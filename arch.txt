@@ -26,7 +26,7 @@ event-management-app/
 │   └── event.test.js
 │   └── ticket.test.js
 │   └── admin.test.js
-├── index.js
+├── server.js
 ├── .eslintrc.json
 ├── .gitignore
 └── README.md
