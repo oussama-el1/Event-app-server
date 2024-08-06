@@ -1,0 +1,32 @@
+event-management-app/
+├── config/
+│   └── redisConfig.js
+├── controllers/
+│   └── authController.js
+│   └── eventController.js
+│   └── ticketController.js
+├── jobs/
+│   └── thumbnailWorker.js
+│   └── emailWorker.js
+├── models/
+│   └── User.js
+│   └── Event.js
+│   └── Ticket.js
+├── routes/
+│   └── authRoutes.js
+│   └── eventRoutes.js
+│   └── ticketRoutes.js
+│   └── adminRoutes.js
+├── utils/
+│   └── generateQRCode.js
+│   └── emailService.js
+│   └── cacheUtils.js
+├── tests/
+│   └── auth.test.js
+│   └── event.test.js
+│   └── ticket.test.js
+│   └── admin.test.js
+├── index.js
+├── .eslintrc.json
+├── .gitignore
+└── README.md
