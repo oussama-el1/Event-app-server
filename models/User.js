@@ -25,7 +25,7 @@ const UserSchema = mongoose.Schema({
 
   listOfInterest: {
     type: [String],
-    required: [true, "Please Enter your Email"],
+    required: [true, "Please Enter your Interests"],
   },
 
   maritalStatus: {
@@ -36,12 +36,12 @@ const UserSchema = mongoose.Schema({
 
   tel: {
     type: String,
-    required: [true, "Please Enter your Email"],
+    required: [true, "Please Enter your Telephone Number"],
   },
 
   birthDate: {
     type: Date,
-    require: true,
+    required: true,
   },
 
   notification: {
@@ -59,10 +59,45 @@ const UserSchema = mongoose.Schema({
     default: false,
   },
 
-  otp: { type: String },
-  otpExpires: { type: Date },
-});
+  otp: { 
+    type: String 
+  },
+  
+  otpExpires: { 
+    type: Date 
+  },
 
+  followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+
+  profilePicture: {
+    type: String,
+  },
+
+  bio: {
+    type: String,
+    maxlength: 500
+  },
+
+  address: {
+    street: String,
+    city: String,
+    state: String,
+    zip: String,
+    country: String
+  }
+});
 
 UserSchema.methods.hashPassword = async function(password) {
   this.hashedPassword = await bcrypt.hash(password, 10);

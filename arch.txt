@@ -6,7 +6,6 @@ event-management-app/
 │   └── eventController.js
 │   └── ticketController.js
 ├── jobs/
-│   └── thumbnailWorker.js
 │   └── emailWorker.js
 ├── models/
 │   └── User.js

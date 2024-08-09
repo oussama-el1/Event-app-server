@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const User = require('../models/User');
 const redisClient = require('../utils/cacheUtils');
-
+const emailQueue = require('../queues/emailQueue');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -73,13 +73,15 @@ class AuthController {
       await newUser.hashPassword(password)
       await newUser.save();
       
-      // send a otp to the User via Email
-      console.log("Otp is : ", otp);
+      await emailQueue.add({
+        to: email,
+        subject: 'Verify Email OTP',
+        text: `Please verify your email with the folowing OTP : ${otp}`
+      });
 
       return res.status(201).json({
         status: 'succes',
         message: 'User create successfully',
-        data: newUser,
       });
     } catch (err) {
       res.status(500).json({ error: err.message })
@@ -134,7 +136,7 @@ class AuthController {
 
       const token = generateToken(user);
       const key = `auth_${token}`
-      await redisClient.set(key, user._id, 3600);
+      await redisClient.set(key, user.id, 3600);
 
       return res.status(200).json({
         status : 'succes',
@@ -242,8 +244,14 @@ class AuthController {
 
       await redisClient.set(`reset_${resetToken}`, user.id, 3600);
   
-      const resetUrl = `http://localhost:5000/api/auth/reset-password?token=${resetToken}`;
-  
+      const resetUrl = `http://localhost:5000/api/auth/reset-password?token=${resetToken}`;  
+
+      await emailQueue.add({
+        to: email,
+        subject: 'Password Reset',
+        text: `Please use The following Token to reset your password  : ${resetUrl}`
+      });
+
       res.status(200).json({ status: 'succes', message: 'Password reset email sent', resetUrl });
     } catch (err) {
       res.status(500).json({ message: 'Internal server error' });
@@ -285,32 +293,6 @@ class AuthController {
       res.status(500).json({ message: 'Internal server error' });
     }
   }
-  
-  
-
-  static async ProtectMidll(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (token == null) {
-      return res.sendStatus(401);
-    }
-
-    jwt.verify(token, JWT_SECRET, async (err, user) => {
-      if (err) {
-        return res.sendStatus(403);
-      }
-
-      const key = `auth_${token}`;
-      const userid = await redisClient.get(key);
-      if (userid !== user.id) {
-        return res.sendStatus(403);
-      };
-   
-      req.user = user;
-      next();
-    });
-  };
 }
 
 module.exports = AuthController
