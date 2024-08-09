@@ -97,6 +97,15 @@ const UserSchema = mongoose.Schema({
     zip: String,
     country: String
   }
+}, {
+  toObject: {
+    transform: (doc, ret) => {
+      delete ret.hashedPassword;
+      delete ret.__v;
+      ret.fullName = `${ret.firstName} ${ret.lastName}`;
+      return ret;
+    },
+  },
 });
 
 UserSchema.methods.hashPassword = async function(password) {

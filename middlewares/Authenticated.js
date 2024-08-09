@@ -1,3 +1,11 @@
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const redisClient = require('../utils/cacheUtils');
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
+
 async function ProtectMidll(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
