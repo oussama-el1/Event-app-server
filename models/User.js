@@ -70,14 +70,16 @@ const UserSchema = mongoose.Schema({
   followers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      unique: true
     }
   ],
 
   following: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      unique: true
     }
   ],
 
@@ -108,12 +110,35 @@ const UserSchema = mongoose.Schema({
   },
 });
 
+UserSchema.index({ followers: 1 });
+UserSchema.index({ following: 1 });
+
 UserSchema.methods.hashPassword = async function(password) {
   this.hashedPassword = await bcrypt.hash(password, 10);
 }
 
 UserSchema.methods.comparePassword = function(password) {
   return bcrypt.compare(password, this.hashedPassword);
+}
+
+UserSchema.methods.generateBio = function() {
+  const { firstName, lastName, email, listOfInterest, maritalStatus, tel, birthDate, address } = this;
+  
+  const interests = listOfInterest.join(', ');
+  const addressString = address ? `${address.street}, ${address.city}, ${address.state}, ${address.zip}, ${address.country}` : 'Not provided';
+  
+  const bio = `
+    Hi, I'm ${firstName} ${lastName}. 
+    You can reach me at ${email}. 
+    I am ${maritalStatus} and my contact number is ${tel}. 
+    I was born on ${birthDate.toDateString()}. 
+    My interests include ${interests}. 
+    My address is ${addressString}.
+  `;
+
+  this.bio = bio.trim();
+  
+  return this.bio;
 }
 
 const User = mongoose.model("User", UserSchema);

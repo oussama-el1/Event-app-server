@@ -10,9 +10,6 @@ async function ProtectMidll(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
-
-  console.log('Before file midll :', req.body);
-
   if (token == null) {
     return res.sendStatus(401);
   }

@@ -28,6 +28,7 @@ class AuthController {
         tel,
         birthDate,
         maritalStatus,
+        address
       } = req.body
 
 
@@ -68,8 +69,10 @@ class AuthController {
         birthDate,
         otp,
         otpExpires,
+        address
       });
-
+      
+      newUser.generateBio();
       await newUser.hashPassword(password)
       await newUser.save();
       
@@ -78,6 +81,7 @@ class AuthController {
         subject: 'Verify Email OTP',
         text: `Please verify your email with the folowing OTP : ${otp}`
       });
+
 
       return res.status(201).json({
         status: 'succes',
@@ -260,10 +264,10 @@ class AuthController {
 
   static async ResetPassword(req, res) {
     const { token } = req.query;
-    const { currentPassword, newPassword } = req.body;
+    const { newPassword } = req.body;
   
-    if (!token || !currentPassword || !newPassword) {
-      return res.status(400).json({ message: 'Token, current password, and new password are required' });
+    if (!token || !newPassword) {
+      return res.status(400).json({ message: 'Token, and new password are required' });
     }
   
     try {
@@ -276,12 +280,7 @@ class AuthController {
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-  
-      const isMatch = await user.comparePassword(currentPassword);
-      if (!isMatch) {
-        return res.status(401).json({ message: 'Current password is incorrect' });
-      }
-  
+
       await user.hashPassword(newPassword);
       await user.save();
   
