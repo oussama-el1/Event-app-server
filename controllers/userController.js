@@ -177,23 +177,26 @@ class UserController {
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-      const followers = user.followers;
+      
+      const followers = user.followers.map(follower => follower.toObject());
+      
       res.status(200).json(followers);
     } catch (error) {
       console.error(`Error getting followers: ${error.message}`);
       res.status(500).json({ message: 'Internal server error' });
     }
   }
+  
 
-  static async getFollowing(req, res) {
+  static async getFollowings(req, res) {
     const userId = req.user.id;
     try {
       const user = await User.findById(userId).populate('following');
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-      const following = user.following;
-      res.status(200).json(following);
+      const followings = user.following.map(following => following.toObject());
+      res.status(200).json(followings);
     } catch (error) {
       console.error(`Error getting following: ${error.message}`);
       res.status(500).json({ message: 'Internal server error' });

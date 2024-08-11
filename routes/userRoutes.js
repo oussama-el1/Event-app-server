@@ -10,10 +10,8 @@ UserRouter.put('/user', ProtectMidll, upload.single('profilePicture'), UserContr
 UserRouter.post('/follow', ProtectMidll, UserController.followUser);
 UserRouter.post('/unfollow', ProtectMidll, UserController.unfollowUser);
 UserRouter.get('/followers', ProtectMidll, UserController.getFollowers);
-UserRouter.get('/following', ProtectMidll, UserController.getFollowing);
+UserRouter.get('/followings', ProtectMidll, UserController.getFollowings);
 UserRouter.get('/followers-count', ProtectMidll, UserController.getFollowersCount);
 UserRouter.get('/following-count', ProtectMidll, UserController.getFollowingCount);
-UserRouter.get('/followers-details', ProtectMidll, UserController.getFollowersDetails);
-UserRouter.get('/following-details', ProtectMidll, UserController.getFollowingDetails);
 
 module.exports = UserRouter
