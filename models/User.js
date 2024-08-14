@@ -23,6 +23,11 @@ const UserSchema = mongoose.Schema({
     required: true,
   },
 
+  gender: {
+    type: String,
+    enum: ['Male', 'Female']
+  },
+
   listOfInterest: {
     type: [String],
     required: [true, "Please Enter your Interests"],
@@ -98,7 +103,21 @@ const UserSchema = mongoose.Schema({
     state: String,
     zip: String,
     country: String
-  }
+  },
+
+  createdEvents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event'
+    }
+  ],
+
+  bookedTickets: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Ticket'
+    }
+  ],
 }, {
   toObject: {
     transform: (doc, ret) => {
@@ -112,6 +131,9 @@ const UserSchema = mongoose.Schema({
 
 UserSchema.index({ followers: 1 });
 UserSchema.index({ following: 1 });
+UserSchema.index({ listOfInterest: 1 });
+UserSchema.index({ firstName: 1, lastName: 1 });
+
 
 UserSchema.methods.hashPassword = async function(password) {
   this.hashedPassword = await bcrypt.hash(password, 10);

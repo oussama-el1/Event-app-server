@@ -28,7 +28,8 @@ class AuthController {
         tel,
         birthDate,
         maritalStatus,
-        address
+        address,
+        gender
       } = req.body
 
 
@@ -69,7 +70,8 @@ class AuthController {
         birthDate,
         otp,
         otpExpires,
-        address
+        address,
+        gender
       });
       
       newUser.generateBio();

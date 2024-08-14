@@ -16,7 +16,24 @@ class UserController {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      const { ...userData } = user.toObject();
+      const userData = user.toObject();
+
+      res.status(200).json(userData);
+    } catch (error) {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+
+  static async getUser(req, res) {
+    try {
+      const userId = req.params.id;
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      const userData = user.toObject();
 
       res.status(200).json(userData);
     } catch (error) {
@@ -233,50 +250,53 @@ class UserController {
     }
   }
 
-  static async getFollowersDetails(req, res) {
-    const userId = req.user.id;
-    try {
-      const user = await User.findById(userId).populate('followers');
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-      
-      const followers = user.followers;
-      const followersDetails = followers.map((follower) => {
-        return {
-          fullname: `${follower.firstName} ${follower.lastName}`,
-          profilePicture: follower.profilePicture
-        };
-      });
+  /**
+   * Search users
+   * exemple of request : http://localhost:5000/api/user/search?query=oussama
+   * return : array of users
+   */
+  static async searchUsers(req, res) {
+    const query = req.query.query.trim();
   
-      res.status(200).json(followersDetails);
-    } catch (error) {
-      console.error(`Error getting followers details: ${error.message}`);
-      res.status(500).json({ message: 'Internal server error' });
+    if (query.length < 3) {
+      return res.status(400).json({ message: 'Search query must be at least 3 characters long' });
     }
-  }
-
-  static async getFollowingDetails(req, res) {
-    const userId = req.user.id;
+  
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 10;
+  
     try {
-      const user = await User.findById(userId).populate('following');
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-      const following = user.following;
-      const followingDetails = following.map((following) => {
-        return {
-          fullname: `${following.firstName} ${following.lastName}`,
-          profilePicture: following.profilePicture
-        };
+      const result = await User.find({
+        $or: [
+          { firstName: { $regex: query, $options: 'i' } },
+          { lastName: { $regex: query, $options: 'i' } },
+          { listOfInterest: { $regex: query, $options: 'i' } }
+        ]
+      })
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+      const totalUsers = await User.countDocuments({
+      $or: [
+        { firstName: { $regex: query, $options: 'i' } },
+        { lastName: { $regex: query, $options: 'i' } },
+        { listOfInterest: { $regex: query, $options: 'i' } }
+      ]
+    });
+
+      const users = result.map(user => user.toObject());
+
+      res.status(200).json({
+        users,
+        totalUsers,
+        currentPage: page,
+        totalPages: Math.ceil(totalUsers / limit)
       });
-      res.status(200).json(followingDetails);
     } catch (error) {
-      console.error(`Error getting following details: ${error.message}`);
+      console.error(`Error during search: ${error.message}`);
       res.status(500).json({ message: 'Internal server error' });
     }
   }
-
 }
 
 module.exports = UserController;
