@@ -57,9 +57,11 @@ const EventSchema = mongoose.Schema({
     }
   ],
 
-  image: {
-    type: String,
-  },
+  media: [
+    {
+      type: String,
+    }
+  ],
 
   isPublic: {
     type: Boolean,
