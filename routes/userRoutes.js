@@ -9,7 +9,7 @@ UserRouter.get('/events', ProtectMidll, UserController.getEvents);
 UserRouter.get('/bookings', ProtectMidll, UserController.getBookings);
 
 UserRouter.get('/me', ProtectMidll, UserController.getMe);
-UserRouter.get('/:id', ProtectMidll, UserController.getUser)
+UserRouter.get('/:id', ProtectMidll, UserController.getUser);
 UserRouter.put('/me', ProtectMidll, upload.single('profilePicture'), UserController.updateMe);
 UserRouter.post('/follow', ProtectMidll, UserController.followUser);
 UserRouter.post('/unfollow', ProtectMidll, UserController.unfollowUser);
