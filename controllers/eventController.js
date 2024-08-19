@@ -52,7 +52,7 @@ class eventController {
     } catch (error) {
       res.status(500).json({ message: "Error creating event", error });
     }
-  }
+  };
 }
 
 module.exports = eventController;
