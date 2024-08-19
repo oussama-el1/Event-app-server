@@ -32,7 +32,6 @@ class AuthController {
         gender
       } = req.body
 
-
       if (!email) {
         return res.status(400).json(
           { status : "error",
@@ -58,7 +57,7 @@ class AuthController {
       }
       
       const otp = crypto.randomInt(100000, 999999);
-      const otpExpires = new Date(Date.now() + 15 * 60 * 1000);
+      const otpExpires = new Date(Date.now() + 15 * 60 * 1000); // 15 min
 
       const newUser = new User({
         firstName,
@@ -78,6 +77,7 @@ class AuthController {
       await newUser.hashPassword(password)
       await newUser.save();
       
+      // add job
       await emailQueue.add({
         to: email,
         subject: 'Verify Email OTP',
@@ -191,8 +191,6 @@ class AuthController {
       };
 
       const ismatch = await user.comparePassword(password);
-      console.log(ismatch);
-
 
       if (!ismatch) {
         return res.status(400).json({
@@ -232,7 +230,7 @@ class AuthController {
     } catch (err) {
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
+  };
 
   static async ForgotPassword(req, res) {
     const { email } = req.body;
@@ -293,7 +291,7 @@ class AuthController {
       console.error(`Error resetting password: ${err.message}`);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
+  };
 }
 
 module.exports = AuthController
