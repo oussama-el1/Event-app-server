@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 
+const EventRouter = require('./routes/eventRoutes')
 const Authrouter = require('./routes/authRoutes');
 const UserRouter = require('./routes/userRoutes');
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(morgan('combined'));
 app.use('/api/auth', Authrouter);
 app.use('/api/users', UserRouter);
+app.use('/api/events', EventRouter)
 
 app.listen(PORT, () => {
   console.log(`App Running On Port ${PORT}...`);
