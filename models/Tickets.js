@@ -50,6 +50,10 @@ const TicketShema = mongoose.Schema({
   quantity: {
     type: Number,
     required: [true, 'Quantity is required']
+  },
+
+  qrCode: {
+    type: String,
   }
 });
 
