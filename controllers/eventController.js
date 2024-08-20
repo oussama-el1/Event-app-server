@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Event = require("../models/Event");
 const Joi = require("joi");
+const { use } = require("chai");
 
 class eventController {
   static async postevent(req, res) {
@@ -130,13 +131,28 @@ class eventController {
   }
   static async deleteevent(req, res) {
     try {
+      const organizer = req.user.id
+      const user = await User.findById(organizer);
+
+      if (!user) {
+        return res.status(404).json({
+          status: "error",
+          message: "user not found",
+        });
+      }
+
       const event = Event.findByIdAndDelete(req.params.id);
       if (!event) {
         return res
           .status(400)
           .json({ message: "Event ID not found in request" });
       }
-      res.status(200).json(event);
+      user.createdEvents.pull({_id: req.params.id})
+      await user.save()
+      res.status(200).json({
+        message: "Event deleted successfully",
+        event: { id: event._id, name: event.title },
+      });
     } catch (error) {
       console.error(`Error deleting event: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
