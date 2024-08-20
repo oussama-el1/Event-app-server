@@ -76,7 +76,7 @@ class eventController {
           message: "user not found",
         });
       }
-      const events = await Event.find({ organizer: organizer }).sort({
+      const events = await Event.find({ organizer: organizer }).populate({
         createdAt: -1,
       });
       if (!events) {
