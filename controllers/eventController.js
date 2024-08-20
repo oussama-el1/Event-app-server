@@ -120,7 +120,6 @@ class eventController {
           .status(400)
           .json({ message: "Event ID not found in request" });
       }
-      event.updatedAt.default = Date.now;
       await event.save();
       res.status(200).json(event);
     } catch (error) {
