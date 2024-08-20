@@ -30,6 +30,7 @@ class eventController {
           message: "user not found",
         });
       }
+
       const { error } = validateEvent({
         title,
         description,
@@ -38,10 +39,12 @@ class eventController {
         ticketLimit,
         categories,
       });
+
       if (error)
         return res.status(400).json({
           message: error.details[0].message,
         });
+
       const newEvent = new Event({
         title,
         description,
@@ -64,7 +67,8 @@ class eventController {
     } catch (error) {
       res.status(500).json({ message: "Error creating event", error });
     }
-  }
+  };
+
   static async getevent(req, res) {
     try {
       const organizer = req.user.id;
@@ -88,7 +92,8 @@ class eventController {
           status: "error",
           message: "Event not found",
         });
-      }
+      };
+
       res.status(200).json({
         status: "success",
         data: events,
@@ -125,7 +130,6 @@ class eventController {
           .status(400)
           .json({ message: "Event ID not found in request" });
       }
-      event.updatedAt.default = Date.now;
       await event.save();
       res.status(200).json(event);
     } catch (error) {
