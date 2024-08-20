@@ -64,12 +64,12 @@ const UserSchema = mongoose.Schema({
     default: false,
   },
 
-  otp: { 
-    type: String 
+  otp: {
+    type: String
   },
-  
-  otpExpires: { 
-    type: Date 
+
+  otpExpires: {
+    type: Date
   },
 
   followers: [
@@ -145,21 +145,21 @@ UserSchema.methods.comparePassword = function(password) {
 
 UserSchema.methods.generateBio = function() {
   const { firstName, lastName, email, listOfInterest, maritalStatus, tel, birthDate, address } = this;
-  
+
   const interests = listOfInterest.join(', ');
   const addressString = address ? `${address.street}, ${address.city}, ${address.state}, ${address.zip}, ${address.country}` : 'Not provided';
-  
+
   const bio = `
-    Hi, I'm ${firstName} ${lastName}. 
-    You can reach me at ${email}. 
-    I am ${maritalStatus} and my contact number is ${tel}. 
-    I was born on ${birthDate.toDateString()}. 
-    My interests include ${interests}. 
+    Hi, I'm ${firstName} ${lastName}.
+    You can reach me at ${email}.
+    I am ${maritalStatus} and my contact number is ${tel}.
+    I was born on ${birthDate.toDateString()}.
+    My interests include ${interests}.
     My address is ${addressString}.
   `;
 
   this.bio = bio.trim();
-  
+
   return this.bio;
 }
 
