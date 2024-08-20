@@ -1,7 +1,6 @@
 const User = require("../models/User");
 const Event = require("../models/Event");
 const Joi = require("joi");
-const { use } = require("chai");
 
 class eventController {
   static async postevent(req, res) {
@@ -76,9 +75,14 @@ class eventController {
           message: "user not found",
         });
       }
-      const events = await Event.find({ organizer: organizer }).populate({
-        createdAt: -1,
-      });
+      const events = await Event.find({ organizer: organizer })
+        .populate(
+          "User",
+          "firstName, lastName, email, gender, listOfInterest, "
+        )
+        .sort({
+          createdAt: -1,
+        });
       if (!events) {
         return res.status(404).json({
           status: "error",
@@ -131,7 +135,7 @@ class eventController {
   }
   static async deleteevent(req, res) {
     try {
-      const organizer = req.user.id
+      const organizer = req.user.id;
       const user = await User.findById(organizer);
 
       if (!user) {
@@ -147,8 +151,8 @@ class eventController {
           .status(400)
           .json({ message: "Event ID not found in request" });
       }
-      user.createdEvents.pull({_id: req.params.id})
-      await user.save()
+      user.createdEvents.pull({ _id: req.params.id });
+      await user.save();
       res.status(200).json({
         message: "Event deleted successfully",
         event: { id: event._id, name: event.title },
