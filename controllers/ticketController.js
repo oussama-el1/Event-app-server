@@ -1,13 +1,14 @@
+const { generateUniqueBookingId, generateQRCode } = require('../utils/helpers');
+
 const Event = require('../models/Event');
 const Ticket = require('../models/Tickets');
-const { generateUniqueBookingId, generateQRCode } = require('../utils/helpers');
 
 class TicketController {
 
   static async purchase(req, res) {
     try {
         const user = req.user.id;
-        const { event: eventId, ticketType, price, quantity } = req.body;
+        const { event: eventId, ticketType, quantity } = req.body;
     
         const eventDoc = await Event.findById(eventId);
 
@@ -22,6 +23,8 @@ class TicketController {
         if (eventDoc.ticketSold + quantity > eventDoc.ticketLimit) {
             throw new Error(`You can only purchase up to ${eventDoc.ticketLimit - eventDoc.ticketSold} tickets`);
         }
+
+        const price = eventDoc.getTicketPrice(ticketType);
 
         let bookedSeats = [];
 
@@ -59,6 +62,7 @@ class TicketController {
                 ticketType,
                 quantity: 1
             };
+
             const qrCodePath = await generateQRCode(qrCodeData);
             newTicket.qrCode = qrCodePath;
 
@@ -70,7 +74,11 @@ class TicketController {
         eventDoc.ticketSold += quantity;
         await eventDoc.save();
 
-        res.status(201).json({ message: 'Tickets purchased successfully', tickets });
+        res.status(201).json({ 
+            message: 'Tickets purchased successfully',
+            tickets,
+            remainingTickets: eventDoc.ticketLimit - eventDoc.ticketSold
+        });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
