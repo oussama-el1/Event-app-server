@@ -3,13 +3,14 @@ const fs = require('fs');
 const User = require("../models/User");
 const Event = require("../models/Event");
 const Joi = require("joi");
+const uuid = require('uuid')
 
 class eventController {
   static async postevent(req, res) {
     try {
-      const { title, description, date, location, ticketLimit, categories } =
+      let location = req.body.location
+      const { title, description, date, ticketLimit, categories } =
         req.body;
-
       if (
         !title ||
         !description ||
@@ -22,10 +23,10 @@ class eventController {
           .status(400)
           .json({ status: "error", message: "Missing Some input" });
       }
+      location = JSON.parse(location)
       const { address, city, state, zip, country } = location;
-
       if (!address || !city || !state || !zip || !country ) {
-      return res.status(400).json({ status: "error", message: " missing some input in address" });
+        return res.status(400).json({ status: "error", message: " missing some input in address" });
       }
       if (!req.uploadDir) {
         return res.status(500).json({ message: "Upload directory not set" });
@@ -47,7 +48,6 @@ class eventController {
         ticketLimit,
         categories,
       });
-
       if (error)
         return res.status(400).json({
           message: error.details[0].message,
@@ -71,7 +71,7 @@ class eventController {
       await newEvent.save();
       const eventID = newEvent._id.toString();
       const finalDir = path.resolve(
-        `/tmp/event-app/events/${eventID}-${Date.now()}/`
+        `/tmp/event-app/events/${eventID}/${uuid.v4()}/`
       );
 
       if (!fs.existsSync(finalDir)) {
@@ -80,7 +80,6 @@ class eventController {
       if (!req.files || req.files.length === 0) {
         return res.status(400).json({ message: "No files uploaded" });
       }
-      console.log("Uploaded files:", req.files);
       req.files.forEach((file) => {
         const newFilePath = path.join(finalDir, path.basename(file.path));
         fs.renameSync(file.path, newFilePath);
@@ -203,7 +202,7 @@ class eventController {
       }
       if (req.files && req.files.length > 0) {
         const finalDir = path.resolve(
-          `/tmp/event-app/events/${event._id}-${Date.now()}/`
+          `/tmp/event-app/events/${event._id}/${uuid.v4()}/`
         );
 
         if (!fs.existsSync(finalDir)) {
