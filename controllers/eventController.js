@@ -51,7 +51,6 @@ class eventController {
         location,
         ticketLimit,
         categories,
-        organizer,
       });
 
       await newEvent.save();
