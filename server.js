@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 
-const EventRouter = require('./routes/eventRoutes')
 const Authrouter = require('./routes/authRoutes');
 const UserRouter = require('./routes/userRoutes');
 const TicketRouter = require('./routes/ticketRoutes');
@@ -23,7 +22,6 @@ app.use(express.json());
 app.use(morgan('combined'));
 app.use('/api/auth', Authrouter);
 app.use('/api/users', UserRouter);
-app.use('/api/events', EventRouter);
 app.use('/api/tickets', TicketRouter);
 
 app.listen(PORT, () => {
