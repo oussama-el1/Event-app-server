@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const EventRouter = require('./routes/eventRoutes')
 const Authrouter = require('./routes/authRoutes');
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(morgan('combined'));
 app.use('/api/auth', Authrouter);

@@ -4,7 +4,6 @@ const TicketShema = mongoose.Schema({
 
   bookingId: {
     type: String,
-    unique: true,
     match: /^[A-Za-z0-9]{8}$/,
     required: true,
   },

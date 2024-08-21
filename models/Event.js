@@ -1,5 +1,18 @@
 const mongoose = require('mongoose');
 
+const SeatSchema = new mongoose.Schema({
+  seatNumber: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  status: {
+    type: String,
+    enum: ['available', 'booked'],
+    default: 'available',
+  }
+});
+
 const EventSchema = mongoose.Schema({
   title: {
     type: String,
@@ -63,6 +76,8 @@ const EventSchema = mongoose.Schema({
     }
   ],
 
+  seats: [SeatSchema],
+
   isPublic: {
     type: Boolean,
     default: true
@@ -80,7 +95,7 @@ const EventSchema = mongoose.Schema({
 });
 
 EventSchema.pre('save', function(next) {
-  this.updatedAt = date.now(),
+  this.updatedAt = Date.now(),
   next();
 });
 
