@@ -8,7 +8,7 @@ const EventSchema = mongoose.Schema({
 
   description: {
     type: String,
-    reuired: [true, 'Event description is required'],
+    required: [true, 'Event description is required'],
   },
 
   date: {
@@ -19,7 +19,7 @@ const EventSchema = mongoose.Schema({
   location: {
     address: {
       type: String,
-      required: [true, 'Event address is required'],  
+      required: [true, 'Event address is required'],
     },
     city: String,
     state: String,
@@ -80,7 +80,7 @@ const EventSchema = mongoose.Schema({
 });
 
 EventSchema.pre('save', function(next) {
-  this.updatedAt = date.now(),
+  this.updatedAt = Date.now(),
   next();
 });
 

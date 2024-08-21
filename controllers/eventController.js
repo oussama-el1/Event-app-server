@@ -1,3 +1,5 @@
+const path = require('path'); // Import the path module
+const fs = require('fs');
 const User = require("../models/User");
 const Event = require("../models/Event");
 const Joi = require("joi");
@@ -20,10 +22,16 @@ class eventController {
           .status(400)
           .json({ status: "error", message: "Missing Some input" });
       }
+      const { address, city, state, zip, country } = location;
 
+      if (!address || !city || !state || !zip || !country ) {
+      return res.status(400).json({ status: "error", message: " missing some input in address" });
+      }
+      if (!req.uploadDir) {
+        return res.status(500).json({ message: "Upload directory not set" });
+    }
       const organizer = req.user.id;
       const user = await User.findById(organizer);
-
       if (!user) {
         return res.status(404).json({
           status: "error",
@@ -48,9 +56,16 @@ class eventController {
         title,
         description,
         date,
-        location,
+        location :{
+          address,
+          city,
+          state,
+          zip,
+          country
+        },
         ticketLimit,
         categories,
+        organizer
       });
 
       await newEvent.save();
@@ -62,7 +77,10 @@ class eventController {
       if (!fs.existsSync(finalDir)) {
         fs.mkdirSync(finalDir, { recursive: true });
       }
-
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ message: "No files uploaded" });
+      }
+      console.log("Uploaded files:", req.files);
       req.files.forEach((file) => {
         const newFilePath = path.join(finalDir, path.basename(file.path));
         fs.renameSync(file.path, newFilePath);
@@ -80,7 +98,8 @@ class eventController {
         event: { id: newEvent._id, name: newEvent.title },
       });
     } catch (error) {
-      res.status(500).json({ message: "Error creating event", error });
+      console.error("Error creating event:", error); // Log the error to the console
+      res.status(500).json({ message: "Error creating event", error: error.message });
     }
   }
 
@@ -125,7 +144,13 @@ class eventController {
         title,
         description,
         date,
-        location,
+        location :{
+          address,
+          city,
+          state,
+          zip,
+          country
+        },
         ticketLimit,
         categories,
         isPublic,
@@ -134,7 +159,13 @@ class eventController {
         title,
         description,
         date,
-        location,
+        location :{
+          address,
+          city,
+          state,
+          zip,
+          country
+        },
         ticketLimit,
         categories,
         isPublic,
@@ -143,13 +174,22 @@ class eventController {
         return res.status(400).json({
           message: error.details[0].message,
         });
+      if (!req.uploadDir) {
+          return res.status(500).json({ message: "Upload directory not set" });
+      }
       const event = await Event.findByIdAndUpdate(
         req.params.id,
         {
           title,
           description,
           date,
-          location,
+          location :{
+            address,
+            city,
+            state,
+            zip,
+            country
+          },
           ticketLimit,
           categories,
           isPublic,
@@ -217,19 +257,26 @@ class eventController {
   }
 }
 
+
 function validateEvent(event) {
-  const schema = {
+  const schema = Joi.object({
     title: Joi.string().min(3).required(),
     description: Joi.string().min(50).required(),
     date: Joi.date().required(),
-    location: Joi.string().min(5).required(),
+    location: Joi.object({
+      address: Joi.string().min(5).required(),
+      city: Joi.string(),
+      state: Joi.string(),
+      zip: Joi.string(),
+      country: Joi.string()
+    }).required(),
     ticketLimit: Joi.number().min(1).required(),
-    categories: Joi.string().required(),
-    isPublic: Joi.boolean().required(),
-    media: Joi.string(),
-  };
+    categories: Joi.array().items(Joi.string().valid('Music', 'Sports', 'Conference', 'Festival', 'Other')).required(),
+    isPublic: Joi.boolean(),
+    media: Joi.string().optional(),
+  });
 
-  return Joi.validate(event, schema);
+  return schema.validate(event, { abortEarly: false });
 }
 
 module.exports = eventController;
