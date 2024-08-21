@@ -45,6 +45,10 @@ app.get('/login', (req, res) => {
 app.get('/verify_email', (req, res) => {
   res.sendFile(path.join(__dirname, '/html/verify_email.html'));
 });
+
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, '/html/home.html'));
+});
 app.listen(PORT, () => {
   console.log(`App Running On Port ${PORT}...`);
 });
