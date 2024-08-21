@@ -3,7 +3,6 @@ const fs = require('fs');
 const User = require("../models/User");
 const Event = require("../models/Event");
 const Joi = require("joi");
-const uuid = require('uuid')
 
 class eventController {
   static async postevent(req, res) {
@@ -11,7 +10,8 @@ class eventController {
       let location = req.body.location
       const { title, description, date, ticketLimit, categories } =
         req.body;
-      if (
+
+        if (
         !title ||
         !description ||
         !date ||
@@ -23,16 +23,21 @@ class eventController {
           .status(400)
           .json({ status: "error", message: "Missing Some input" });
       }
+
       location = JSON.parse(location)
       const { address, city, state, zip, country } = location;
+      
       if (!address || !city || !state || !zip || !country ) {
         return res.status(400).json({ status: "error", message: " missing some input in address" });
       }
+
       if (!req.uploadDir) {
         return res.status(500).json({ message: "Upload directory not set" });
-    }
+      }
+
       const organizer = req.user.id;
       const user = await User.findById(organizer);
+
       if (!user) {
         return res.status(404).json({
           status: "error",
@@ -48,10 +53,12 @@ class eventController {
         ticketLimit,
         categories,
       });
+
       if (error)
         return res.status(400).json({
           message: error.details[0].message,
         });
+
       const newEvent = new Event({
         title,
         description,
@@ -71,15 +78,17 @@ class eventController {
       await newEvent.save();
       const eventID = newEvent._id.toString();
       const finalDir = path.resolve(
-        `/tmp/event-app/events/${eventID}/${uuid.v4()}/`
+        `/tmp/event-app/events/${eventID}/`
       );
 
       if (!fs.existsSync(finalDir)) {
         fs.mkdirSync(finalDir, { recursive: true });
       }
+
       if (!req.files || req.files.length === 0) {
         return res.status(400).json({ message: "No files uploaded" });
       }
+
       req.files.forEach((file) => {
         const newFilePath = path.join(finalDir, path.basename(file.path));
         fs.renameSync(file.path, newFilePath);
@@ -88,6 +97,7 @@ class eventController {
       newEvent.media = req.files.map((file) =>
         path.join(finalDir, path.basename(file.path))
       );
+
       await newEvent.save();
       user.createdEvents.push(newEvent._id);
       await user.save();
@@ -111,7 +121,8 @@ class eventController {
           status: "error",
           message: "user not found",
         });
-      }
+      };
+
       const events = await Event.find({ organizer: organizer })
         .populate(
           "User",
@@ -120,12 +131,13 @@ class eventController {
         .sort({
           createdAt: -1,
         });
+
       if (!events) {
         return res.status(404).json({
           status: "error",
           message: "Event not found",
         });
-      }
+      };
 
       res.status(200).json({
         status: "success",
@@ -136,24 +148,24 @@ class eventController {
         .status(500)
         .json({ message: "Event not found for this organizer", error });
     }
-  }
+  };
+
   static async updateevent(req, res) {
     try {
       const {
         title,
         description,
         date,
-        location :{
-          address,
-          city,
-          state,
-          zip,
-          country
-        },
         ticketLimit,
         categories,
         isPublic,
       } = req.body;
+      
+      let location = req.body.location;
+
+      location = JSON.parse(location);
+      const { address, city, state, zip, country } = location;
+
       const { error } = validateEvent({
         title,
         description,
@@ -169,11 +181,13 @@ class eventController {
         categories,
         isPublic,
       });
+
       if (error)
         return res.status(400).json({
           message: error.details[0].message,
         });
-      if (!req.uploadDir) {
+
+        if (!req.uploadDir) {
           return res.status(500).json({ message: "Upload directory not set" });
       }
       const event = await Event.findByIdAndUpdate(
@@ -202,7 +216,7 @@ class eventController {
       }
       if (req.files && req.files.length > 0) {
         const finalDir = path.resolve(
-          `/tmp/event-app/events/${event._id}/${uuid.v4()}/`
+          `/tmp/event-app/events/${event._id}/`
         );
 
         if (!fs.existsSync(finalDir)) {
