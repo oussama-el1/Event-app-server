@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const path = require('path');
+const cors = require('cors');
 
 const EventRouter = require('./routes/eventRoutes')
 const Authrouter = require('./routes/authRoutes');
@@ -12,16 +14,37 @@ mongoose.connect(uri)
   .then(() => console.log('Connected to Database'))
   .catch((err) => console.log('Database Error :', err));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5501;
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(morgan('combined'));
 app.use('/api/auth', Authrouter);
 app.use('/api/users', UserRouter);
 app.use('/api/events', EventRouter)
+app.use(express.static('public'));
 
+
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, '/html/signup.html'));
+});
+
+app.get('/more_info', (req, res) => {
+  res.sendFile(path.join(__dirname, '/html/register_1.html'));
+});
+
+app.get('/interests', (req, res) => {
+  res.sendFile(path.join(__dirname, '/html/register_2.html'));
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '/html/login.html'));
+});
+
+app.get('/verify_email', (req, res) => {
+  res.sendFile(path.join(__dirname, '/html/verify_email.html'));
+});
 app.listen(PORT, () => {
   console.log(`App Running On Port ${PORT}...`);
 });

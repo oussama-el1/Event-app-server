@@ -31,14 +31,14 @@ class AuthController {
         address,
         gender
       } = req.body
-
+      console.log("hh");
       if (!email) {
         return res.status(400).json(
           { status : "error",
             message : "Missing Email" }
         );
       }
-
+      console.log("jj");
       const existingUser = await User.findOne({ email });
       
       if (existingUser) {
@@ -49,7 +49,7 @@ class AuthController {
               message : "User Already Exist but Email is not Verified" }
           );
         }
-
+        console.log("cc");
         return res.status(400).json(
           { status : "error",
             message : "User Already Exist" }
@@ -84,7 +84,7 @@ class AuthController {
         text: `Please verify your email with the folowing OTP : ${otp}`
       });
 
-
+      console.log(newUser);
       return res.status(201).json({
         status: 'succes',
         message: 'User create successfully',

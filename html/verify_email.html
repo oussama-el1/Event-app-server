@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/auth.css">
+    <title>MAX ZHOO - Verify Email</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="log-container">
+        <div class="mini-cont">
+          <div class="logo">
+            <img src="../static/imgs/logo.png" alt="">
+          </div>
+          <h2>Verify Your Email</h2>
+          <form class="login-form" id="verificationForm">
+            <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
+            <button type="submit">Verify Email</button>
+          </form>
+        </div>
+      </div>
+      <div class="imgcont">
+        <img class="side-img" src="../static/imgs/login-t.jpeg" alt="Login Image">
+      </div>
+    </div>
+    <script>
+      document.getElementById('verificationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        var urlParams = new URLSearchParams(window.location.search);
+        var email = urlParams.get('email');
+        var otp = document.getElementById('otp').value;
+
+        var data = {
+          email: email,
+          otp: otp
+        };
+
+        fetch('/api/auth/verify-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            alert('Email verified successfully!');
+            // Redirect to the dashboard or login page
+            window.location.href = 'dashboard.html';
+          } else {
+            alert('Error: ' + (data.message || 'Unable to verify email.'));
+          }
+        })
+        .catch(error => {
+          alert('An error occurred: ' + error.message);
+        });
+      });
+    </script>
+  </body>
+</html>

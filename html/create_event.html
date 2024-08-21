@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Event</title>
+    <link href="../css/create_event.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel='stylesheet' href='https://unpkg.com/@yaireo/tagify/dist/tagify.css'>
+    <link rel="stylesheet" href="../css/invite.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand img-fluid logo-small" href="#">
+          <img src="../static/imgs/logo.png" class="img-fluid w-50" alt="">
+        </a>
+        <!-- Toggle button for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar links and buttons -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">EVENTS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">FAVORITS</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <!-- Search Form -->
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+          </div>
+          <!-- Profile icon -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+            <li class="nav-item dropdown">
+              <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="profile-icon-container">
+                  <img src="../static/imgs/user.jpeg" alt="Profile Icon" class="profile-icon">
+                </div>
+                <!-- You can also use icon as follows: -->
+                <!--  <i class="fas fa-user"></i> -->
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="#">
+                   Account </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                     Settings </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    Log Out </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+        <main>
+        <div class="container bg-figma">
+            <div class="wrapper">
+            <h2>Create an Event</h2>
+
+            <!-- Tabs Navigation -->
+            <div class="tabs">
+                <button class="tablink active" onclick="openTab(event, 'BasicInfo')">Basic Info</button>
+                <button class="tablink" onclick="openTab(event, 'Upload Media')">Upload Media</button>
+                <button class="tablink" onclick="openTab(event, 'Invite Info')">Invite Info</button>
+                <button class="tablink" onclick="openTab(event, 'Budget')">Budget</button>
+                <button class="tablink" onclick="openTab(event, 'Payment Info')">Payment Info</button>
+            </div>
+
+            <!-- Tab Content: Basic Info -->
+            <div id="BasicInfo" class="tabcontent" style="display: block;">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Event Name">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Event Type">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Priced Event">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Price $">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Date">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Location">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Start Time">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="End Time">
+                    </div>
+                </div>
+
+                <!-- Additional Inputs: Event Format, Hashtags, Description -->
+                <div class="column">
+                    <input type="text" class="form-control" placeholder="Event Format">
+                    <input type="text" class="form-control" placeholder="Hashtags">
+                    <textarea class="form-control" placeholder="Description"></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn bg-aka" type="button" onclick="nextTab()">Save & Continue</button>
+                </div>
+            </div>
+
+            <!-- Tab Content: Upload Media -->
+            <div id="Upload Media" class="tabcontent">
+                <div class="border border-white p-3">
+                <h3 class="mx-5 text-center" >Upload pictures for your event.</h3>
+
+		    <!-- File Upload Input -->
+		    <div class="upload-section">
+                        <input type="file" id="uploadInput" class="form-control" style="display: none;" onchange="handleFileUpload()" multiple>
+                        <label for="uploadInput" class="upload-label" id="dropZone">
+                            <span class="upload-button btn btn-darki">
+                                &#128228; Upload Media
+                            </span>
+                        </label>
+		        <!-- Confirmation Message -->
+                        <p id="uploadMessage" style="display: none;">Media uploaded successfully!</p>
+		        <!-- Image Links Container -->
+                        <div id="imageLinksContainer" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="button-group ">
+                    <button class="btn bg-aka" type="button" onclick="nextTab()">Save & Continue</button>
+                </div>
+            </div>
+
+<!-- Tab Content: Invite Info -->
+<div id="Invite Info" class="tabcontent">
+    <div class="border border-white p-3">
+    <div class="">
+        <h3>Invite Users</h3>
+<input name='tags' placeholder='Profile Name'>
+       
+    </div>
+    <!-- List of invited users -->
+    <div id="invitedUsersList" class="invited-list">
+        <h3>Invited Users:</h3>
+        <ul id="invitedUsers"></ul>
+    </div>
+    </div>
+    <div class="button-group">
+        <button class="btn bg-aka" type="button" onclick="nextTab()">Save & Continue</button>
+    </div>
+</div>
+
+
+<!-- Tab Content: Budget -->
+<div id="Budget" class="tabcontent ">
+    <div class="border border-white p-3">
+    <form>
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Commodity Name">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Budget Allocated">
+        </div>
+      </div>
+      <div class="row area">
+          <textarea class="form-control" placeholder="Description"></textarea>
+      </div>
+    </form>
+    <div class="button-group">
+        <button class="btn bg-aka" type="button">Add</button>
+    </div>
+    </div>
+    <div class="button-group">
+        <button class="btn bg-aka" type="button" onclick="nextTab()">Save & Continue</button>
+    </div>
+</div>
+
+	    <!-- Tab Content: Payment Info -->
+            <div id="Payment Info" class="tabcontent ">
+                <div class="border border-white p-3">
+                <h3>Please select payment methods to be linked with this Event</h3>
+
+                <div class="my-3">
+                    <div class="form-check">
+                      <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Credit card
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckChecked" >
+                      <label class="form-check-label" for="flexCheckChecked">
+                        Debit card
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckChecked" >
+                      <label class="form-check-label" for="flexCheckChecked">
+                        UPI
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckChecked" >
+                      <label class="form-check-label" for="flexCheckChecked">
+                        PayPal
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckChecked" >
+                      <label class="form-check-label" for="flexCheckChecked">
+                        Gift Cards
+                      </label>
+                    </div>
+                </div>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn bg-aka">Submit</button>
+                </div>
+            </div>
+</div>
+
+
+        </div>
+    </main>
+
+    <script>
+
+
+        // Opens a specific tab and hides all other tabs.
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Remove the active class from all tab links
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Finds the index of the currently active tab, and activates the index of the next tab
+        function nextTab() {
+            var i, tablinks;
+            var activeTabIndex = -1;
+            var tablinks = document.getElementsByClassName("tablink");
+
+            // Find the index of the currently active tab
+            for (i = 0; i < tablinks.length; i++) {
+                if (tablinks[i].classList.contains("active")) {
+                    activeTabIndex = i;
+                    break;
+		}
+	    }
+
+            // Get the next tab index
+            var nextTabIndex = activeTabIndex + 1;
+            if (nextTabIndex < tablinks.length) {
+                var nextTab = tablinks[nextTabIndex];
+                var nextTabName = nextTab.textContent.trim(); // Get the tab name based on the button text
+                openTab({currentTarget: nextTab}, nextTabName);
+	    }
+	}
+
+        // Function to handle file upload
+        function handleFileUpload() {
+            var fileInput = document.getElementById("uploadInput");
+            var files = fileInput.files;
+            var imageLinksContainer = document.getElementById("imageLinksContainer");
+
+            imageLinksContainer.innerHTML = ""; // Clear previous image links
+
+            if (files.length > 0) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    var reader = new FileReader();
+
+                    reader.onload = (function(file) {
+                        return function(e) {
+                            var link = document.createElement("a");
+                            link.href = e.target.result;
+                            link.target = "_blank";
+                            link.textContent = "View " + file.name;
+                            imageLinksContainer.appendChild(link);
+                            imageLinksContainer.appendChild(document.createElement("br"));
+                        };
+		    })(file);
+
+                    reader.readAsDataURL(file);
+		}
+
+                // Show the upload message and image link
+                document.getElementById("uploadMessage").style.display = "block";
+                imageLinksContainer.style.display = "block";
+	    }
+        }
+
+        // Function to handle file drop
+        function handleFileSelect(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            var files = evt.dataTransfer.files; // FileList object.
+
+            // Assign files to file input
+            document.getElementById("uploadInput").files = files;
+            handleFileUpload(); // Call the same function used for the file input change event
+        }
+
+        // Function to handle drag over event
+        function handleDragOver(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+        }
+
+        // Attach event listeners for drag-and-drop functionality
+        var dropZone = document.getElementById('dropZone');
+        dropZone.addEventListener('dragover', handleDragOver, false);
+        dropZone.addEventListener('drop', handleFileSelect, false);
+
+// Function to add invited users to the list
+function addInvite(type) {
+    var inputField, inviteList, inviteTypeText;
+
+    if (type === 'email') {
+        inputField = document.getElementById('inviteEmailInput');
+        inviteTypeText = 'Email: ';
+    } else if (type === 'profile') {
+        inputField = document.getElementById('inviteProfileInput');
+        inviteTypeText = 'Profile: ';
+    }
+
+    var userInput = inputField.value.trim();
+    if (userInput !== '') {
+        inviteList = document.getElementById('invitedUsers');
+
+        var listItem = document.createElement('li');
+        listItem.textContent = inviteTypeText + userInput;
+
+        inviteList.appendChild(listItem);
+
+        // Clear the input field after adding the invite
+        inputField.value = '';
+    }
+}
+    </script>
+    <script src='https://unpkg.com/@yaireo/tagify'>
+    </script><script  src="./invite.js"></script>
+</body>
+</html>
