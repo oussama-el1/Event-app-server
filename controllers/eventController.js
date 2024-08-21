@@ -44,7 +44,6 @@ class eventController {
         return res.status(400).json({
           message: error.details[0].message,
         });
-
       const newEvent = new Event({
         title,
         description,
@@ -56,7 +55,24 @@ class eventController {
       });
 
       await newEvent.save();
+      const eventID = newEvent._id.toString();
+      const finalDir = path.resolve(
+        `/tmp/event-app/events/${eventID}-${Date.now()}/`
+      );
 
+      if (!fs.existsSync(finalDir)) {
+        fs.mkdirSync(finalDir, { recursive: true });
+      }
+
+      req.files.forEach((file) => {
+        const newFilePath = path.join(finalDir, path.basename(file.path));
+        fs.renameSync(file.path, newFilePath);
+      });
+
+      newEvent.media = req.files.map((file) =>
+        path.join(finalDir, path.basename(file.path))
+      );
+      await newEvent.save();
       user.createdEvents.push(newEvent._id);
       await user.save();
 
@@ -67,7 +83,7 @@ class eventController {
     } catch (error) {
       res.status(500).json({ message: "Error creating event", error });
     }
-  };
+  }
 
   static async getevent(req, res) {
     try {
@@ -92,7 +108,7 @@ class eventController {
           status: "error",
           message: "Event not found",
         });
-      };
+      }
 
       res.status(200).json({
         status: "success",
@@ -106,8 +122,15 @@ class eventController {
   }
   static async updateevent(req, res) {
     try {
-      const { title, description, date, location, ticketLimit, categories } =
-        req.body;
+      const {
+        title,
+        description,
+        date,
+        location,
+        ticketLimit,
+        categories,
+        isPublic,
+      } = req.body;
       const { error } = validateEvent({
         title,
         description,
@@ -115,6 +138,7 @@ class eventController {
         location,
         ticketLimit,
         categories,
+        isPublic,
       });
       if (error)
         return res.status(400).json({
@@ -122,7 +146,15 @@ class eventController {
         });
       const event = await Event.findByIdAndUpdate(
         req.params.id,
-        { title, description, date, location, ticketLimit, categories },
+        {
+          title,
+          description,
+          date,
+          location,
+          ticketLimit,
+          categories,
+          isPublic,
+        },
         { new: true }
       );
       if (!event) {
@@ -130,8 +162,26 @@ class eventController {
           .status(400)
           .json({ message: "Event ID not found in request" });
       }
-      await event.save();
-      res.status(200).json(event);
+      if (req.files && req.files.length > 0) {
+        const finalDir = path.resolve(
+          `/tmp/event-app/events/${event._id}-${Date.now()}/`
+        );
+
+        if (!fs.existsSync(finalDir)) {
+          fs.mkdirSync(finalDir, { recursive: true });
+        }
+
+        req.files.forEach((file) => {
+          const newFilePath = path.join(finalDir, path.basename(file.path));
+          fs.renameSync(file.path, newFilePath);
+        });
+
+        event.media = req.files.map((file) =>
+          path.join(finalDir, path.basename(file.path))
+        );
+        await event.save();
+        res.status(200).json(event);
+      }
     } catch (error) {
       console.error(`Error updating event: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
@@ -155,7 +205,7 @@ class eventController {
           .status(400)
           .json({ message: "Event ID not found in request" });
       }
-      user.createdEvents.pull({ _id: req.params.id });
+      user.createdEvents.pull(req.params.id);
       await user.save();
       res.status(200).json({
         message: "Event deleted successfully",
@@ -176,6 +226,8 @@ function validateEvent(event) {
     location: Joi.string().min(5).required(),
     ticketLimit: Joi.number().min(1).required(),
     categories: Joi.string().required(),
+    isPublic: Joi.boolean().required(),
+    media: Joi.string(),
   };
 
   return Joi.validate(event, schema);
