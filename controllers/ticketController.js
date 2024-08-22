@@ -7,7 +7,6 @@ const Event = require('../models/Event');
 const Ticket = require('../models/Tickets');
 
 class TicketController {
-
   static async purchase(req, res) {
     try {
         const user = req.user.id;
