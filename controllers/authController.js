@@ -55,10 +55,10 @@ class AuthController {
             message : "User Already Exist" }
         );
       }
-      
+      console.log('kk')
       const otp = crypto.randomInt(100000, 999999);
       const otpExpires = new Date(Date.now() + 15 * 60 * 1000); // 15 min
-
+      console.log('fil')
       const newUser = new User({
         firstName,
         lastName,
@@ -72,11 +72,9 @@ class AuthController {
         address,
         gender
       });
-      
       newUser.generateBio();
       await newUser.hashPassword(password)
-      await newUser.save();
-      
+      await newUser.save(); //                                  makhdamaach hh
       // add job
       await emailQueue.add({
         to: email,

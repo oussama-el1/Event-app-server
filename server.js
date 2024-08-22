@@ -24,6 +24,8 @@ app.use('/api/auth', Authrouter);
 app.use('/api/users', UserRouter);
 app.use('/api/events', EventRouter)
 app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'css')));
+app.use(express.static(path.join(__dirname, 'static')));
 
 
 app.get('/signup', (req, res) => {
@@ -48,6 +50,10 @@ app.get('/verify_email', (req, res) => {
 
 app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, '/html/home.html'));
+});
+
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, '/html/user_Aboutme.html'));
 });
 app.listen(PORT, () => {
   console.log(`App Running On Port ${PORT}...`);

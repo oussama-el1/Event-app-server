@@ -12,186 +12,158 @@
 </head>
 <body>
     <script>
-                // Simulate fetching data from backend
         document.addEventListener('DOMContentLoaded', () => {
-            // Replace with actual backend call
             fetchProfileData().then(profileData => {
-                document.getElementById('profile-name').textContent = profileData.name;
-                document.getElementById('profile-pic').src = profileData.profilePic;
-                document.getElementById('dob').textContent = `Date of Birth: ${profileData.dob}`;
-                document.getElementById('email').textContent = `Email ID: ${profileData.email}`;
-                document.getElementById('contact').textContent = `Contact number: ${profileData.contact}`;
+                // Populate the HTML elements with data from the API
+                document.getElementById('profile-name').textContent = profileData.fullName || 'Panda Man';
+                document.getElementById('profile-pic').src = profileData.profilePicture || '../static/imgs/default-profile.jpg';
+                document.getElementById('dob').textContent = `Date of Birth: ${profileData.birthDate || '01/01/1970'}`;
+                document.getElementById('email').textContent = `Email ID: ${profileData.email || 'example@domain.com'}`;
+                document.getElementById('contact').textContent = `Contact number: ${profileData.tel || '0000000000'}`;
+                document.getElementById('bio').textContent = profileData.bio || 'No bio available';
+            }).catch(error => {
+                console.error('Error fetching profile data:', error);
+                // Display default values in case of an error
+                document.getElementById('profile-name').textContent = 'Panda Man';
+                document.getElementById('profile-pic').src = '../static/imgs/default-profile.jpg';
+                document.getElementById('dob').textContent = 'Date of Birth: 01/01/1970';
+                document.getElementById('email').textContent = 'Email ID: example@domain.com';
+                document.getElementById('contact').textContent = 'Contact number: 0000000000';
+                document.getElementById('bio').textContent = 'No bio available';
+            });
+
+            // Handle tab navigation
+            const tabs = document.querySelectorAll('.profile-nav a');
+            const sections = document.querySelectorAll('.tab-content');
+
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    // Remove active class from all tabs and sections
+                    tabs.forEach(t => t.classList.remove('active'));
+                    sections.forEach(section => section.classList.remove('active'));
+
+                    // Add active class to clicked tab and corresponding section
+                    tab.classList.add('active');
+                    sections[index].classList.add('active');
+                });
             });
         });
 
-        // Mock function to simulate backend data retrieval
+        // Function to simulate fetching data from the backend
         function fetchProfileData() {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve({
-                        name: "Panda Man",
-                        profilePic: "../static/imgs/default-profile.jpg",
-                        dob: "23/04/2000",
-                        email: "Somethinghere@server.com",
-                        contact: "1234567890"
-                    });
-                }, 1000);
+            return fetch('/api/users/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data) throw new Error('No data');
+                return data;
+            })
+            .catch(error => {
+                console.error('Error fetching profile data:', error);
+                return {}; // Return an empty object if there's an error
             });
         }
 
-            document.addEventListener('DOMContentLoaded', () => {
-        // Simulate fetching data from backend
-        fetchProfileData().then(profileData => {
-            document.getElementById('profile-name').textContent = profileData.name;
-            document.getElementById('profile-pic').src = profileData.profilePic;
-            document.getElementById('dob').textContent = `Date of Birth: ${profileData.dob}`;
-            document.getElementById('email').textContent = `Email ID: ${profileData.email}`;
-            document.getElementById('contact').textContent = `Contact number: ${profileData.contact}`;
-        });
-
-        // Handle tab navigation
-        const tabs = document.querySelectorAll('.profile-nav a');
-        const sections = document.querySelectorAll('.tab-content');
-
-        tabs.forEach((tab, index) => {
-            tab.addEventListener('click', (event) => {
-                event.preventDefault();
-                // Remove active class from all tabs and sections
-                tabs.forEach(t => t.classList.remove('active'));
-                sections.forEach(section => section.classList.remove('active'));
-
-                // Add active class to clicked tab and corresponding section
-                tab.classList.add('active');
-                sections[index].classList.add('active');
-            });
-        });
-    });
-
-    // Mock function to simulate backend data retrieval
-    function fetchProfileData() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    name: "Panda Man",
-                    profilePic: "../static/imgs/default-profile.jpg",
-                    dob: "23/04/2000",
-                    email: "Somethinghere@server.com",
-                    contact: "1234567890"
-                });
-            }, 1000);
-        });
-    }
+        // Function to get token from localStorage
+        function getToken() {
+            return localStorage.getItem('authToken') || '';
+        }
     </script>
 
     <header>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <!-- Navbar Brand -->
-        <a class="navbar-brand img-fluid logo-small" href="#">
-          <img src="../static/imgs/logo.png" class="img-fluid w-50" alt="">
-        </a>
-        <!-- Toggle button for mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Navbar links and buttons -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">EVENTS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">FAVORITS</a>
-            </li>
-          </ul>
-          <div class="d-flex">
-            <!-- Search Form -->
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
-          </div>
-          <!-- Profile icon -->
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
-            <li class="nav-item dropdown">
-              <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="profile-icon-container">
-                  <img src="../static/imgs/user.jpeg" alt="Profile Icon" class="profile-icon">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand img-fluid logo-small" href="#">
+                    <img src="../static/imgs/logo.png" class="img-fluid w-50" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">EVENTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAVORITS</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        </form>
+                    </div>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+                        <li class="nav-item dropdown">
+                            <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="profile-icon-container">
+                                    <img src="../static/imgs/user.jpeg" alt="Profile Icon" class="profile-icon">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="user_Aboutme.html">Account</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="login.html">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-                <!-- You can also use icon as follows: -->
-                <!--  <i class="fas fa-user"></i> -->
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item" href="user_Aboutme.html">
-                   Account </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                     Settings </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item" href="login.html">
-                    Log Out </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+            </div>
+        </nav>
     </header>
 
-<main>
-    <section class="profile-section">
-        <div class="profile-card">
-            <div class="imgcnt">
-                <img id="profile-pic" src="../static/imgs/default-profile.jpg" alt="Profile Picture" class="profile-picture">
+    <main>
+        <section class="profile-section">
+            <div class="profile-card">
+                <div class="imgcnt">
+                    <img id="profile-pic" src="../static/imgs/default-profile.jpg" alt="Profile Picture" class="profile-picture">
+                </div>
+                <div>
+                    <h1 id="profile-name">Panda Man</h1>
+                    <p id="dob">Date of Birth: 01/01/1970</p>
+                    <p id="email">Email ID: example@domain.com</p>
+                    <p id="contact">Contact number: 0000000000</p>
+                </div>
             </div>
-            <div>
-                <h1 id="profile-name">Panda Man</h1>
-                <p id="dob">Date of Birth: 23/04/2000</p>
-                <p id="email">Email ID: Somethinghere@server.com</p>
-                <p id="contact">Contact number: 1234567890</p>
+
+            <nav class="profile-nav">
+                <ul>
+                    <li><a href="#" class="active">About me</a></li>
+                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="#">My Events</a></li>
+                    <li><a href="#">Calendar</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+
+            <div class="tab-content active">
+                <div class="about-me">
+                    <p id="bio">No bio available</p>
+                </div>
             </div>
-        </div>
-
-        <nav class="profile-nav">
-            <ul>
-                <li><a href="#" class="active">About me</a></li>
-                <li><a href="#">My Bookings</a></li>
-                <li><a href="#">My Events</a></li>
-                <li><a href="#">Calendar</a></li>
-                <li><a href="#">Settings</a></li>
-            </ul>
-        </nav>
-
-        <div class="tab-content active">
-            <div class="about-me">
-                <p>Lorem ipsum dolor sit amet, consectetur. Lectus euismod ac et pellentesque tincidunt commodo aliquam turpis posuere.</p>
-                <p>Personality: label1, label2...</p>
+            <div class="tab-content">
+                <p>My Bookings content...</p>
             </div>
-        </div>
-        <div class="tab-content">
-            <p>My Bookings content...</p>
-        </div>
-        <div class="tab-content">
-            <p>My Events content...</p>
-        </div>
-        <div class="tab-content">
-            <p>Calendar content...</p>
-        </div>
-        <div class="tab-content">
-            <p>Settings content...</p>
-        </div>
-    </section>
-</main>
-
+            <div class="tab-content">
+                <p>My Events content...</p>
+            </div>
+            <div class="tab-content">
+                <p>Calendar content...</p>
+            </div>
+            <div class="tab-content">
+                <p>Settings content...</p>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-section">
@@ -225,16 +197,12 @@
                 <h3>For regular event updates</h3>
                 <input type="email" placeholder="Enter your mail id here..." class="newsletter-input">
                 <div class="social-icons">
-                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384031.png" alt="Instagram"></a>
-                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/747/747374.png" alt="Facebook"></a>
-                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/2111/2111774.png" alt="WhatsApp"></a>
-                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/5968/5968958.png" alt="Twitter"></a>
+                    <a href="#"><img src="../static/imgs/facebook.png" alt="Facebook" class="social-icon"></a>
+                    <a href="#"><img src="../static/imgs/instagram.png" alt="Instagram" class="social-icon"></a>
+                    <a href="#"><img src="../static/imgs/twitter.png" alt="Twitter" class="social-icon"></a>
                 </div>
             </div>
         </div>
-        <p class="footer-credit">© MaxZhoo Pvt. LTD. All Rights Reserved.</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>

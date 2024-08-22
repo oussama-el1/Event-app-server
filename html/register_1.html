@@ -177,11 +177,11 @@ button.next {
                     <label>Gender?</label>
                     <div class="radio-group">
                         <div class="checkbox-wrapper-24">
-                            <input type="radio" id="male" name="gender" value="male" required>
+                            <input type="radio" id="male" name="gender" value="Male" required>
                             <label for="male"><span></span> Male</label>
                         </div>
                         <div class="checkbox-wrapper-24">
-                            <input type="radio" id="female" name="gender" value="female" required>
+                            <input type="radio" id="female" name="gender" value="Female" required>
                             <label for="female"><span></span> Female</label>
                         </div>
                     </div>
@@ -191,15 +191,15 @@ button.next {
                     <label>Relationship status?</label>
                     <div class="radio-group">
                         <div class="checkbox-wrapper-24">
-                            <input type="radio" id="single" name="relationship" value="single" required>
+                            <input type="radio" id="single" name="maritalStatus" value="Single" required>
                             <label for="single"><span></span> Single</label>
                         </div>
                         <div class="checkbox-wrapper-24">
-                            <input type="radio" id="married" name="relationship" value="married" required>
+                            <input type="radio" id="married" name="maritalStatus" value="Married" required>
                             <label for="married"><span></span> Married</label>
                         </div>
                         <div class="checkbox-wrapper-24">
-                            <input type="radio" id="prefer-not-say-relationship" name="relationship" value="prefer-not-say" required>
+                            <input type="radio" id="prefer-not-say-relationship" name="maritalStatus" value="Prefer not to say" required>
                             <label for="prefer-not-say-relationship"><span></span> Prefer not to say</label>
                         </div>
                     </div>
@@ -215,34 +215,45 @@ button.next {
     <script>
         document.getElementById('registration-form').addEventListener('submit', function(event) {
             event.preventDefault();
-
+    
             // Capture form data
             const formData = new FormData(document.getElementById('registration-form'));
-
+    
             // Convert to JSON
             const jsonData = {};
             formData.forEach((value, key) => {
                 jsonData[key] = value;
             });
+    
+            // Add address information
+            jsonData['address'] = {
+                street: "Hay houdan 284",
+                city: "beni mellal",
+                state: "beni mellal khenifra",
+                zip: "25000",
+                country: "Morocco"
+            };
 
+    
             // Log the JSON data to check values
             console.log('Form Data:', jsonData);
-
+    
             // Retrieve the existing data from sessionStorage
             const existingData = JSON.parse(sessionStorage.getItem('registrationData')) || {};
-
+    
             // Merge the existing data with the new data
             const mergedData = { ...existingData, ...jsonData };
-
+    
             // Save the merged data back to sessionStorage
             sessionStorage.setItem('registrationData', JSON.stringify(mergedData));
-
-            // Log the merged data to check if it includes relationship status
+    
+            // Log the merged data to check if it includes address information
             console.log('Merged Data:', mergedData);
-
+    
             // Redirect to the next registration step
             window.location.href = '/interests';
         });
     </script>
+    
 </body>
 </html>
