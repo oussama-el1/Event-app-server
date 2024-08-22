@@ -20,15 +20,15 @@ This endpoint registers a new user. Upon successful registration, an email verif
 - **Body**: 
   ```json
   {
-    "email": "string",
-    "password": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "listOfInterest": ["string"],
-    "tel": "string",
-    "birthDate": "YYYY-MM-DD",
+    "email": "string", // required
+    "password": "string", // required
+    "firstName": "string", // required
+    "lastName": "string", // required
+    "listOfInterest": ["string"], // required
+    "tel": "string", // required
+    "birthDate": "YYYY-MM-DD", // required
     "maritalStatus": "string",
-    "address": "string",
+    "address": "string", 
     "gender": "string"
   }
   ```
@@ -195,7 +195,7 @@ This endpoint initiates the password reset process for a user. It generates a re
     {
       "status": "success",
       "message": "Password reset email sent",
-      "resetUrl": "http://localhost:5000/api/auth/reset-password?token=<reset-token>"
+      "resetUrl": "http://localhost:3000/api/auth/reset-password?token=<reset-token>" // api Url to make request to change the pwd
     }
     ```
   - Indicates that the password reset email has been sent successfully. The resetUrl is included for the user to reset their password.
