@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - CSS Goey footer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create an Event</title>
+  <link href="create_event.css" rel="stylesheet">
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel='stylesheet' href='https://unpkg.com/@yaireo/tagify/dist/tagify.css'>
+  <link rel="stylesheet" href="./invite.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;display=swap'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css'><link rel="stylesheet" href="./footer.css">
+
+</head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+              <!-- Navbar Brand -->
+              <a class="navbar-brand" href="#">
+                  <img src="./static/imgs/logo.png" class="img-fluid w-50" alt="">
+              </a>
+
+              <!-- Toggle button for mobile -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <!-- Navbar links and buttons -->
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#">EVENTS</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#">FAVORITES</a></li>
+                  </ul>
+                  <div class="d-flex">
+                      <!-- Search Form -->
+                      <form class="d-flex">
+                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      </form>
+                      <!-- Profile icon -->
+                      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu"> 
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <div class="profile-pic">
+                                      <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture">
+                                   </div>
+                               <!-- You can also use icon as follows: -->
+                                 <!--  <i class="fas fa-user"></i> -->
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
+                                  <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
+                                </ul>
+                              </li>
+                           </ul>
+                  </div>
+              </div>
+          </div>
+      </nav>
+          <main>
+          <div class="container bg-figma">
+              <div class="wrapper">
+              <h2>Create an Event</h2>
+
+              <!-- Tabs Navigation -->
+              <div class="tabs">
+                  <button class="tablink active" onclick="openTab(event, 'BasicInfo')">Basic Info</button>
+                  <button class="tablink" onclick="openTab(event, 'Upload Media')">Upload Media</button>
+                  <button class="tablink" onclick="openTab(event, 'Invite Info')">Invite Info</button>
+                  <button class="tablink" onclick="openTab(event, 'Budget')">Budget</button>
+                  <button class="tablink" onclick="openTab(event, 'Payment Info')">Payment Info</button>
+              </div>
+
+              <!-- Tab Content: Basic Info -->
+              <div id="BasicInfo" class="tabcontent" style="display: block;">
+                  <div class="row">
+                      <div class="col">
+                          <input type="text" class="form-control" placeholder="Event Name">
+                      </div>
+                      <div class="col">
+                          <input type="text" class="form-control" placeholder="Event Type">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <input type="text" class="form-control" placeholder="Priced Event">
+                      </div>
+                      <div class="col">
+                          <input type="text" class="form-control" placeholder="Price $">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <input type="text" class="form-control" placeholder="Date">
+                      </div>
+                      <div class="col">
+                          <input type="text" class="form-control" placeholder="Location">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <input type="text" class="form-control" placeholder="Start Time">
+                      </div>
+                      <div class="col">
+                          <input type="text" class="form-control" placeholder="End Time">
+                      </div>
+                  </div>
+
+                  <!-- Additional Inputs: Event Format, Hashtags, Description -->
+                  <div class="column">
+                      <input type="text" class="form-control" placeholder="Event Format">
+                      <input type="text" class="form-control" placeholder="Hashtags">
+                      <textarea class="form-control" placeholder="Description"></textarea>
+                  </div>
+
+                  <div class="button-group">
+                      <button class="btn bg-aka" type="button" onclick="nextTab()">Save & Continue</button>
+                  </div>
+              </div>
+
+              <!-- Tab Content: Upload Media -->
+              <div id="Upload Media" class="tabcontent">
+                  <div class="border border-white p-3">
+                  <h3 class="mx-5 text-center" >Upload pictures for your event.</h3>
+
+          <!-- File Upload Input -->
+          <div class="upload-section">
+                          <input type="file" id="uploadInput" class="form-control" style="display: none;" onchange="handleFileUpload()" multiple>
+                          <label for="uploadInput" class="upload-label" id="dropZone">
+                              <span class="upload-button btn btn-darki">
+                                  &#128228; Upload Media
+                              </span>
+                          </label>
+              <!-- Confirmation Message -->
+                          <p id="uploadMessage" style="display: none;">Media uploaded successfully!</p>
+              <!-- Image Links Container -->
+                          <div id="imageLinksContainer" style="display: none;"></div>
+                      </div>
+                  </div>
+                  <div class="button-group ">
+                      <button class="btn bg-aka" type="button" onclick="nextTab()">Save & Continue</button>
+                  </div>
+              </div>
+
+  <!-- Tab Content: Invite Info -->
+  <div id="Invite Info" class="tabcontent">
+      <div class="border border-white p-3">
+      <div class="">
+          <h3>Invite Users</h3>
+  <input name='tags' placeholder='Profile Name'>
+         
+      </div>
+      <!-- List of invited users -->
+      <div id="invitedUsersList" class="invited-list">
+          <h3>Invited Users:</h3>
+          <ul id="invitedUsers"></ul>
+      </div>
+      </div>
+      <div class="button-group">
+          <button class="btn bg-aka" type="button" onclick="nextTab()">Save & Continue</button>
+      </div>
+  </div>
+
+
+  <!-- Tab Content: Budget -->
+  <div id="Budget" class="tabcontent ">
+      <div class="border border-white p-3">
+      <form>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Commodity Name">
+          </div>
+          <div class="col">
+            <input type="number" class="form-control" placeholder="Budget Allocated">
+          </div>
+        </div>
+        <div class="row area">
+            <textarea class="form-control" placeholder="Description"></textarea>
+        </div>
+      </form>
+      <div class="button-group">
+          <button class="btn bg-aka" type="button">Add</button>
+      </div>
+      </div>
+      <div class="button-group">
+          <button class="btn bg-aka" type="button" onclick="nextTab()">Save & Continue</button>
+      </div>
+  </div>
+
+        <!-- Tab Content: Payment Info -->
+              <div id="Payment Info" class="tabcontent ">
+                  <div class="border border-white p-3">
+                  <h3>Please select payment methods to be linked with this Event</h3>
+
+                  <div class="my-3">
+                      <div class="form-check">
+                        <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Credit card
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckChecked" >
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Debit card
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckChecked" >
+                        <label class="form-check-label" for="flexCheckChecked">
+                          UPI
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckChecked" >
+                        <label class="form-check-label" for="flexCheckChecked">
+                          PayPal
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input bg-aka" type="checkbox" value="" id="flexCheckChecked" >
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Gift Cards
+                        </label>
+                      </div>
+                  </div>
+                  </div>
+                  <div class="button-group">
+                      <button type="submit" class="btn bg-aka">Submit</button>
+                  </div>
+              </div>
+  </div>
+
+
+          </div>
+      </main>
+
+      <script>
+
+
+          // Opens a specific tab and hides all other tabs.
+          function openTab(evt, tabName) {
+              var i, tabcontent, tablinks;
+
+              // Hide all tab content
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                  tabcontent[i].style.display = "none";
+              }
+
+              // Remove the active class from all tab links
+              tablinks = document.getElementsByClassName("tablink");
+              for (i = 0; i < tablinks.length; i++) {
+                  tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+
+              // Show the current tab, and add an "active" class to the button that opened the tab
+              document.getElementById(tabName).style.display = "block";
+              evt.currentTarget.className += " active";
+          }
+
+          // Finds the index of the currently active tab, and activates the index of the next tab
+          function nextTab() {
+              var i, tablinks;
+              var activeTabIndex = -1;
+              var tablinks = document.getElementsByClassName("tablink");
+
+              // Find the index of the currently active tab
+              for (i = 0; i < tablinks.length; i++) {
+                  if (tablinks[i].classList.contains("active")) {
+                      activeTabIndex = i;
+                      break;
+      }
+        }
+
+              // Get the next tab index
+              var nextTabIndex = activeTabIndex + 1;
+              if (nextTabIndex < tablinks.length) {
+                  var nextTab = tablinks[nextTabIndex];
+                  var nextTabName = nextTab.textContent.trim(); // Get the tab name based on the button text
+                  openTab({currentTarget: nextTab}, nextTabName);
+        }
+    }
+
+          // Function to handle file upload
+          function handleFileUpload() {
+              var fileInput = document.getElementById("uploadInput");
+              var files = fileInput.files;
+              var imageLinksContainer = document.getElementById("imageLinksContainer");
+
+              imageLinksContainer.innerHTML = ""; // Clear previous image links
+
+              if (files.length > 0) {
+                  for (var i = 0; i < files.length; i++) {
+                      var file = files[i];
+                      var reader = new FileReader();
+
+                      reader.onload = (function(file) {
+                          return function(e) {
+                              var link = document.createElement("a");
+                              link.href = e.target.result;
+                              link.target = "_blank";
+                              link.textContent = "View " + file.name;
+                              imageLinksContainer.appendChild(link);
+                              imageLinksContainer.appendChild(document.createElement("br"));
+                          };
+          })(file);
+
+                      reader.readAsDataURL(file);
+      }
+
+                  // Show the upload message and image link
+                  document.getElementById("uploadMessage").style.display = "block";
+                  imageLinksContainer.style.display = "block";
+        }
+          }
+
+          // Function to handle file drop
+          function handleFileSelect(evt) {
+              evt.stopPropagation();
+              evt.preventDefault();
+              var files = evt.dataTransfer.files; // FileList object.
+
+              // Assign files to file input
+              document.getElementById("uploadInput").files = files;
+              handleFileUpload(); // Call the same function used for the file input change event
+          }
+
+          // Function to handle drag over event
+          function handleDragOver(evt) {
+              evt.stopPropagation();
+              evt.preventDefault();
+              evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+          }
+
+          // Attach event listeners for drag-and-drop functionality
+          var dropZone = document.getElementById('dropZone');
+          dropZone.addEventListener('dragover', handleDragOver, false);
+          dropZone.addEventListener('drop', handleFileSelect, false);
+
+  // Function to add invited users to the list
+  function addInvite(type) {
+      var inputField, inviteList, inviteTypeText;
+
+      if (type === 'email') {
+          inputField = document.getElementById('inviteEmailInput');
+          inviteTypeText = 'Email: ';
+      } else if (type === 'profile') {
+          inputField = document.getElementById('inviteProfileInput');
+          inviteTypeText = 'Profile: ';
+      }
+
+      var userInput = inputField.value.trim();
+      if (userInput !== '') {
+          inviteList = document.getElementById('invitedUsers');
+
+          var listItem = document.createElement('li');
+          listItem.textContent = inviteTypeText + userInput;
+
+          inviteList.appendChild(listItem);
+
+          // Clear the input field after adding the invite
+          inputField.value = '';
+      }
+  }
+      </script>
+      <script src='https://unpkg.com/@yaireo/tagify'>
+      </script><script  src="./invite.js"></script>
+  </body>
+  <footer>
+<!-- partial:index.partial.html -->
+<div class="main"></div>
+<div class="footer">
+  <div class="bubbles">
+    <div class="bubble" style="--size:5.977357239141471rem; --distance:8.919834342488787rem; --position:63.948346141800755%; --time:2.870352616355383s; --delay:-3.2492976942777156s;"></div>
+    <div class="bubble" style="--size:2.615974828390435rem; --distance:7.987930669905858rem; --position:39.422423500801536%; --time:2.1401503176027434s; --delay:-2.1599863496674896s;"></div>
+    <div class="bubble" style="--size:2.6512637960572727rem; --distance:8.22816786785879rem; --position:44.61356177394881%; --time:3.6982882363278464s; --delay:-3.5753606294252633s;"></div>
+    <div class="bubble" style="--size:2.5646644624036607rem; --distance:7.96624305902899rem; --position:20.932002507187313%; --time:3.261514634790087s; --delay:-2.3333093445151127s;"></div>
+    <div class="bubble" style="--size:4.509561142508036rem; --distance:7.699503375113061rem; --position:26.07831031036191%; --time:3.727533155349605s; --delay:-3.3523889112673966s;"></div>
+    <div class="bubble" style="--size:4.609047813328331rem; --distance:6.173359395891566rem; --position:2.0912827701855985%; --time:3.1208704904426496s; --delay:-3.8440660126011807s;"></div>
+    <div class="bubble" style="--size:2.4287927001974685rem; --distance:6.828477268097747rem; --position:37.526976214851494%; --time:3.7779235136108236s; --delay:-3.8619888864917247s;"></div>
+    <div class="bubble" style="--size:2.446073564316273rem; --distance:6.741149838485176rem; --position:10.606215022092663%; --time:2.0857467667914875s; --delay:-3.973028617110726s;"></div>
+    <div class="bubble" style="--size:4.858488203062283rem; --distance:7.727294513887059rem; --position:65.39289750263471%; --time:2.628164914665419s; --delay:-2.715643324129606s;"></div>
+    <div class="bubble" style="--size:4.357251936807777rem; --distance:8.970625615401104rem; --position:23.23185626482596%; --time:3.7918997062014874s; --delay:-2.879104335264188s;"></div>
+    <div class="bubble" style="--size:2.3224298981403537rem; --distance:6.80953423664022rem; --position:49.24350123134949%; --time:3.498871551975769s; --delay:-3.5465827026064787s;"></div>
+    <div class="bubble" style="--size:5.5800421819021135rem; --distance:7.0625669451550745rem; --position:56.04148629001693%; --time:3.467264281357605s; --delay:-2.700938325813619s;"></div>
+    <div class="bubble" style="--size:5.204210369663579rem; --distance:8.546024423760471rem; --position:5.379513676382501%; --time:3.4668252478197688s; --delay:-3.3781068506745706s;"></div>
+    <div class="bubble" style="--size:2.2124767419599554rem; --distance:9.998610142775371rem; --position:69.64215769204166%; --time:3.189528891922587s; --delay:-2.6173154068533364s;"></div>
+    <div class="bubble" style="--size:3.085505281100607rem; --distance:7.646672910310605rem; --position:91.93895558160366%; --time:2.8712761173841956s; --delay:-3.6331375530769487s;"></div>
+    <div class="bubble" style="--size:2.541925244280015rem; --distance:7.372832127790476rem; --position:20.215991058025136%; --time:3.657107287491727s; --delay:-3.563301599268453s;"></div>
+    <div class="bubble" style="--size:3.563486322924006rem; --distance:9.097686011884617rem; --position:57.488416673803954%; --time:2.2714608810569517s; --delay:-2.8457109626118156s;"></div>
+    <div class="bubble" style="--size:5.1083886773597875rem; --distance:7.272675242688707rem; --position:24.355965256875063%; --time:2.9330419025487022s; --delay:-2.640973658502383s;"></div>
+    <div class="bubble" style="--size:2.250254730480969rem; --distance:8.479029112779473rem; --position:41.82518330252457%; --time:2.6281732639417332s; --delay:-2.3729422270657916s;"></div>
+    <div class="bubble" style="--size:5.652906697377593rem; --distance:8.59101170981679rem; --position:86.71551178899908%; --time:2.725620787824735s; --delay:-2.1331259241316403s;"></div>
+    <div class="bubble" style="--size:3.9716764460660547rem; --distance:9.619840399471052rem; --position:60.232393283552824%; --time:2.1128536444556105s; --delay:-2.0687941475181484s;"></div>
+    <div class="bubble" style="--size:4.6603306177793185rem; --distance:6.076429677025213rem; --position:70.70758737861185%; --time:2.1815930939452306s; --delay:-2.73380302906422s;"></div>
+    <div class="bubble" style="--size:4.272415093584029rem; --distance:7.532580224039164rem; --position:58.287211815951906%; --time:2.1380848595297097s; --delay:-3.5770002112220833s;"></div>
+    <div class="bubble" style="--size:5.506328210352113rem; --distance:6.631467345792089rem; --position:84.58869105611761%; --time:2.724371825049918s; --delay:-2.714070044114189s;"></div>
+    <div class="bubble" style="--size:5.257883949901801rem; --distance:6.44649533826063rem; --position:47.276185522975894%; --time:2.8644411672008063s; --delay:-3.652084295144127s;"></div>
+    <div class="bubble" style="--size:3.1348714631792705rem; --distance:7.618333332737517rem; --position:61.95950481057953%; --time:2.792208098926176s; --delay:-3.178292371683338s;"></div>
+    <div class="bubble" style="--size:5.788841250885585rem; --distance:9.162864533735213rem; --position:2.590383044424205%; --time:3.1279421557207523s; --delay:-2.0882085659557825s;"></div>
+    <div class="bubble" style="--size:2.5145949046514424rem; --distance:6.905824695454885rem; --position:80.5132133276658%; --time:3.2045086369292632s; --delay:-2.8545968982403114s;"></div>
+    <div class="bubble" style="--size:5.733511972704012rem; --distance:9.834861500164529rem; --position:86.71896325488757%; --time:3.3611127269787504s; --delay:-2.1777607030687394s;"></div>
+    <div class="bubble" style="--size:4.768320578764237rem; --distance:9.620091081154657rem; --position:100.37744526369943%; --time:3.6287819770277734s; --delay:-3.3472448673148456s;"></div>
+    <div class="bubble" style="--size:3.679485667584691rem; --distance:9.78290829145011rem; --position:10.822391690662032%; --time:2.846478635971266s; --delay:-2.142272318473358s;"></div>
+    <div class="bubble" style="--size:4.248196098130309rem; --distance:7.8987712344583745rem; --position:39.09036663731523%; --time:3.509771315706228s; --delay:-3.8176420474928796s;"></div>
+    <div class="bubble" style="--size:2.7966089753018037rem; --distance:9.646636581410629rem; --position:15.0374967298442%; --time:2.8815695560356436s; --delay:-2.24874836357934s;"></div>
+    <div class="bubble" style="--size:5.210465733848058rem; --distance:8.513951514456615rem; --position:98.84492601298072%; --time:3.583841707510209s; --delay:-2.084744738237757s;"></div>
+    <div class="bubble" style="--size:5.540257995834029rem; --distance:8.026761252414783rem; --position:82.08415065492778%; --time:3.883692437788842s; --delay:-2.053362188291398s;"></div>
+    <div class="bubble" style="--size:4.769533765562027rem; --distance:7.083911394307931rem; --position:-0.8499778489094574%; --time:3.318018172179047s; --delay:-3.2468863115863216s;"></div>
+    <div class="bubble" style="--size:4.2234381314046185rem; --distance:6.304615502565348rem; --position:35.730747485983194%; --time:3.771058722422283s; --delay:-3.2220435441235593s;"></div>
+    <div class="bubble" style="--size:3.7149467823941915rem; --distance:9.470263093149212rem; --position:83.16159302598172%; --time:2.069776322560745s; --delay:-2.489443774702662s;"></div>
+    <div class="bubble" style="--size:2.2691603441603156rem; --distance:6.45332584271563rem; --position:85.46336599478002%; --time:3.798184910445975s; --delay:-2.16822126616486s;"></div>
+    <div class="bubble" style="--size:2.156241406432178rem; --distance:7.830695825378295rem; --position:74.81976088127448%; --time:2.74654902834928s; --delay:-2.737919263751151s;"></div>
+    <div class="bubble" style="--size:4.076784858602073rem; --distance:9.072956141470659rem; --position:38.32929441015576%; --time:2.2204021776994574s; --delay:-2.170344931237389s;"></div>
+    <div class="bubble" style="--size:3.912076688637561rem; --distance:8.953173075935986rem; --position:62.62572035501455%; --time:3.21559398991804s; --delay:-2.18793085120212s;"></div>
+    <div class="bubble" style="--size:4.597056458943563rem; --distance:8.211165047686084rem; --position:9.520311893319988%; --time:2.2383329149185616s; --delay:-2.964266499490841s;"></div>
+    <div class="bubble" style="--size:3.3966297578373217rem; --distance:8.63299347935806rem; --position:47.840462895566134%; --time:3.5393455246912002s; --delay:-3.1936674483381853s;"></div>
+    <div class="bubble" style="--size:4.772294008509205rem; --distance:7.40803072550908rem; --position:-4.164885191398913%; --time:2.814696360071858s; --delay:-3.577027231841387s;"></div>
+    <div class="bubble" style="--size:3.836131014108231rem; --distance:6.21239599917748rem; --position:103.38057479847731%; --time:2.084022279296014s; --delay:-3.1748732035933536s;"></div>
+    <div class="bubble" style="--size:4.778320873995173rem; --distance:7.24167986357866rem; --position:83.58125815882276%; --time:2.682841023632612s; --delay:-2.997486091151994s;"></div>
+    <div class="bubble" style="--size:2.6045279772536105rem; --distance:6.1354195209538585rem; --position:43.334118194923924%; --time:2.606480409824968s; --delay:-3.4545091464568305s;"></div>
+    <div class="bubble" style="--size:2.5361484696352115rem; --distance:8.094911631999782rem; --position:80.02068185166553%; --time:2.9552190839692876s; --delay:-3.325153371347018s;"></div>
+    <div class="bubble" style="--size:2.46342172929792rem; --distance:7.662534651002661rem; --position:31.50043906451568%; --time:3.711800789027356s; --delay:-3.738030271231834s;"></div>
+    <div class="bubble" style="--size:2.3410582853861053rem; --distance:6.809739098815232rem; --position:49.48757388124438%; --time:3.1841573366478766s; --delay:-3.4286268646884706s;"></div>
+    <div class="bubble" style="--size:4.511852505714401rem; --distance:9.610093565808754rem; --position:102.39424248993691%; --time:3.4625121707498834s; --delay:-3.8121599305046945s;"></div>
+    <div class="bubble" style="--size:5.522251482441707rem; --distance:8.287528315548695rem; --position:63.35049765735873%; --time:2.1731527106566992s; --delay:-2.1230686967931898s;"></div>
+    <div class="bubble" style="--size:2.469934478358873rem; --distance:6.8568788301549155rem; --position:38.290272100475676%; --time:3.4823331682333976s; --delay:-2.3764095093824014s;"></div>
+    <div class="bubble" style="--size:2.3094771473918154rem; --distance:8.448323129334891rem; --position:83.3832524663996%; --time:2.620428590491165s; --delay:-3.6285861308527583s;"></div>
+    <div class="bubble" style="--size:3.531828398048698rem; --distance:9.881227154478577rem; --position:12.6554736040611%; --time:2.8486446894364765s; --delay:-3.8859583601123306s;"></div>
+    <div class="bubble" style="--size:4.09721999615346rem; --distance:7.2795744663706206rem; --position:56.885218724489256%; --time:3.197370373300439s; --delay:-2.3179092723448345s;"></div>
+    <div class="bubble" style="--size:4.704389149139394rem; --distance:8.757247548223258rem; --position:6.6014055338975375%; --time:2.948923546818385s; --delay:-2.0931209105871265s;"></div>
+    <div class="bubble" style="--size:2.9281965680027797rem; --distance:7.6685740244939415rem; --position:88.18899500349968%; --time:2.443917403913326s; --delay:-2.511034162118098s;"></div>
+    <div class="bubble" style="--size:2.438439081805152rem; --distance:9.387717972906165rem; --position:101.97156379898023%; --time:3.2246994347116544s; --delay:-3.8496633851343938s;"></div>
+    <div class="bubble" style="--size:3.4952150279610814rem; --distance:7.411677317991609rem; --position:44.54129111484196%; --time:2.26302171566024s; --delay:-2.4049948167213593s;"></div>
+    <div class="bubble" style="--size:3.1723362682090315rem; --distance:9.026839601624076rem; --position:2.6069243680185767%; --time:3.4505654365635303s; --delay:-2.2602409211393537s;"></div>
+    <div class="bubble" style="--size:3.464779267764646rem; --distance:8.352876622963638rem; --position:-4.00248210777028%; --time:2.7301642388975678s; --delay:-3.4903447347750536s;"></div>
+    <div class="bubble" style="--size:4.6402770491523935rem; --distance:6.575306987215697rem; --position:86.79905158087549%; --time:3.1777473461914463s; --delay:-2.751512560374659s;"></div>
+    <div class="bubble" style="--size:4.910191201962034rem; --distance:7.06690674689426rem; --position:33.98321280085012%; --time:3.2677106230588375s; --delay:-3.434759213921651s;"></div>
+    <div class="bubble" style="--size:4.69620262351942rem; --distance:7.471721777867766rem; --position:92.63183802781244%; --time:3.4094321815643696s; --delay:-3.611609839914543s;"></div>
+    <div class="bubble" style="--size:5.750982541949982rem; --distance:6.587065271649607rem; --position:102.76324871999581%; --time:2.4744655824115145s; --delay:-2.0175818839937723s;"></div>
+    <div class="bubble" style="--size:4.00428378347278rem; --distance:9.691601004955402rem; --position:-4.20808587194303%; --time:3.764118682921162s; --delay:-3.8491506694477224s;"></div>
+    <div class="bubble" style="--size:3.739206973823009rem; --distance:9.029184941447788rem; --position:52.1212141318719%; --time:3.212946201302294s; --delay:-3.4403461589949047s;"></div>
+    <div class="bubble" style="--size:4.551384211207785rem; --distance:6.467929852939047rem; --position:47.022344564745445%; --time:2.688841637953879s; --delay:-2.8010800552578408s;"></div>
+    <div class="bubble" style="--size:4.796801828524128rem; --distance:7.833656611254263rem; --position:62.46909844181704%; --time:3.549932761329666s; --delay:-3.144553134103105s;"></div>
+    <div class="bubble" style="--size:3.578479859756043rem; --distance:6.456506689446427rem; --position:80.46633267395684%; --time:2.5904635342450932s; --delay:-3.0857994626575613s;"></div>
+    <div class="bubble" style="--size:4.890709624496346rem; --distance:9.042506190500113rem; --position:72.8017328740186%; --time:2.0103365098848287s; --delay:-2.8384980848707486s;"></div>
+    <div class="bubble" style="--size:5.020501455863356rem; --distance:6.823444185189854rem; --position:64.08068855053202%; --time:3.9055801402866632s; --delay:-2.0009320557061785s;"></div>
+    <div class="bubble" style="--size:5.591120761121252rem; --distance:8.69121660658086rem; --position:61.8097687343417%; --time:2.696596010045971s; --delay:-2.5775805820896567s;"></div>
+    <div class="bubble" style="--size:4.919003326597616rem; --distance:8.854740272353965rem; --position:17.303417598055184%; --time:2.8665523340187846s; --delay:-3.127762985730224s;"></div>
+    <div class="bubble" style="--size:3.247768732563836rem; --distance:7.170298377806716rem; --position:48.85020396111728%; --time:2.5748840553024603s; --delay:-2.0277457752163466s;"></div>
+    <div class="bubble" style="--size:5.771942487912523rem; --distance:8.432141976917663rem; --position:95.95533908631045%; --time:2.8560509949757242s; --delay:-3.128015778037916s;"></div>
+    <div class="bubble" style="--size:2.7655371670786995rem; --distance:8.259584516294284rem; --position:26.0017001396223%; --time:3.8373277667809247s; --delay:-3.0095727762174858s;"></div>
+    <div class="bubble" style="--size:5.016813596764574rem; --distance:8.714719738047304rem; --position:2.8721600252079575%; --time:2.9463166657927977s; --delay:-2.4672272957281853s;"></div>
+    <div class="bubble" style="--size:5.906939850927788rem; --distance:8.698719705359673rem; --position:66.51578467845336%; --time:2.5453758976326935s; --delay:-3.1266838196550046s;"></div>
+    <div class="bubble" style="--size:2.6926503063716414rem; --distance:9.85035280706094rem; --position:53.684324864182386%; --time:3.270641293708693s; --delay:-3.6886517871861693s;"></div>
+    <div class="bubble" style="--size:4.703543587638833rem; --distance:8.42321917080952rem; --position:67.69701462108416%; --time:2.2370992120153166s; --delay:-2.282213586764612s;"></div>
+    <div class="bubble" style="--size:4.317259159020609rem; --distance:8.958671594102793rem; --position:16.243988333544618%; --time:3.494123029599028s; --delay:-3.999889241254063s;"></div>
+    <div class="bubble" style="--size:3.251560242573844rem; --distance:6.491874070134266rem; --position:37.04985738845886%; --time:2.936714180978589s; --delay:-2.4647086088128143s;"></div>
+    <div class="bubble" style="--size:5.2787626335251385rem; --distance:7.163507284321874rem; --position:11.040395742880538%; --time:3.595031890116884s; --delay:-2.546121519617968s;"></div>
+    <div class="bubble" style="--size:4.337566905361905rem; --distance:8.367739811456714rem; --position:102.84795605691033%; --time:3.2482025499411136s; --delay:-2.8793838226386654s;"></div>
+    <div class="bubble" style="--size:2.2954139665437063rem; --distance:8.03106398062241rem; --position:101.84974626280562%; --time:2.163744551720716s; --delay:-2.890162137970337s;"></div>
+    <div class="bubble" style="--size:3.8047852935626825rem; --distance:9.446246562511178rem; --position:5.429228396269259%; --time:2.6241895064589134s; --delay:-3.033868748655068s;"></div>
+    <div class="bubble" style="--size:3.2716510795462588rem; --distance:9.678203698834704rem; --position:66.20256943897964%; --time:3.0353786445554727s; --delay:-2.3036820962348243s;"></div>
+    <div class="bubble" style="--size:2.028965300898789rem; --distance:7.6447941330389515rem; --position:25.021085672966446%; --time:3.3597058081670013s; --delay:-2.4938048914786064s;"></div>
+    <div class="bubble" style="--size:4.536690330884151rem; --distance:8.236494098434703rem; --position:90.09819068860718%; --time:2.086577975568282s; --delay:-3.69196893166785s;"></div>
+    <div class="bubble" style="--size:2.788221303292249rem; --distance:9.573954608958012rem; --position:3.844113768961037%; --time:2.467216204747275s; --delay:-3.2081147935059966s;"></div>
+    <div class="bubble" style="--size:3.360856515283828rem; --distance:9.888859371368657rem; --position:79.82202003114396%; --time:2.878898931651361s; --delay:-2.040769979528729s;"></div>
+    <div class="bubble" style="--size:2.056416337234068rem; --distance:8.922144862678222rem; --position:49.538680943840355%; --time:2.5144571104923092s; --delay:-3.483127715894199s;"></div>
+    <div class="bubble" style="--size:4.151778917238368rem; --distance:9.079823943744945rem; --position:-4.509214959600505%; --time:2.277709938309935s; --delay:-2.2365093798524702s;"></div>
+    <div class="bubble" style="--size:2.8787336460317574rem; --distance:9.406387322545491rem; --position:80.22644825482716%; --time:3.319862772402029s; --delay:-3.4540717198622124s;"></div>
+    <div class="bubble" style="--size:2.7224298656366805rem; --distance:8.083882364424934rem; --position:41.94361867140563%; --time:3.5601444688394377s; --delay:-2.5598342244994576s;"></div>
+    <div class="bubble" style="--size:3.5121516601439664rem; --distance:8.252978189611294rem; --position:38.10476587695066%; --time:2.1832511155716596s; --delay:-3.278370336179575s;"></div>
+    <div class="bubble" style="--size:4.223078359994085rem; --distance:9.219178147383808rem; --position:86.70688320376227%; --time:3.0562030341095054s; --delay:-3.069010699668477s;"></div>
+    <div class="bubble" style="--size:2.3966036262358283rem; --distance:6.433110494261152rem; --position:55.053477157682224%; --time:2.9334218269242145s; --delay:-3.1758550202741316s;"></div>
+    <div class="bubble" style="--size:2.4457521391992776rem; --distance:9.950121147178514rem; --position:-2.8839661781689863%; --time:3.781087901300296s; --delay:-3.047904105128659s;"></div>
+    <div class="bubble" style="--size:2.1627647573006605rem; --distance:6.730367487217037rem; --position:-0.3466713706583935%; --time:3.8807499006741537s; --delay:-2.4573571094184596s;"></div>
+    <div class="bubble" style="--size:5.035777584624587rem; --distance:9.68071798107206rem; --position:10.67718218161848%; --time:2.1648852480225065s; --delay:-3.377828956794248s;"></div>
+    <div class="bubble" style="--size:4.739433784190344rem; --distance:6.702005959843201rem; --position:38.28235975118435%; --time:3.584253194391161s; --delay:-3.639066576719887s;"></div>
+    <div class="bubble" style="--size:4.106969173740977rem; --distance:9.943817458026878rem; --position:45.004372166707306%; --time:2.6986419719957966s; --delay:-3.73977373867221s;"></div>
+    <div class="bubble" style="--size:4.807934381828543rem; --distance:7.811590252363973rem; --position:49.27453180074847%; --time:3.24365128815837s; --delay:-2.2017773192019177s;"></div>
+    <div class="bubble" style="--size:2.690404452588785rem; --distance:6.354683464971239rem; --position:5.665884583059233%; --time:2.465176632552461s; --delay:-3.612355453172687s;"></div>
+    <div class="bubble" style="--size:4.561252277349634rem; --distance:9.948587688149722rem; --position:74.73844875953077%; --time:3.800582084216402s; --delay:-3.773060497916109s;"></div>
+    <div class="bubble" style="--size:5.196455851374759rem; --distance:8.52705505462873rem; --position:87.48229741490049%; --time:3.4855677566053846s; --delay:-2.8469071439287785s;"></div>
+    <div class="bubble" style="--size:4.852947422934233rem; --distance:9.182598623200525rem; --position:22.498272501788126%; --time:3.0983067683569123s; --delay:-2.615975377803666s;"></div>
+    <div class="bubble" style="--size:3.663003757856626rem; --distance:9.119002288522356rem; --position:86.64671920240716%; --time:3.578224860915808s; --delay:-2.970927330713949s;"></div>
+    <div class="bubble" style="--size:4.686529691712066rem; --distance:7.016270918289482rem; --position:81.13780317868805%; --time:3.055435670907229s; --delay:-3.9357673457445332s;"></div>
+    <div class="bubble" style="--size:2.724800763161724rem; --distance:7.374175336837937rem; --position:22.882470450970185%; --time:3.722537230167992s; --delay:-2.7518045870989507s;"></div>
+    <div class="bubble" style="--size:4.231875990636814rem; --distance:7.87617759219631rem; --position:14.06424688465183%; --time:3.0695235400176704s; --delay:-3.616720775407467s;"></div>
+    <div class="bubble" style="--size:3.2643409203466396rem; --distance:7.645663722014434rem; --position:104.59121172194286%; --time:2.4411834908169987s; --delay:-3.4909666717407726s;"></div>
+    <div class="bubble" style="--size:2.898673890484635rem; --distance:7.288062969659151rem; --position:83.84528171607224%; --time:3.229856969556785s; --delay:-2.1979134781086054s;"></div>
+    <div class="bubble" style="--size:5.292269391080655rem; --distance:6.20030154136772rem; --position:47.515903785879544%; --time:3.897197369714812s; --delay:-3.7291019761329753s;"></div>
+    <div class="bubble" style="--size:4.52856328774599rem; --distance:6.699956566654847rem; --position:48.1541450013767%; --time:2.5678253470358756s; --delay:-3.2758799943070103s;"></div>
+    <div class="bubble" style="--size:5.268883337816951rem; --distance:9.625252057575931rem; --position:26.776830966018323%; --time:2.9816721742678456s; --delay:-2.37948214767747s;"></div>
+    <div class="bubble" style="--size:4.012439634638922rem; --distance:6.036499355099523rem; --position:-3.3627408064629405%; --time:2.8099063394563526s; --delay:-2.887758990539933s;"></div>
+    <div class="bubble" style="--size:4.982026891437973rem; --distance:7.786388749604372rem; --position:28.43519635046475%; --time:3.955576127236471s; --delay:-2.604931826639479s;"></div>
+    <div class="bubble" style="--size:2.539005080713731rem; --distance:9.791180427563983rem; --position:94.69314151239544%; --time:3.7795379100353985s; --delay:-3.4033386040396914s;"></div>
+    <div class="bubble" style="--size:3.4524846311166613rem; --distance:9.977743658748038rem; --position:41.21752461890146%; --time:2.5713529253790823s; --delay:-2.1744497315734037s;"></div>
+    <div class="bubble" style="--size:4.597727286100496rem; --distance:8.716872271063593rem; --position:50.2725875056625%; --time:2.668054454732603s; --delay:-3.806128310097691s;"></div>
+    <div class="bubble" style="--size:3.326679181816365rem; --distance:6.993859552518337rem; --position:46.92337136739921%; --time:3.967021640896234s; --delay:-2.8209774289492375s;"></div>
+    <div class="bubble" style="--size:3.115500848205569rem; --distance:6.824342777396264rem; --position:33.78259038995784%; --time:2.130032895275289s; --delay:-3.500234017972883s;"></div>
+    <div class="bubble" style="--size:2.6020698364256525rem; --distance:7.635698106378659rem; --position:57.58509469453904%; --time:2.153721551080051s; --delay:-3.62838419004606s;"></div>
+  </div>
+  <div class="content">
+    <div>
+      <div><b>Eldew</b><a href="#">Secuce</a><a href="#">Drupand</a><a href="#">Oceash</a><a href="#">Ugefe</a><a href="#">Babed</a></div>
+      <div><b>Spotha</b><a href="#">Miskasa</a><a href="#">Agithe</a><a href="#">Scesha</a><a href="#">Lulle</a></div>
+      <div><b>Chashakib</b><a href="#">Chogauw</a><a href="#">Phachuled</a><a href="#">Tiebeft</a><a href="#">Ocid</a><a href="#">Izom</a><a href="#">Ort</a></div>
+      <div><b>Athod</b><a href="#">Pamuz</a><a href="#">Vapert</a><a href="#">Neesk</a><a href="#">Omemanen</a></div>
+    </div>
+    <div><a class="image" href="https://codepen.io/z-" target="_blank" style="background-image: url(&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/199011/happy.svg&quot;)"></a>
+      <p>©2019 Not Really</p>
+    </div>
+  </div>
+</div>
+<svg style="position:fixed; top:100vh">
+  <defs>
+    <filter id="blob">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="blob"></feColorMatrix>
+      <!--feComposite(in="SourceGraphic" in2="blob" operator="atop") //After reviewing this after years I can't remember why I added this but it isn't necessary for the blob effect-->
+    </filter>
+  </defs>
+</svg>
+<!-- partial -->
+  
+</footer>
+</html>

@@ -1,0 +1,17 @@
+.profile-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-icon {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Adjust the size as needed */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    margin-right: 8px; /* Space between the image and the dropdown arrow */
+}
+.logo-small {
+    width: 250px;
+    height: auto;
+}

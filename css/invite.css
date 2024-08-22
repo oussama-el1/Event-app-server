@@ -1,0 +1,49 @@
+
+h2 {
+  margin: 0;
+}
+
+tags {
+  min-width: 400px;
+  max-width: 600px;
+  margin: 1.5em 0;
+}
+
+/*label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font: 600 0.8em Arial;
+  white-space: nowrap;
+}
+*/
+.disabled tags {
+  display: none;
+}
+.disabled tags + input, .disabled tags + textarea {
+  display: inline-block !important;
+  width: 350px;
+  padding: 0.5em;
+  border: 1px inset;
+}
+
+/*.tabcontent a {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 10%;
+}*/
+
+.tabcontent a:hover {
+  opacity: 0.8;
+}
+
+/*a > img {
+  width: 100%;
+}*/
+
+.bg-figma{
+  background-color: #BAC6CEC9;
+
+}

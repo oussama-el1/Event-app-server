@@ -1,0 +1,254 @@
+main {
+    background-image: url('../static/imgs/creat_event.jpg');
+    background-position: center center;
+/*    background-repeat: no-repeat;
+*/    background-position: cover;
+    padding: 5em;
+    height: 100vh;
+   
+}
+.wrapper {
+    margin: 2em;
+    padding: 2em;
+}
+
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.logo img {
+    height: 80px;
+}
+
+.search-bar {
+    margin: 15px 0;
+}
+
+.search-bar input {
+    padding: 8px;
+    border-radius: 5px 0 0 4px;
+    border: 1px solid;
+}
+
+.search-bar button {
+    padding: 8px 16px;
+    background-color: #C4A265;
+    border: none;
+    color: rgb(0, 0, 0);
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.buttons button {
+    padding: 8px 16px;
+    border: 1px solid #D9D9D9;
+    background-color: #D9D9D9;
+    color: rgb(0, 0, 0);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.buttons button:hover {
+    border: 1px solid #C4A265;
+    background-color: #C4A265;
+    transform: scale(1.1);
+}
+
+/* Container styling with dark gray background */
+.container {
+    background-color: #454343bd; /* Dark gray transparent background */
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Header styling for form */
+h2 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Tabs styling */
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tablink {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    flex-grow: 1;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.tablink:not(:last-child) {
+    margin-right: 5px;
+}
+
+.tablink.active {
+    background-color: #007bff; /* Active tab color */
+    color: white; /* Active tab text color */
+}
+
+.tabcontent {
+    display: none;
+}
+
+/* Input field styling with border-radius */
+.form-control {
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 19px;
+}
+
+
+/* Layout for input rows */
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.col:last-child {
+	margin-right: 0;
+}
+
+/* Layout for the vertical column */
+.column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+/* Larger textarea for description */
+textarea.form-control {
+    height: 100px;
+    border-radius: 8px;
+}
+
+/* Style for the upload section */
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+
+/* Style for the upload label and button */
+.upload-label {
+    display: inline-block;
+    border: 2px dashed #ccc;
+    padding: 60px 140px 60px 140px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.upload-label:hover {
+    border-color: #ce474d;
+}
+
+/* Style for the button in the middle */
+.upload-button {
+    color: white;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Centering the upload icon and text */
+.upload-button::before {
+    margin-right: 8px;
+}
+
+/* Style for the upload message */
+#uploadMessage {
+    color: white;
+    font-size: 14px;
+    margin-top: 25px;
+}
+
+/* Hide the actual file input 
+input[type="file"] {
+    display: none;
+}
+
+.confirmation-message {
+    margin-top: 20px;
+    color: #28a745; /* Green color for success message 
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+*/
+
+/* Button styling */
+.button-group {
+    text-align: center;
+}
+.button-group .btn {
+margin-top: 2em}
+
+.btn {
+    background-color: #190c76;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.area {
+    padding: 0px 13px;
+}
+@media screen and (max-width: 480px) {
+.tablink{
+    margin: 0px 1px 0 1px !important;
+    padding: 10px 8px  !important;
+
+}
+.tabs {
+    font-size: 11px !important;
+}
+.wrapper {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+}
+main{
+    padding: .5em !important;
+} 
+.tablink.active , .bg-aka {
+    background-color: #ce474d !important;
+    color:#fff !important;
+}

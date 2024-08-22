@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh; /* Ensure container takes full viewport height */
+}
+
+.log-container {
+    width: 44%;
+    display: flex;
+    justify-content: center;
+    text-align: center; /* Center align text and form elements */
+}
+
+.mini-cont {
+    margin-top: 15%;
+}
+
+.logo img {
+    height: 60px; /* Adjust this value to your desired size */
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #ce474d;
+    font-size: 35px;
+    margin: 0 0 20% 0; /* Space below h1 */
+}
+
+h2 {
+    font-size: 47px;
+    font-weight: bold;
+    margin: 0 0 20% 0; /* Space below h2 */
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form elements */
+    max-width: 300px; /* Adjust based on your design */
+    margin: 0 auto; /* Center form horizontally */
+}
+
+.login-form input, .login-form button {
+    width: 100%; /* Full width of the form */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login-form button {
+    background-color: #ce474d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.side-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 100vh; /* Adjusted to fit the viewport height */
+    object-fit: cover;
+}
+
+@media (max-width: 770px) {
+    .container {
+        flex-direction: column;
+    }
+    .log-container {
+        width: 100%;
+    }
+    .side-img {
+        display: none;
+    }
+}
