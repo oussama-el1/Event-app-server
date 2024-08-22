@@ -1,5 +1,6 @@
 const { generateUniqueBookingId, generateQRCode } = require('../utils/helpers');
 
+const User = require('../models/User')
 const Event = require('../models/Event');
 const Ticket = require('../models/Tickets');
 
@@ -9,6 +10,12 @@ class TicketController {
     try {
         const user = req.user.id;
         const { event: eventId, ticketType, quantity } = req.body;
+
+        const userDoc = await User.findById(user);
+
+        if (!userDoc) {
+            throw new Error('User not found');
+        }
     
         const eventDoc = await Event.findById(eventId);
 
@@ -66,13 +73,17 @@ class TicketController {
             const qrCodePath = await generateQRCode(qrCodeData);
             newTicket.qrCode = qrCodePath;
 
+            userDoc.bookedTickets.push(newTicket._id);
+
             tickets.push(newTicket);
         }
 
         await Ticket.insertMany(tickets);
 
         eventDoc.ticketSold += quantity;
+
         await eventDoc.save();
+        await userDoc.save();
 
         res.status(201).json({ 
             message: 'Tickets purchased successfully',
@@ -84,7 +95,50 @@ class TicketController {
     }
   };
 
-  static async getTicket(req, res) {    
+  static async getTicket(req, res) {
+    try {
+      const userId = req.user.id;
+      const ticketId = req.params.id;
+  
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'User Not Found',
+        });
+      }
+  
+      const bookedTickets = user.bookedTickets;
+  
+      if (!bookedTickets.includes(ticketId)) {
+        return res.status(403).json({
+          status: 'error',
+          message: 'You are not authorized to view this ticket',
+        });
+      }
+
+      const ticketDoc = await Ticket.findById(ticketId).populate({
+        path: 'event',
+        select: 'title date location organizer media',
+      });
+
+      if (!ticketDoc) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Ticket Not Found',
+        });
+      }
+  
+      res.status(200).json({
+        status: 'success',
+        ticket: ticketDoc,
+      });
+    } catch (err) {
+      res.status(500).json({
+        message: err.message || err.toString(),
+      });
+    }
   };
 };
 

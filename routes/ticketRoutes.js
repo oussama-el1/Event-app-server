@@ -8,6 +8,6 @@ const TicketController = require('../controllers/ticketController');
 const TicketRouter = express.Router();
 
 TicketRouter.post('/purchase', ProtectMidll, validateTicketPurchase, TicketController.purchase);
-TicketRouter.get('/ticket', ProtectMidll, TicketController.getTicket);
+TicketRouter.get('/:id', ProtectMidll, TicketController.getTicket);
 
 module.exports = TicketRouter;

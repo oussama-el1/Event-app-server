@@ -6,6 +6,7 @@ const TicketShema = mongoose.Schema({
     type: String,
     match: /^[A-Za-z0-9]{8}$/,
     required: true,
+    index: { unique: false }
   },
 
   event: {
