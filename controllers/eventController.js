@@ -26,7 +26,7 @@ class eventController {
 
       location = JSON.parse(location)
       const { address, city, state, zip, country } = location;
-      
+
       if (!address || !city || !state || !zip || !country ) {
         return res.status(400).json({ status: "error", message: " missing some input in address" });
       }
@@ -114,20 +114,7 @@ class eventController {
 
   static async getevent(req, res) {
     try {
-      const organizer = req.user.id;
-      const user = await User.findById(organizer);
-      if (!user) {
-        return res.status(404).json({
-          status: "error",
-          message: "user not found",
-        });
-      };
-
-      const events = await Event.find({ organizer: organizer })
-        .populate(
-          "User",
-          "firstName, lastName, email, gender, listOfInterest, "
-        )
+      const events = await Event.find({ _id: req.params.id })
         .sort({
           createdAt: -1,
         });
@@ -146,7 +133,7 @@ class eventController {
     } catch (error) {
       res
         .status(500)
-        .json({ message: "Event not found for this organizer", error });
+        .json({ message: "Event not found for this ID", error });
     }
   };
 
@@ -160,7 +147,7 @@ class eventController {
         categories,
         isPublic,
       } = req.body;
-      
+
       let location = req.body.location;
 
       location = JSON.parse(location);
@@ -251,11 +238,11 @@ class eventController {
         });
       }
 
-      const event = Event.findByIdAndDelete(req.params.id);
+      const event = await Event.findByIdAndRemove(req.params.id);
       if (!event) {
         return res
           .status(400)
-          .json({ message: "Event ID not found in request" });
+          .json({ message: "Event ID not found" });
       }
       user.createdEvents.pull(req.params.id);
       await user.save();
