@@ -49,7 +49,7 @@ class TicketController {
 
         const bookingId = await generateUniqueBookingId();
         const tickets = [];
-        
+
         for (let i = 0; i < quantity; i++) {
             const seatNumber = bookedSeats[i] ? bookedSeats[i].seatNumber : null;
             const newTicket = new Ticket({
@@ -101,22 +101,13 @@ class TicketController {
     try {
       const userId = req.user.id;
       const ticketId = req.params.id;
-  
+
       const user = await User.findById(userId);
-  
+
       if (!user) {
         return res.status(404).json({
           status: 'error',
           message: 'User Not Found',
-        });
-      }
-  
-      const bookedTickets = user.bookedTickets;
-  
-      if (!bookedTickets.includes(ticketId)) {
-        return res.status(403).json({
-          status: 'error',
-          message: 'You are not authorized to view this ticket',
         });
       }
 
@@ -131,7 +122,16 @@ class TicketController {
           message: 'Ticket Not Found',
         });
       }
-  
+
+      const bookedTickets = user.bookedTickets;
+
+      if (!bookedTickets.includes(ticketId)) {
+        return res.status(403).json({
+          status: 'error',
+          message: 'You are not authorized to view this ticket',
+        });
+      }
+
       res.status(200).json({
         status: 'success',
         ticket: ticketDoc,
@@ -156,14 +156,6 @@ class TicketController {
               });
           }
 
-          const bookedTickets = user.bookedTickets;
-          if (!bookedTickets.includes(ticketId)) {
-              return res.status(403).json({
-                  status: 'error',
-                  message: 'You are not authorized to cancel this ticket',
-              });
-          }
-
           const ticket = await Ticket.findById(ticketId).populate('event');
           if (!ticket) {
               return res.status(404).json({
@@ -176,6 +168,14 @@ class TicketController {
               return res.status(400).json({
                   status: 'error',
                   message: 'Ticket is already cancelled or refunded',
+              });
+          }
+
+          const bookedTickets = user.bookedTickets;
+          if (!bookedTickets.includes(ticketId)) {
+              return res.status(403).json({
+                  status: 'error',
+                  message: 'You are not authorized to cancel this ticket',
               });
           }
 
