@@ -76,9 +76,6 @@ class UserController {
       const userId = req.user.id;
       const updates = req.body;
 
-      console.log('after file midll :', req.body);
-
-
       if (!userId) {
         return res.status(400).json({ message: 'User ID not found in request' });
       }
@@ -381,8 +378,6 @@ class UserController {
       if (!user) {
         return res.status(404).json({ status: 'error', message: 'User not found' });
       }
-
-      console.log(user);
 
       let bookings = user.bookedTickets;
 
