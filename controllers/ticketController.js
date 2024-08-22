@@ -1,5 +1,7 @@
-const { generateUniqueBookingId, generateQRCode } = require('../utils/helpers');
+const fs = require('fs');
+const path = require('path');
 
+const { generateUniqueBookingId, generateQRCode } = require('../utils/helpers');
 const User = require('../models/User')
 const Event = require('../models/Event');
 const Ticket = require('../models/Tickets');
@@ -74,6 +76,7 @@ class TicketController {
             newTicket.qrCode = qrCodePath;
 
             userDoc.bookedTickets.push(newTicket._id);
+            eventDoc.tickets.push(newTicket._id);
 
             tickets.push(newTicket);
         }
@@ -139,6 +142,84 @@ class TicketController {
         message: err.message || err.toString(),
       });
     }
+  };
+
+  static async cancelTicket(req, res) {
+      const userId = req.user.id;
+      const ticketId = req.params.id;
+
+      try {
+          const user = await User.findById(userId);
+          if (!user) {
+              return res.status(404).json({
+                  status: 'error',
+                  message: 'User Not Found',
+              });
+          }
+
+          const bookedTickets = user.bookedTickets;
+          if (!bookedTickets.includes(ticketId)) {
+              return res.status(403).json({
+                  status: 'error',
+                  message: 'You are not authorized to cancel this ticket',
+              });
+          }
+
+          const ticket = await Ticket.findById(ticketId).populate('event');
+          if (!ticket) {
+              return res.status(404).json({
+                  status: 'error',
+                  message: 'Ticket Not Found',
+              });
+          }
+
+          if (ticket.status === 'cancelled' || ticket.status === 'Refunded') {
+              return res.status(400).json({
+                  status: 'error',
+                  message: 'Ticket is already cancelled or refunded',
+              });
+          }
+
+          ticket.status = 'cancelled';
+          await ticket.save();
+
+          if (ticket.event) {
+              const event = await Event.findById(ticket.event._id);
+              if (event) {
+                  if (ticket.seatNumber) {
+                      const seat = event.seats.find(s => s.seatNumber === ticket.seatNumber);
+                      if (seat) {
+                          seat.status = 'available';
+                      }
+                  }
+                  event.ticketSold -= ticket.quantity;
+                  event.tickets.pull(ticketId);
+                  await event.save();
+              }
+          }
+
+          user.bookedTickets.pull(ticketId);
+          await user.save();
+
+          if (ticket.qrCode) {
+              const qrCodePath = path.resolve(`${ticket.qrCode}`);
+              fs.unlink(qrCodePath, (err) => {
+                  if (err) {
+                      console.error('Error deleting QR code file:', err);
+                  }
+              });
+          }
+
+          res.status(200).json({
+              status: 'success',
+              message: 'Ticket cancelled successfully' 
+          });
+      } catch (err) {
+          res.status(500).json({
+              status: 'error',
+              message: err.message || err.toString()
+          });
+      }
   };
 };
 
