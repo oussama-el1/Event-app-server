@@ -211,6 +211,7 @@ class eventController {
             standard,
             vip,
           },
+          seats: undefined
         },
         { new: true }
       );
@@ -274,7 +275,9 @@ class eventController {
     const limit = parseInt(req.query.limit, 10) || 10;
     try {
       const userID = req.user.id;
-      const user = await User.findById(userID).populate("listOfInterest");
+      console.log(userID)
+
+      const user = await User.findById(userID)
       if (!user) {
         return res
           .status(404)
