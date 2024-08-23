@@ -127,7 +127,7 @@ class eventController {
         .status(500)
         .json({ message: "Error creating event", error: error.message });
     }
-  }
+  };
 
   static async getevent(req, res) {
     try {
@@ -146,7 +146,7 @@ class eventController {
     } catch (error) {
       res.status(500).json({ message: "Event not found for this ID", error });
     }
-  }
+  };
 
   static async updateevent(req, res) {
     try {
@@ -240,7 +240,7 @@ class eventController {
       console.error(`Error updating event: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  };
 
   static async deleteevent(req, res) {
     try {
@@ -268,52 +268,74 @@ class eventController {
       console.error(`Error deleting event: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  };
 
-  static async gethomeevent(req, res) {
+  static async getHomeEvent(req, res) {
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 10;
+
     try {
-      const userID = req.user.id;
-      const user = await User.findById(userID);
-      if (!user) {
-        return res
-          .status(404)
-          .json({ status: "error", message: "User not found" });
-      }
-      const intersets = user.listOfInterest;
-      const country = user.address.country;
-      if (!country) {
-        return res.status(400).json({
-          status: "error",
-          message: "User country is not set in the profile.",
+        const userID = req.user.id;
+        const user = await User.findById(userID).select('listOfInterest address');
+        
+        if (!user) {
+            return res.status(404).json({
+                status: "error",
+                message: "User not found"
+            });
+        }
+
+        const { listOfInterest: interests, address: { country } } = user;
+
+        if (!interests || interests.length === 0) {
+            return res.status(400).json({
+                status: "error",
+                message: "User has no interests set."
+            });
+        }
+
+        if (!country) {
+            return res.status(400).json({
+                status: "error",
+                message: "User country is not set in the profile."
+            });
+        }
+
+        const query = {
+            categories: { $in: interests },
+            "location.country": country,
+            date: { $gt: Date.now() },
+        };
+
+        const events = await Event.find(query)
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .sort({ date: 1 })
+            .populate("organizer", "lastName firstName")
+            .select("title date location organizer");
+
+        if (events.length === 0) {
+            return res.status(404).json({
+                status: "error",
+                message: "No events found matching your interests and location."
+            });
+        }
+
+        res.status(200).json({
+            status: "success",
+            currentPage: page,
+            totalPages: Math.ceil(await Event.countDocuments(query) / limit),
+            events
         });
-      }
-      console.log({
-        categories: { $in: interests },
-        "location.country": country,
-        date: { $gt: Date.now() },
-      });
-      const events = await Event.find({
-        $and: {
-          categories: { $in: intersets },
-          "location.country": country,
-          date: { $gt: Date.now() },
-        },
-      })
-        .skip((page - 1) * limit)
-        .limit(limit)
-        .sort({ date: 1 })
-        .populate("organizer")
-        .select("title date location organizer.lastName");
-      res.status(200).json({
-        events,
-      });
     } catch (error) {
-      console.error(`Error during search: ${error.message}`);
-      res.status(500).json({ message: "Internal server error" });
+        console.error(`Error fetching events: ${error.message}`);
+        res.status(500).json({
+            status: "error",
+            message: "Internal server error"
+        });
     }
-  }
+}
+
 
   static async addSeats(req, res) {
     const userId = req.user.id;
@@ -384,8 +406,8 @@ class eventController {
         message: "Internal server error",
       });
     }
-  }
-}
+  };
+};
 
 function validateEvent(event) {
   const schema = Joi.object({
@@ -414,11 +436,13 @@ function validateEvent(event) {
   });
 
   return schema.validate(event, { abortEarly: false });
-}
+};
+
 function validateSeats(seats) {
   const seatsSchema = Joi.object({
     seats: Joi.array().items(Joi.string().min(1)).unique().required(),
   });
   return seatsSchema.validate(seats, { abortEarly: false });
-}
+};
+
 module.exports = eventController;

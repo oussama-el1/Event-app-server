@@ -103,7 +103,10 @@ const UserSchema = mongoose.Schema({
     city: String,
     state: String,
     zip: String,
-    country: String
+    country: {
+      type: String,
+      required: [true, "Country is required"],
+    }
   },
 
   createdEvents: [

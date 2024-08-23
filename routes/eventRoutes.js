@@ -6,10 +6,10 @@ const uploadmedia = require('../middlewares/uploadMedia')
 const EventRouter = express.Router();
 
 EventRouter.post("/event", ProtectMidll, uploadmedia, eventController.postevent);
+EventRouter.get("/homeEvent", ProtectMidll, eventController.getHomeEvent);
 EventRouter.get("/:id", ProtectMidll, eventController.getevent);
 EventRouter.put("/:id", ProtectMidll, uploadmedia, eventController.updateevent);
 EventRouter.delete("/:id", ProtectMidll, eventController.deleteevent);
-EventRouter.get("/homeEvent", ProtectMidll, eventController.gethomeevent)
-EventRouter.post("/addseat/:id", ProtectMidll, eventController.addSeats)
+EventRouter.post("/addseat/:id", ProtectMidll, eventController.addSeats);
 
 module.exports = EventRouter;
