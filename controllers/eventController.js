@@ -334,8 +334,7 @@ class eventController {
             message: "Internal server error"
         });
     }
-}
-
+  };
 
   static async addSeats(req, res) {
     const userId = req.user.id;
@@ -427,10 +426,31 @@ function validateEvent(event) {
     }).required(),
     ticketLimit: Joi.number().min(1).required(),
     categories: Joi.array()
-      .items(
-        Joi.string().valid("Music", "Sports", "Conference", "Festival", "Other")
+    .items(
+      Joi.string().valid(
+        "Music", 
+        "Sports", 
+        "Conference", 
+        "Festival", 
+        "Other",
+        "Technology", 
+        "Health", 
+        "Education", 
+        "Business", 
+        "Art",
+        "Theater", 
+        "Networking", 
+        "Charity", 
+        "Food & Drink", 
+        "Comedy",
+        "Film", 
+        "Literature", 
+        "Fashion", 
+        "Travel", 
+        "Workshop"
       )
-      .required(),
+    )
+    .required(),
     isPublic: Joi.boolean(),
     media: Joi.string().optional(),
   });

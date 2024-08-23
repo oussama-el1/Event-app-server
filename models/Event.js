@@ -45,7 +45,29 @@ const EventSchema = mongoose.Schema({
   categories: [
     {
       type: String,
-      enum: ['Music', 'Sports', 'Conference', 'Festival', 'Other']
+      enum: [
+        'Music', 
+        'Sports', 
+        'Conference', 
+        'Festival', 
+        'Other',
+        'Technology', 
+        'Health', 
+        'Education', 
+        'Business', 
+        'Art',
+        'Theater', 
+        'Networking', 
+        'Charity', 
+        'Food & Drink', 
+        'Comedy',
+        'Film', 
+        'Literature', 
+        'Fashion', 
+        'Travel', 
+        'Workshop'
+      ],
+      required: true,
     }
   ],
   media: [

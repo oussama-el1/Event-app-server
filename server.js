@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(morgan('combined'));
 app.use('/api/auth', Authrouter);
 app.use('/api/users', UserRouter);
-app.use('/api/users', UserRouter);
+app.use('/api/events', EventRouter);
 app.use('/api/tickets', TicketRouter);
 
 app.listen(PORT, () => {
