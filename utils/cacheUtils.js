@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import  { createClient } from  'redis';
 
 const REDIS_HOST = process.env.REDIS_HOST
 const REDIS_PORT = process.env.REDIS_PORT

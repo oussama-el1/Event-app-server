@@ -1,98 +1,83 @@
 const mongoose = require('mongoose');
 
-const SeatSchema = new mongoose.Schema({
-  seatNumber: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  status: {
-    type: String,
-    enum: ['available', 'booked'],
-    default: 'available',
-  }
-});
-
 const EventSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, 'Event Title is required'],
   },
-
   description: {
     type: String,
     required: [true, 'Event description is required'],
   },
-
   date: {
     type: Date,
     required: [true, 'Event date is required'],
   },
-
   location: {
     address: {
       type: String,
-      required: [true, 'Event address is required'],  
+      required: [true, 'Event address is required'],
     },
     city: String,
     state: String,
     zip: String,
     country: String
   },
-
   organizer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'Event organizer is required'],
   },
-
   tickets: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Ticket'
     }
   ],
-
   ticketLimit: {
     type: Number,
     required: [true, 'Event ticket limit is required'],
   },
-
   ticketSold: {
     type: Number,
     default: 0
   },
-
   categories: [
     {
       type: String,
       enum: ['Music', 'Sports', 'Conference', 'Festival', 'Other']
     }
   ],
-
   media: [
     {
       type: String,
     }
   ],
-
-  seats: [SeatSchema],
-
+  seats: [
+    {
+      seatNumber: {
+        type: String,
+        required: true,
+      },
+      status: {
+        type: String,
+        enum: ['available', 'booked'],
+        default: 'available',
+      }
+    }
+  ],
   isPublic: {
     type: Boolean,
     default: true
   },
-
   createdAt: {
     type: Date,
     default: Date.now,
   },
-
   updatedAt: {
     type: Date,
     default: Date.now,
   },
-
   ticketPricing: {
     standard: {
       type: Number,
