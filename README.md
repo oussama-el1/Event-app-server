@@ -97,7 +97,5 @@ git push origin feature/AmazingFeature
 
 ## 📞 Contact
 #### Team Emails : 
- - olhadaoui8@gmail.com
- - 
- - 
- - 
+ - Back-end Team : oelhadaoui8@gmail.com and mohamedelheimer0@gmail.com
+ - Front-End Team : anastaai94@gmail.com and sb.naba2@gmail.com
