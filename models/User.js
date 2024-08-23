@@ -123,6 +123,11 @@ const UserSchema = mongoose.Schema({
     transform: (doc, ret) => {
       delete ret.hashedPassword;
       delete ret.__v;
+      delete ret.followers;
+      delete ret.following;
+      delete ret.createdEvents;
+      delete ret.bookedTickets;
+
       ret.fullName = `${ret.firstName} ${ret.lastName}`;
       return ret;
     },

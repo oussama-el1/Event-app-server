@@ -26,59 +26,33 @@ This route is protected and requires a valid JWT token. The token should be incl
 - **200 OK**: Returns the user's profile information.
   ```json
   {
-    "_id": "64d8c4d8f6a6e2b8d7e3c9d1",
-    "firstName": "John",
-    "lastName": "Doe",
-    "fullName": "John Doe",
-    "email": "john.doe@example.com",
-    "gender": "Male",
-    "listOfInterest": ["coding", "reading", "traveling"],
+    "address": {
+        "street": "Hay houdan 284",
+        "city": "beni mellal",
+        "state": "beni mellal khenifra",
+        "zip": "25000",
+        "country": "Morocco"
+    },
+    "_id": "66c7ac45f44af4428f9ff29b",
+    "firstName": "Oussama",
+    "lastName": "ELHADRAOUI",
+    "email": "oelhadraoui8@gmail.com",
+    "listOfInterest": [
+        "Technology",
+        "Music",
+        "Esport",
+        "GYM"
+    ],
     "maritalStatus": "Single",
-    "tel": "+1234567890",
-    "birthDate": "1990-01-01T00:00:00.000Z",
+    "tel": "+212641707742",
+    "birthDate": "2004-06-20T00:00:00.000Z",
     "notification": true,
     "darkMode": false,
     "emailVerified": true,
-    "followers": [
-      {
-        "_id": "64d8c4d8f6a6e2b8d7e3c9d2",
-        "fullName": "Jane Smith",
-        "profilePicture": "https://example.com/path/to/profilePicture2.jpg"
-      }
-    ],
-    "following": [
-      {
-        "_id": "64d8c4d8f6a6e2b8d7e3c9d3",
-        "fullName": "Mike Johnson",
-        "profilePicture": "https://example.com/path/to/profilePicture3.jpg"
-      }
-    ],
-    "profilePicture": "https://example.com/path/to/profilePicture.jpg",
-    "bio": "Hi, I'm John Doe. You can reach me at john.doe@example.com. I am Single and my contact number is +1234567890. I was born on Mon Jan 01 1990. My interests include coding, reading, traveling. My address is Not provided.",
-    "address": {
-      "street": "123 Main St",
-      "city": "Springfield",
-      "state": "IL",
-      "zip": "62701",
-      "country": "USA"
-    },
-    "createdEvents": [
-      {
-        "_id": "64d8c4d8f6a6e2b8d7e3c9d4",
-        "title": "Tech Conference 2024",
-        "date": "2024-08-25T00:00:00.000Z"
-      }
-    ],
-    "bookedTickets": [
-      {
-        "_id": "64d8c4d8f6a6e2b8d7e3c9d5",
-        "event": "64d8c4d8f6a6e2b8d7e3c9d4",
-        "seat": "A12"
-      }
-    ],
-    "createdAt": "2024-07-01T10:00:00.000Z",
-    "updatedAt": "2024-08-01T10:00:00.000Z"
+    "bio": "Hi, I'm Oussama ELHADRAOUI. \n    You can reach me at oelhadraoui8@gmail.com. \n    I am Single and my contact number is +212641707742. \n    I was born on Sun Jun 20 2004. \n    My interests include Technology, Music, Esport, GYM. \n    My address is Hay houdan 284, beni mellal, beni mellal khenifra, 25000, Morocco.",
+    "fullName": "Oussama ELHADRAOUI"
   }
+  ```
 
 
 ## GET /:id
@@ -103,59 +77,34 @@ This route is protected and requires a valid JWT token. The token should be incl
 - **200 OK**: Returns the requested user's profile information.
   ```json
   {
-    "_id": "64d8c4d8f6a6e2b8d7e3c9d6",
-    "firstName": "Jane",
-    "lastName": "Smith",
-    "fullName": "Jane Smith",
-    "email": "jane.smith@example.com",
-    "gender": "Female",
-    "listOfInterest": ["photography", "music", "traveling"],
-    "maritalStatus": "Married",
-    "tel": "+1234567891",
-    "birthDate": "1985-02-14T00:00:00.000Z",
+  
+    "address": {
+        "street": "Hay houdan 284",
+        "city": "beni mellal",
+        "state": "beni mellal khenifra",
+        "zip": "25000",
+        "country": "Morocco"
+    },
+    "_id": "66c7ac45f44af4428f9ff29b",
+    "firstName": "Oussama",
+    "lastName": "ELHADRAOUI",
+    "email": "oelhadraoui8@gmail.com",
+    "listOfInterest": [
+        "Technology",
+        "Music",
+        "Esport",
+        "GYM"
+    ],
+    "maritalStatus": "Single",
+    "tel": "+212641707742",
+    "birthDate": "2004-06-20T00:00:00.000Z",
     "notification": true,
     "darkMode": false,
     "emailVerified": true,
-    "followers": [
-      {
-        "_id": "64d8c4d8f6a6e2b8d7e3c9d7",
-        "fullName": "John Doe",
-        "profilePicture": "https://example.com/path/to/profilePicture.jpg"
-      }
-    ],
-    "following": [
-      {
-        "_id": "64d8c4d8f6a6e2b8d7e3c9d8",
-        "fullName": "Emily Davis",
-        "profilePicture": "https://example.com/path/to/profilePicture4.jpg"
-      }
-    ],
-    "profilePicture": "https://example.com/path/to/profilePicture2.jpg",
-    "bio": "Hi, I'm Jane Smith. You can reach me at jane.smith@example.com. I am Married and my contact number is +1234567891. I was born on Thu Feb 14 1985. My interests include photography, music, traveling. My address is Not provided.",
-    "address": {
-      "street": "456 Elm St",
-      "city": "Springfield",
-      "state": "IL",
-      "zip": "62701",
-      "country": "USA"
-    },
-    "createdEvents": [
-      {
-        "_id": "64d8c4d8f6a6e2b8d7e3c9d9",
-        "title": "Photography Workshop",
-        "date": "2024-09-15T00:00:00.000Z"
-      }
-    ],
-    "bookedTickets": [
-      {
-        "_id": "64d8c4d8f6a6e2b8d7e3c9da",
-        "event": "64d8c4d8f6a6e2b8d7e3c9d9",
-        "seat": "B5"
-      }
-    ],
-    "createdAt": "2024-07-10T11:00:00.000Z",
-    "updatedAt": "2024-08-12T12:00:00.000Z"
+    "bio": "Hi, I'm Oussama ELHADRAOUI. \n    You can reach me at oelhadraoui8@gmail.com. \n    I am Single and my contact number is +212641707742. \n    I was born on Sun Jun 20 2004. \n    My interests include Technology, Music, Esport, GYM. \n    My address is Hay houdan 284, beni mellal, beni mellal khenifra, 25000, Morocco.",
+    "fullName": "Oussama ELHADRAOUI"
   }
+  ```
 
 
 ## PUT /me

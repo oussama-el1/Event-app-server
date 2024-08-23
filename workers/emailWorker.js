@@ -3,13 +3,13 @@ const mg = require('../services/mailgun');
 require('dotenv').config()
 
 emailQueue.process(async (job) => {
-  const { to, subject, text } = job.data;
+  const { to, subject, html } = job.data;
 
   const data = {
     from : process.env.MAIlGUN_FROM,
     to,
     subject,
-    text,
+    html,
   };
 
   try {

@@ -5,6 +5,8 @@ require('dotenv').config();
 const User = require('../models/User');
 const redisClient = require('../utils/cacheUtils');
 const emailQueue = require('../queues/emailQueue');
+const otpEmailTemplate = require('../templates/otp');
+const resetPasswordEmailTemplate = require('../templates/resetPassword');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -81,7 +83,7 @@ class AuthController {
       await emailQueue.add({
         to: email,
         subject: 'Verify Email OTP',
-        text: `Please verify your email with the folowing OTP : ${otp}`
+        html: otpEmailTemplate(otp)
       });
 
 
@@ -253,7 +255,7 @@ class AuthController {
       await emailQueue.add({
         to: email,
         subject: 'Password Reset',
-        text: `Please use The following Token to reset your password  : ${resetUrl}`
+        html: resetPasswordEmailTemplate(resetUrl)
       });
 
       res.status(200).json({ status: 'succes', message: 'Password reset email sent', resetUrl });
