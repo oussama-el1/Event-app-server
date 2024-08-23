@@ -1,53 +1,103 @@
-# MAX ZHO: Premier Party Planning in Morocco
+# 🎟️ Event Management App
 
-## Table of Contents
+Welcome to the **Event Management App**! This is a robust application designed to help users manage events seamlessly. With our app, users can create, browse, and book tickets for events. Built with modern technologies like **Node.js**, **Express**, **MongoDB**, and **Redis**, this app is optimized for performance and scalability.
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Setup and Installation](#setup-and-installation)
-  - [Frontend Setup](#frontend-setup)
-  - [Backend Setup](#backend-setup)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+## 🌟 Features
 
-## Project Overview
+- **User Authentication & Authorization**: Secure login, registration, and role-based access.
+- **Event Management**: Create, update, and delete events with ease.
+- **Ticket Booking**: Book tickets for your favorite events, with support for different ticket types.
+- **Real-time Notifications**: Stay updated with real-time notifications about your bookings.
+- **Job Queues**: Efficient background processing with **Bull** and **Redis**.
 
-MAX ZHO is an innovative platform designed to revolutionize party planning in Morocco. It enables users to create customized private parties, select unique locations, book entertainment, include food and drink packages, and invite guests based on personalized profiles. MAX ZHO aims to provide a seamless and exclusive party planning experience.
+## 🛠️ Tech Stack
 
-## Features
+- **Node.js** - JavaScript runtime built on Chrome's V8 JavaScript engine.
+- **Express.js** - Web framework for Node.js.
+- **MongoDB** - NoSQL database for storing event data.
+- **Redis** - In-memory data structure store, used as a database, cache, and message broker.
+- **Bull** - Premium queue for handling background jobs.
 
-- **User Registration and Profile Creation:** Users can sign up and create detailed profiles.
-- **Party Creation:** Users can create parties, select locations, entertainment options, food, and drink packages.
-- **Invitation System:** Users can send invitations and manage RSVPs.
-- **Location Suggestions:** Suggests pre-booked venues like villas and clubs, or allows custom location entry.
-- **Admin Dashboard:** Admins can manage users and view party statistics.
+## 🚀 Getting Started
 
-## Technologies Used
+Follow these steps to get a copy of the project up and running on your local machine.
 
-### Frontend
-- React
-- Axios (for API requests)
-- React Router (for navigation)
+### Prerequisites
 
-### Backend
-- Node.js
-- Express
-- Body-parser
-- Cors
+Make sure you have the following installed:
 
-### Other Services
-- Google Maps API (for location selection)
-- Auth0 or Firebase (for authentication)
-- Stripe (for payment processing)
+- **Node.js**: [Download Node.js](https://nodejs.org/)
+- **MongoDB**: [Download MongoDB](https://www.mongodb.com/try/download/community)
+- **Redis**: [Download Redis](https://redis.io/download/)
 
-## Setup and Installation
+### 🔧 Installation
 
-### Frontend Setup
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/oussama-el1/Event-app-server
+    ```
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/max-zho.git
-   cd max-zho
+2. **Navigate to the project directory**:
+    ```bash
+    cd Event-app-server
+    ```
+
+3. **Install dependencies**:
+    ```bash
+    npm install
+    ```
+
+4. **Set up environment variables**:
+    Create a `.env` file in the root of the project and add the following:
+    ```env
+    PORT=5000
+    MONGO_URI=mongodb://localhost:27017/event-management
+    JWT_SECRET=your_jwt_secret
+    REDIS_URL=redis://localhost:6379
+    ```
+
+5. **Start the application**:
+    ```bash
+    npm run start-server
+    ```
+    The app should now be running on `http://localhost:5000`.
+
+6. **Start the email worker**:
+    ```bash
+    npm run email-worker
+    ```
+
+## 🎉 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+**Fork the Project**:
+
+Click on the fork button at the top right of this repository.
+
+**Create your Feature Branch**:
+
+```bash
+git checkout -b feature/AmazingFeature
+```
+
+**Commit your Changes:**:
+
+```bash
+git commit -m 'Add some AmazingFeature'
+```
+
+**Push to the Branch:**:
+
+```bash
+git push origin feature/AmazingFeature
+```
+**Open a Pull Request.**
+
+
+## 📞 Contact
+#### Team Emails : 
+ - olhadaoui8@gmail.com
+ - 
+ - 
+ - 
