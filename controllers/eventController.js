@@ -37,12 +37,10 @@ class eventController {
       ticketPricing = JSON.parse(ticketPricing);
       const { standard, vip } = ticketPricing;
       if (!standard || !vip) {
-        return res
-          .status(400)
-          .json({
-            status: "error",
-            message: " missing some input in ticketPricing",
-          });
+        return res.status(400).json({
+          status: "error",
+          message: " missing some input in ticketPricing",
+        });
       }
 
       if (!req.uploadDir) {
@@ -211,7 +209,7 @@ class eventController {
             standard,
             vip,
           },
-          seats: undefined
+          seats: undefined,
         },
         { new: true }
       );
@@ -277,9 +275,7 @@ class eventController {
     const limit = parseInt(req.query.limit, 10) || 10;
     try {
       const userID = req.user.id;
-      console.log(userID)
-
-      const user = await User.findById(userID)
+      const user = await User.findById(userID);
       if (!user) {
         return res
           .status(404)
@@ -287,6 +283,19 @@ class eventController {
       }
       const intersets = user.listOfInterest;
       const country = user.address.country;
+      if (!country) {
+        return res
+          .status(400)
+          .json({
+            status: "error",
+            message: "User country is not set in the profile.",
+          });
+      }
+      console.log({
+        categories: { $in: interests },
+        "location.country": country,
+        date: { $gt: Date.now() },
+      });
       const events = await Event.find({
         $and: {
           categories: { $in: intersets },
