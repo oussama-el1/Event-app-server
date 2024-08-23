@@ -5,17 +5,14 @@ const EventSchema = mongoose.Schema({
     type: String,
     required: [true, 'Event Title is required'],
   },
-
   description: {
     type: String,
     required: [true, 'Event description is required'],
   },
-
   date: {
     type: Date,
     required: [true, 'Event date is required'],
   },
-
   location: {
     address: {
       type: String,
@@ -26,43 +23,36 @@ const EventSchema = mongoose.Schema({
     zip: String,
     country: String
   },
-
   organizer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'Event organizer is required'],
   },
-
   tickets: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Ticket'
     }
   ],
-
   ticketLimit: {
     type: Number,
     required: [true, 'Event ticket limit is required'],
   },
-
   ticketSold: {
     type: Number,
     default: 0
   },
-
   categories: [
     {
       type: String,
       enum: ['Music', 'Sports', 'Conference', 'Festival', 'Other']
     }
   ],
-
   media: [
     {
       type: String,
     }
   ],
-
   seats: [
     {
       seatNumber: {
@@ -76,23 +66,18 @@ const EventSchema = mongoose.Schema({
       }
     }
   ],
-
-
   isPublic: {
     type: Boolean,
     default: true
   },
-
   createdAt: {
     type: Date,
     default: Date.now,
   },
-
   updatedAt: {
     type: Date,
     default: Date.now,
   },
-
   ticketPricing: {
     standard: {
       type: Number,
@@ -113,19 +98,6 @@ EventSchema.pre('save', function(next) {
 EventSchema.index({ date: 1 });
 EventSchema.index({ organizer: 1 });
 EventSchema.index({ isPublic: 1, date: 1 });
-EventSchema.index({ seats: 1 }, { unique: true });
-
-
-EventSchema.methods.getTicketPrice = function(ticketType) {
-  switch (ticketType) {
-    case 'Standard':
-      return this.ticketPricing.standard;
-    case 'VIP':
-      return this.ticketPricing.vip;
-    default:
-      throw new Error('Invalid ticket type');
-  }
-};
 
 const Event = mongoose.model('Event', EventSchema);
 

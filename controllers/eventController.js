@@ -148,7 +148,7 @@ class eventController {
     } catch (error) {
       res.status(500).json({ message: "Event not found for this ID", error });
     }
-  }
+  };
 
   static async updateevent(req, res) {
     try {
@@ -242,7 +242,8 @@ class eventController {
       console.error(`Error updating event: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  };
+
   static async deleteevent(req, res) {
     try {
       const organizer = req.user.id;
@@ -269,7 +270,8 @@ class eventController {
       console.error(`Error deleting event: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  };
+
   static async gethomeevent(req, res) {
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 10;
@@ -304,60 +306,78 @@ class eventController {
       console.error(`Error during search: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
-  static async addseats(req, res) {
-    const userID = req.user.id;
+  };
+
+  static async addSeats(req, res) {
+    const userId = req.user.id;
+    const eventId = req.params.id;
+  
     try {
-      const user = await User.findById(userID);
+      const [user, event] = await Promise.all([
+        User.findById(userId),
+        Event.findById(eventId),
+      ]);
+  
       if (!user) {
         return res.status(404).json({
-          status: "error",
-          message: "User not found",
+          status: 'error',
+          message: 'User not found',
         });
       }
-
-      const eventID = req.params.id;
-      const event = await Event.findById(eventID);
+  
       if (!event) {
         return res.status(404).json({
-          status: "error",
-          message: "Event not found",
+          status: 'error',
+          message: 'Event not found',
         });
       }
-
-      if (event.organizer.toString() !== userID) {
+  
+      if (event.organizer.toString() !== userId) {
         return res.status(403).json({
-          status: "error",
-          message: "User is not authorized to add seats to this event",
+          status: 'error',
+          message: 'User is not authorized to add seats to this event',
         });
       }
-
+  
       const { seats } = req.body;
       const { error } = validateSeats({ seats });
       if (error) {
         return res.status(400).json({
+          status: 'error',
           message: error.details[0].message,
         });
       }
 
-      const newSeats = seats.map(seatNumber => ({
-        seatNumber,
-        status: 'available',
-      }));
+      const seatNumbers = new Set(event.seats.map(seat => seat.seatNumber));
+      const newSeats = [];
+  
+      for (const seatNumber of seats) {
+        if (seatNumbers.has(seatNumber)) {
+          return res.status(400).json({
+            status: 'error',
+            message: `Seat number ${seatNumber} already exists for this event`,
+          });
+        }
+        seatNumbers.add(seatNumber);
+        newSeats.push({ seatNumber, status: 'available' });
+      }
 
-      event.seats = [...event.seats, ...newSeats];
-
+      event.seats.push(...newSeats);
       await event.save();
-
+  
       res.status(200).json({
-        message: "Seats added successfully",
+        status: 'success',
+        message: 'Seats added successfully',
         seats: newSeats,
       });
     } catch (error) {
       console.error(`Error adding seats: ${error.message}`);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({
+        status: 'error',
+        message: 'Internal server error',
+      });
     }
-  }
+  };
 }
 
 function validateEvent(event) {
