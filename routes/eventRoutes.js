@@ -9,5 +9,6 @@ EventRouter.post("/event", ProtectMidll, uploadmedia, eventController.postevent)
 EventRouter.get("/:id", ProtectMidll, eventController.getevent);
 EventRouter.put("/:id", ProtectMidll, uploadmedia, eventController.updateevent);
 EventRouter.delete("/:id", ProtectMidll, eventController.deleteevent);
+EventRouter.get("/homeEvent", ProtectMidll, eventController.gethomeevent)
 
 module.exports = EventRouter;

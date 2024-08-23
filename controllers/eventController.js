@@ -1,5 +1,5 @@
-const path = require('path'); // Import the path module
-const fs = require('fs');
+const path = require("path"); // Import the path module
+const fs = require("fs");
 const User = require("../models/User");
 const Event = require("../models/Event");
 const Joi = require("joi");
@@ -7,28 +7,42 @@ const Joi = require("joi");
 class eventController {
   static async postevent(req, res) {
     try {
-      let location = req.body.location
-      const { title, description, date, ticketLimit, categories } =
-        req.body;
+      let location = req.body.location;
+      let ticketPricing = req.body.ticketPricing;
+      const { title, description, date, ticketLimit, categories } = req.body;
 
-        if (
+      if (
         !title ||
         !description ||
         !date ||
         !location ||
         !ticketLimit ||
-        !categories
+        !categories ||
+        !ticketPricing
       ) {
         return res
           .status(400)
           .json({ status: "error", message: "Missing Some input" });
       }
 
-      location = JSON.parse(location)
+      location = JSON.parse(location);
       const { address, city, state, zip, country } = location;
 
-      if (!address || !city || !state || !zip || !country ) {
-        return res.status(400).json({ status: "error", message: " missing some input in address" });
+      if (!address || !city || !state || !zip || !country) {
+        return res
+          .status(400)
+          .json({ status: "error", message: " missing some input in address" });
+      }
+
+      ticketPricing = JSON.parse(ticketPricing);
+      const { standard, vip } = ticketPricing;
+      if (!standard || !vip) {
+        return res
+          .status(400)
+          .json({
+            status: "error",
+            message: " missing some input in ticketPricing",
+          });
       }
 
       if (!req.uploadDir) {
@@ -52,6 +66,7 @@ class eventController {
         location,
         ticketLimit,
         categories,
+        ticketPricing,
       });
 
       if (error)
@@ -63,23 +78,25 @@ class eventController {
         title,
         description,
         date,
-        location :{
+        location: {
           address,
           city,
           state,
           zip,
-          country
+          country,
         },
         ticketLimit,
         categories,
-        organizer
+        organizer,
+        ticketPricing: {
+          standard,
+          vip,
+        },
       });
 
       await newEvent.save();
       const eventID = newEvent._id.toString();
-      const finalDir = path.resolve(
-        `/tmp/event-app/events/${eventID}/`
-      );
+      const finalDir = path.resolve(`/tmp/event-app/events/${eventID}/`);
 
       if (!fs.existsSync(finalDir)) {
         fs.mkdirSync(finalDir, { recursive: true });
@@ -108,65 +125,62 @@ class eventController {
       });
     } catch (error) {
       console.error("Error creating event:", error); // Log the error to the console
-      res.status(500).json({ message: "Error creating event", error: error.message });
+      res
+        .status(500)
+        .json({ message: "Error creating event", error: error.message });
     }
   }
 
   static async getevent(req, res) {
     try {
-      const events = await Event.find({ _id: req.params.id })
-        .sort({
-          createdAt: -1,
-        });
-
+      const events = await Event.findById(req.params.id);
       if (!events) {
         return res.status(404).json({
           status: "error",
           message: "Event not found",
         });
-      };
+      }
 
       res.status(200).json({
         status: "success",
         data: events,
       });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Event not found for this ID", error });
+      res.status(500).json({ message: "Event not found for this ID", error });
     }
-  };
+  }
 
   static async updateevent(req, res) {
     try {
-      const {
-        title,
-        description,
-        date,
-        ticketLimit,
-        categories,
-        isPublic,
-      } = req.body;
+      const { title, description, date, ticketLimit, categories, isPublic } =
+        req.body;
 
       let location = req.body.location;
+      let ticketPricing = req.body.ticketPricing;
 
       location = JSON.parse(location);
       const { address, city, state, zip, country } = location;
+      ticketPricing = JSON.parse(ticketPricing);
+      const { standard, vip } = ticketPricing;
 
       const { error } = validateEvent({
         title,
         description,
         date,
-        location :{
+        location: {
           address,
           city,
           state,
           zip,
-          country
+          country,
         },
         ticketLimit,
         categories,
         isPublic,
+        ticketPricing: {
+          standard,
+          vip,
+        },
       });
 
       if (error)
@@ -174,8 +188,8 @@ class eventController {
           message: error.details[0].message,
         });
 
-        if (!req.uploadDir) {
-          return res.status(500).json({ message: "Upload directory not set" });
+      if (!req.uploadDir) {
+        return res.status(500).json({ message: "Upload directory not set" });
       }
       const event = await Event.findByIdAndUpdate(
         req.params.id,
@@ -183,16 +197,20 @@ class eventController {
           title,
           description,
           date,
-          location :{
+          location: {
             address,
             city,
             state,
             zip,
-            country
+            country,
           },
           ticketLimit,
           categories,
           isPublic,
+          ticketPricing: {
+            standard,
+            vip,
+          },
         },
         { new: true }
       );
@@ -202,9 +220,7 @@ class eventController {
           .json({ message: "Event ID not found in request" });
       }
       if (req.files && req.files.length > 0) {
-        const finalDir = path.resolve(
-          `/tmp/event-app/events/${event._id}/`
-        );
+        const finalDir = path.resolve(`/tmp/event-app/events/${event._id}/`);
 
         if (!fs.existsSync(finalDir)) {
           fs.mkdirSync(finalDir, { recursive: true });
@@ -240,9 +256,7 @@ class eventController {
 
       const event = await Event.findByIdAndRemove(req.params.id);
       if (!event) {
-        return res
-          .status(400)
-          .json({ message: "Event ID not found" });
+        return res.status(400).json({ message: "Event ID not found" });
       }
       user.createdEvents.pull(req.params.id);
       await user.save();
@@ -255,8 +269,93 @@ class eventController {
       res.status(500).json({ message: "Internal server error" });
     }
   }
-}
+  static async gethomeevent(req, res) {
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 10;
+    try {
+      const userID = req.user.id;
+      const user = await User.findById(userID).populate("listOfInterest");
+      if (!user) {
+        return res
+          .status(404)
+          .json({ status: "error", message: "User not found" });
+      }
+      const intersets = user.listOfInterest;
+      const country = user.address.country;
+      const events = await Event.find({
+        $and: {
+          categories: { $in: intersets },
+          "location.country": country,
+          date: { $gt: Date.now() },
+        },
+      })
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .sort({ date: 1 })
+        .populate("organizer")
+        .select("title date location organizer.lastName");
+      res.status(200).json({
+        events,
+      });
+    } catch (error) {
+      console.error(`Error during search: ${error.message}`);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
+  static async addseats(req, res) {
+    const userID = req.user.id;
+    try {
+      const user = await User.findById(userID);
+      if (!user) {
+        return res.status(404).json({
+          status: "error",
+          message: "User not found",
+        });
+      }
 
+      const eventID = req.params.id;
+      const event = await Event.findById(eventID);
+      if (!event) {
+        return res.status(404).json({
+          status: "error",
+          message: "Event not found",
+        });
+      }
+
+      if (event.organizer.toString() !== userID) {
+        return res.status(403).json({
+          status: "error",
+          message: "User is not authorized to add seats to this event",
+        });
+      }
+
+      const { seats } = req.body;
+      const { error } = validateSeats({ seats });
+      if (error) {
+        return res.status(400).json({
+          message: error.details[0].message,
+        });
+      }
+
+      const newSeats = seats.map(seatNumber => ({
+        seatNumber,
+        status: 'available',
+      }));
+
+      event.seats = [...event.seats, ...newSeats];
+
+      await event.save();
+
+      res.status(200).json({
+        message: "Seats added successfully",
+        seats: newSeats,
+      });
+    } catch (error) {
+      console.error(`Error adding seats: ${error.message}`);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
+}
 
 function validateEvent(event) {
   const schema = Joi.object({
@@ -268,15 +367,28 @@ function validateEvent(event) {
       city: Joi.string(),
       state: Joi.string(),
       zip: Joi.string(),
-      country: Joi.string()
+      country: Joi.string(),
+    }).required(),
+    ticketPricing: Joi.object({
+      standard: Joi.number().required(),
+      vip: Joi.number().required(),
     }).required(),
     ticketLimit: Joi.number().min(1).required(),
-    categories: Joi.array().items(Joi.string().valid('Music', 'Sports', 'Conference', 'Festival', 'Other')).required(),
+    categories: Joi.array()
+      .items(
+        Joi.string().valid("Music", "Sports", "Conference", "Festival", "Other")
+      )
+      .required(),
     isPublic: Joi.boolean(),
     media: Joi.string().optional(),
   });
 
   return schema.validate(event, { abortEarly: false });
 }
-
+function validateSeats(seats) {
+  const seatsSchema = Joi.object({
+    seats: Joi.array().items(Joi.string().min(1)).unique().required(),
+  });
+  return seatsSchema.validate(seats, { abortEarly: false });
+}
 module.exports = eventController;
