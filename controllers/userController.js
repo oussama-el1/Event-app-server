@@ -24,7 +24,7 @@ class UserController {
     } catch (error) {
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
+  };
 
   static async getUser(req, res) {
     try {
@@ -41,7 +41,7 @@ class UserController {
     } catch (error) {
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
+  };
   
   /**
    * The magic of Update a User  
@@ -113,7 +113,7 @@ class UserController {
       console.error(`Error updating user: ${error.message}`);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
+  };
 
   static async followUser(req, res) {
     try {
@@ -150,7 +150,7 @@ class UserController {
       console.error('Error following user:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
+  };
 
   static async unfollowUser(req, res) {
     const currentUserId = req.user.id;
@@ -187,7 +187,7 @@ class UserController {
       console.error(`Error unfollowing user: ${error.message}`);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
+  };
 
   static async getFollowers(req, res) {
     const userId = req.user.id;
@@ -198,14 +198,13 @@ class UserController {
       }
       
       const followers = user.followers.map(follower => follower.toObject());
-      
+
       res.status(200).json(followers);
     } catch (error) {
       console.error(`Error getting followers: ${error.message}`);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
-  
+  };
 
   static async getFollowings(req, res) {
     const userId = req.user.id;
@@ -220,37 +219,7 @@ class UserController {
       console.error(`Error getting following: ${error.message}`);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
-
-  static async getFollowersCount(req, res) {
-    const userId = req.user.id;
-    try {
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-      const followersCount = user.followers.length;
-      res.status(200).json({ followersCount });
-    } catch (error) {
-      console.error(`Error getting followers count: ${error.message}`);
-      res.status(500).json({ message: 'Internal server error' });
-    }
-  }
-
-  static async getFollowingCount(req, res) {
-    const userId = req.user.id;
-    try {
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-      const followingCount = user.following.length;
-      res.status(200).json({ followingCount });
-    } catch (error) {
-      console.error(`Error getting following count: ${error.message}`);
-      res.status(500).json({ message: 'Internal server error' });
-    }
-  }
+  };
 
   /**
    * Search users
