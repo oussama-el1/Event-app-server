@@ -146,7 +146,7 @@ class eventController {
     } catch (error) {
       res.status(500).json({ message: "Event not found for this ID", error });
     }
-  };
+  }
 
   static async updateevent(req, res) {
     try {
@@ -240,7 +240,7 @@ class eventController {
       console.error(`Error updating event: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
     }
-  };
+  }
 
   static async deleteevent(req, res) {
     try {
@@ -268,7 +268,7 @@ class eventController {
       console.error(`Error deleting event: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
     }
-  };
+  }
 
   static async gethomeevent(req, res) {
     const page = parseInt(req.query.page, 10) || 1;
@@ -284,12 +284,10 @@ class eventController {
       const intersets = user.listOfInterest;
       const country = user.address.country;
       if (!country) {
-        return res
-          .status(400)
-          .json({
-            status: "error",
-            message: "User country is not set in the profile.",
-          });
+        return res.status(400).json({
+          status: "error",
+          message: "User country is not set in the profile.",
+        });
       }
       console.log({
         categories: { $in: interests },
@@ -315,78 +313,78 @@ class eventController {
       console.error(`Error during search: ${error.message}`);
       res.status(500).json({ message: "Internal server error" });
     }
-  };
+  }
 
   static async addSeats(req, res) {
     const userId = req.user.id;
     const eventId = req.params.id;
-  
+
     try {
       const [user, event] = await Promise.all([
         User.findById(userId),
         Event.findById(eventId),
       ]);
-  
+
       if (!user) {
         return res.status(404).json({
-          status: 'error',
-          message: 'User not found',
+          status: "error",
+          message: "User not found",
         });
       }
-  
+
       if (!event) {
         return res.status(404).json({
-          status: 'error',
-          message: 'Event not found',
+          status: "error",
+          message: "Event not found",
         });
       }
-  
+
       if (event.organizer.toString() !== userId) {
         return res.status(403).json({
-          status: 'error',
-          message: 'User is not authorized to add seats to this event',
+          status: "error",
+          message: "User is not authorized to add seats to this event",
         });
       }
-  
+
       const { seats } = req.body;
       const { error } = validateSeats({ seats });
       if (error) {
         return res.status(400).json({
-          status: 'error',
+          status: "error",
           message: error.details[0].message,
         });
       }
 
-      const seatNumbers = new Set(event.seats.map(seat => seat.seatNumber));
+      const seatNumbers = new Set(event.seats.map((seat) => seat.seatNumber));
       const newSeats = [];
-  
+
       for (const seatNumber of seats) {
         if (seatNumbers.has(seatNumber)) {
           return res.status(400).json({
-            status: 'error',
+            status: "error",
             message: `Seat number ${seatNumber} already exists for this event`,
           });
         }
         seatNumbers.add(seatNumber);
-        newSeats.push({ seatNumber, status: 'available' });
+        newSeats.push({ seatNumber, status: "available" });
       }
 
       event.seats.push(...newSeats);
       await event.save();
-  
+
       res.status(200).json({
-        status: 'success',
-        message: 'Seats added successfully',
+        status: "success",
+        message: "Seats added successfully",
         seats: newSeats,
       });
     } catch (error) {
       console.error(`Error adding seats: ${error.message}`);
       res.status(500).json({
-        status: 'error',
-        message: 'Internal server error',
+        status: "error",
+        message: "Internal server error",
       });
     }
-  };
+  }
 }
 
 function validateEvent(event) {
