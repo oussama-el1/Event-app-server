@@ -29,31 +29,31 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 
 app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, '/html/signup.html'));
+  res.sendFile(path.join(__dirname, 'public/html/signup.html'));
 });
 
 app.get('/more_info', (req, res) => {
-  res.sendFile(path.join(__dirname, '/html/register_1.html'));
+  res.sendFile(path.join(__dirname, 'public/html/register_1.html'));
 });
 
 app.get('/interests', (req, res) => {
-  res.sendFile(path.join(__dirname, '/html/register_2.html'));
+  res.sendFile(path.join(__dirname, 'public/html/register_2.html'));
 });
 
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '/html/login.html'));
+  res.sendFile(path.join(__dirname, 'public/html/login.html'));
 });
 
 app.get('/verify_email', (req, res) => {
-  res.sendFile(path.join(__dirname, '/html/verify_email.html'));
+  res.sendFile(path.join(__dirname, 'public/html/verify_email.html'));
 });
 
 app.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, '/html/home.html'));
+  res.sendFile(path.join(__dirname, 'public/html/home.html'));
 });
 
 app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname, '/html/user_Aboutme.html'));
+  res.sendFile(path.join(__dirname, 'public/html/user_Aboutme.html'));
 });
 app.listen(PORT, () => {
   console.log(`App Running On Port ${PORT}...`);
