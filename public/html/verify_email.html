@@ -25,49 +25,55 @@
       </div>
     </div>
     <script>
-      document.getElementById('verificationForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        
-        // Get the email from local storage
-        var email = localStorage.getItem('email');
-        
-        // Get the OTP entered by the user
-        var otp = document.getElementById('otp').value;
-    
-        // Check if the email exists in local storage
-        if (!email) {
-          alert('Email not found. Please try again.');
-          return;
-        }
-    
-        // Create the data object with the email and OTP
-        var data = {
-          email: email,
-          otp: otp
-        };
-    
-        // Send the POST request to verify the email
-        fetch('/api/auth/verify-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'success') {
-            alert('Email verified successfully!');
-            // Redirect to the dashboard or login page
-            window.location.href = '/home';
-          } else {
-            alert('Error: ' + (data.message || 'Unable to verify email.'));
-          }
-        })
-        .catch(error => {
-          alert('An error occurred: ' + error.message);
-        });
+      document.querySelectorAll('.tag').forEach(tag => {
+          tag.addEventListener('click', () => {
+              tag.classList.toggle('selected');
+          });
       });
-    </script>
+  
+      async function submitSelection() {
+          const selectedTags = [];
+          document.querySelectorAll('.tag.selected').forEach(tag => {
+              selectedTags.push(tag.innerText);
+          });
+  
+          if (selectedTags.length === 0) {
+              alert('Please select at least one interest or personality trait.');
+              return;
+          }
+  
+          const registrationData = JSON.parse(sessionStorage.getItem('registrationData')) || {};
+          registrationData.listOfInterest = selectedTags;
+  
+          console.log('Submitting data:', registrationData);
+  
+          try {
+              const response = await fetch('/api/auth/register', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(registrationData)
+              });
+  
+              const data = await response.json();
+  
+              if (response.status === 201) {
+                  // Save email to local storage if it's not already saved
+                  if (!localStorage.getItem('email')) {
+                      localStorage.setItem('email', registrationData.email);
+                  }
+                  // Redirect to the login page after successful registration
+                  window.location.href = '/login';
+              } else {
+                  console.log(data);
+                  alert(data.message || 'An error occurred during registration.');
+              }
+          } catch (error) {
+              console.error('Error:', error);
+              alert('An error occurred while submitting interests.');
+          }
+      }
+  </script>
   </body>
 </html>
