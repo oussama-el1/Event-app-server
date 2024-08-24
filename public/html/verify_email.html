@@ -59,10 +59,9 @@
               const data = await response.json();
   
               if (response.status === 201) {
-                  // Save email to local storage if it's not already saved
-                  if (!localStorage.getItem('email')) {
-                      localStorage.setItem('email', registrationData.email);
-                  }
+                  // Overwrite the email in local storage
+                  localStorage.setItem('email', registrationData.email);
+  
                   // Redirect to the login page after successful registration
                   window.location.href = '/login';
               } else {
@@ -75,5 +74,6 @@
           }
       }
   </script>
+  
   </body>
 </html>
