@@ -28,15 +28,25 @@
       document.getElementById('verificationForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
         
-        var urlParams = new URLSearchParams(window.location.search);
-        var email = urlParams.get('email');
+        // Get the email from local storage
+        var email = localStorage.getItem('email');
+        
+        // Get the OTP entered by the user
         var otp = document.getElementById('otp').value;
-
+    
+        // Check if the email exists in local storage
+        if (!email) {
+          alert('Email not found. Please try again.');
+          return;
+        }
+    
+        // Create the data object with the email and OTP
         var data = {
           email: email,
           otp: otp
         };
-
+    
+        // Send the POST request to verify the email
         fetch('/api/auth/verify-email', {
           method: 'POST',
           headers: {
