@@ -25,39 +25,55 @@
       </div>
     </div>
     <script>
-      document.getElementById('login-form').addEventListener('submit', async function(event) {
-          event.preventDefault();
+      document.querySelectorAll('.tag').forEach(tag => {
+          tag.addEventListener('click', () => {
+              tag.classList.toggle('selected');
+          });
+      });
   
-          const email = document.getElementById('email').value;
-          const password = document.getElementById('password').value;
+      async function submitSelection() {
+          const selectedTags = [];
+          document.querySelectorAll('.tag.selected').forEach(tag => {
+              selectedTags.push(tag.innerText);
+          });
+  
+          if (selectedTags.length === 0) {
+              alert('Please select at least one interest or personality trait.');
+              return;
+          }
+  
+          const registrationData = JSON.parse(sessionStorage.getItem('registrationData')) || {};
+          registrationData.listOfInterest = selectedTags;
+  
+          console.log('Submitting data:', registrationData);
   
           try {
-              const response = await fetch('/api/auth/login', {
+              const response = await fetch('/api/auth/register', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json'
                   },
-                  body: JSON.stringify({ email: email, password: password })
+                  body: JSON.stringify(registrationData)
               });
   
               const data = await response.json();
   
-              if (response.ok) {
-                  alert(data.message); // Success message
-                  
-                  // Store the token in localStorage
-                  localStorage.setItem('authToken', data.token);
-  
-                  // Redirect to /home with the token as a query parameter
-                  window.location.href = `/home?token=${data.token}`;
+              if (response.status === 201) {
+                  // Save email to local storage if it's not already saved
+                  if (!localStorage.getItem('email')) {
+                      localStorage.setItem('email', registrationData.email);
+                  }
+                  // Redirect to the login page after successful registration
+                  window.location.href = '/login';
               } else {
-                  alert(`Error: ${data.message}`);
+                  console.log(data);
+                  alert(data.message || 'An error occurred during registration.');
               }
           } catch (error) {
-              console.error('Error during login:', error);
-              alert('An unexpected error occurred. Please try again later.');
+              console.error('Error:', error);
+              alert('An error occurred while submitting interests.');
           }
-      });
+      }
   </script>
   </body>
 </html>
