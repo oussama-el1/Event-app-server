@@ -136,15 +136,13 @@ p {
     </div>
 
     <script>
-        // Toggle the 'selected' class on tag click
         document.querySelectorAll('.tag').forEach(tag => {
             tag.addEventListener('click', () => {
                 tag.classList.toggle('selected');
             });
         });
 
-        function submitSelection() {
-            // Check if at least one tag is selected
+        async function submitSelection() {
             const selectedTags = [];
             document.querySelectorAll('.tag.selected').forEach(tag => {
                 selectedTags.push(tag.innerText);
@@ -155,35 +153,34 @@ p {
                 return;
             }
 
-            // Retrieve the existing data from sessionStorage
             const registrationData = JSON.parse(sessionStorage.getItem('registrationData')) || {};
             registrationData.listOfInterest = selectedTags;
 
-            // Log the JSON data to the console
             console.log('Submitting data:', registrationData);
 
-            // Send all data to the backend
-            fetch('/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(registrationData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // Redirect to email verification page upon success
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(registrationData)
+                });
+
+                const data = await response.json();
+
+                if (response.status === 201) {
                     window.location.href = '/verify_email';
                 } else {
-                    alert('Error: ' + (data.message || 'Unable to register.'));
+                    console.log(data);
+                    alert(data.message || 'An error occurred during registration.');
                 }
-            })
-            .catch((error) => {
+            } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred while submitting interests.');
-            });
+            }
         }
     </script>
+
 </body>
 </html>
