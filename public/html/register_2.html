@@ -45,50 +45,50 @@
                 tag.classList.toggle('selected');
             });
         });
-
+    
         async function submitSelection() {
-    const selectedTags = [];
-    document.querySelectorAll('.tag.selected').forEach(tag => {
-        selectedTags.push(tag.innerText);
-    });
-
-    if (selectedTags.length === 0) {
-        alert('Please select at least one interest or personality trait.');
-        return;
-    }
-
-    const registrationData = JSON.parse(sessionStorage.getItem('registrationData')) || {};
-    registrationData.listOfInterest = selectedTags;
-
-    console.log('Submitting data:', registrationData);
-
-    try {
-        const response = await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(registrationData)
-        });
-
-        const data = await response.json();
-
-        if (response.status === 201) {
-            // Save email to local storage if it's not already saved
-            if (!localStorage.getItem('email')) {
-                localStorage.setItem('email', registrationData.email);
+            const selectedTags = [];
+            document.querySelectorAll('.tag.selected').forEach(tag => {
+                selectedTags.push(tag.innerText);
+            });
+    
+            if (selectedTags.length === 0) {
+                alert('Please select at least one interest or personality trait.');
+                return;
             }
-            window.location.href = '/verify_email';
-        } else {
-            console.log(data);
-            alert(data.message || 'An error occurred during registration.');
+    
+            const registrationData = JSON.parse(sessionStorage.getItem('registrationData')) || {};
+            registrationData.listOfInterest = selectedTags;
+    
+            console.log('Submitting data:', registrationData);
+    
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(registrationData)
+                });
+    
+                const data = await response.json();
+    
+                if (response.status === 201) {
+                    // Overwrite email in local storage
+                    localStorage.setItem('email', registrationData.email);
+                    
+                    window.location.href = '/verify_email';
+                } else {
+                    console.log(data);
+                    alert(data.message || 'An error occurred during registration.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while submitting interests.');
+            }
         }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while submitting interests.');
-    }
-}
     </script>
+    
 
 </body>
 </html>
