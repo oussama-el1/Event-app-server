@@ -47,10 +47,10 @@
 
                 if (response.ok) {
                     alert(data.message); // Success message
-                    // Store the token in localStorage or cookies for further use
+                    // Store the token in localStorage
                     localStorage.setItem('authToken', data.token);
-                    // Redirect to a protected page
-                    window.location.href = '/dashboard.html';
+                    // Redirect to /home with the token
+                    window.location.href = `/home?token=${data.token}`;
                 } else {
                     alert(`Error: ${data.message}`);
                 }
