@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css'>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel='stylesheet' href='https://unpkg.com/@yaireo/tagify/dist/tagify.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/profile_card.css">
+    <link rel="stylesheet" href="../css/testimonial.css">
+    <link rel="stylesheet" href="../css/newsletter-section.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/kMVqIzKsbIM3a5tkH1+Vhoh44HrQsbOzE8piF8PL/4iY7kSAVWUX7dG5TQnOfG8V1sCqBN4cFtyIg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/carousel.css" rel="stylesheet">
+    <link href="../css/navbar.css" rel="stylesheet">
+
+
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+          }
+
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>
+
+        
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand img-fluid logo-small" href="#">
+          <img src="../static/imgs/logo.png" class="img-fluid w-50" alt="">
+        </a>
+        <!-- Toggle button for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar links and buttons -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">EVENTS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <!-- Search Form -->
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+          </div>
+          <!-- Profile icon -->
+          <a href="./login.html" class="btn btn-primary btn-lg">Sign Up</a>
+        </div>
+      </div>
+    </nav>
+    <!-- main HTML content goes here -->
+        <main>
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <a href="link1.html" class="carousel-cover" style="background-image: url('../static/imgs/carousel1.jpg');"></a>
+                  <div class="container">
+                    <div class="carousel-caption text-start">
+                      <h1 style="color: black; font-weight: bold;">Join Us</h1>
+                      <p style="color: black; font-weight: bold  ;">there's something for everyone.<br> <br>
+                      Join us to create lasting memories and connect with like-minded individuals.</p>
+                      <p><a class="btn btn-lg btn-primary" href="./signup.html">Sign up today</a></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <a href="link2.html" class="carousel-cover" style="background-image: url('../static/imgs/carousel2.jpg');"></a>
+                  <div class="container">
+                    <div class="carousel-caption">
+                      <h1 style="color: white; font-weight: bold;">About Us.</h1>
+                      <p style="color: white; font-weight: bold">
+                        Discover how our passion for innovation and dedication drives everything we do. 
+                      </p>
+                       <p><a class="btn btn-lg btn-primary" href="">learn more</a></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <a href="link3.html" class="carousel-cover" style="background-image: url('../static/imgs/carousel3.jpg');"></a>
+                  <div class="container">
+                    <div class="carousel-caption text-end">
+                      <h1 style="color: white; font-weight: bold;">One more for good measure.</h1>
+                      <p style="color: white; font-weight: bold;">Spread good vibs everywhere you go and watch the world light </p>
+                      <p><a class="btn btn-lg btn-primary" href="#">Browse events</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            <div class="shadow-border">
+            <h2 class="custom-heading">Best Events</h2>
+          <div class="page-content">
+            <div class="card">
+              <div class="content">
+                <h2 class="title">Experience AR</h2>
+                <button class="btn btn-outline-danger btn-circle favorite-button">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <div>
+                  <h2 class="mb-2">
+                    <sup>$</sup>39 / 4 <sup>hrs</sup>
+                  </h2>
+                  <p class="mb-6">per person</p>
+                  <p class="mb-6">Marrakech, Morocco</p>
+                  <button class="btn">Book now</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <h2 class="title">To The Beach</h2>
+                <button class="btn btn-outline-danger btn-circle favorite-button">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <div>
+                  <h2 class="mb-2">
+                    <sup>$</sup>39 / 4 <sup>hrs</sup>
+                  </h2>
+                  <p class="mb-6">per person</p>
+                  <p class="mb-6">Marrakech, Morocco</p>
+                  <button class="btn">Book now</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <h2 class="title">Super Night</h2>
+                <button class="btn btn-outline-danger btn-circle favorite-button">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <div>
+                  <h2 class="mb-2">
+                    <sup>$</sup>39 / 4 <sup>hrs</sup>
+                  </h2>
+                  <p class="mb-6">per person</p>
+                  <p class="mb-6">Marrakech, Morocco</p>
+                  <button class="btn">Book now</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <h2 class="title">Experience Yoga</h2>
+                <button class="btn btn-outline-danger btn-circle favorite-button">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <div>
+                  <h2 class="mb-2">
+                    <sup>$</sup>39 / 4 <sup>hrs</sup>
+                  </h2>
+                  <p class="mb-6">per person</p>                 
+                  <p class="mb-6">Marrakech, Morocco</p>
+                  <button class="btn">Book now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="page-content">
+            <div class="card">
+              <div class="content">
+                <h2 class="title">Experience AR</h2>
+                <button class="btn btn-outline-danger btn-circle favorite-button">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <div>
+                  <h2 class="mb-2">
+                    <sup>$</sup>39 / 4 <sup>hrs</sup>
+                  </h2>
+                  <p class="mb-6">per person</p>
+                  <p class="mb-6">Marrakech, Morocco</p>
+                  <button class="btn">Book now</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <h2 class="title">To The Beach</h2>
+                <button class="btn btn-outline-danger btn-circle favorite-button">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <div>
+                  <h2 class="mb-2">
+                    <sup>$</sup>39 / 4 <sup>hrs</sup>
+                  </h2>
+                  <p class="mb-6">per person</p>
+                  <p class="mb-6">Marrakech, Morocco</p>
+                  <button class="btn">Book now</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <h2 class="title">Super Night</h2>
+                <button class="btn btn-outline-danger btn-circle favorite-button">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <div>
+                  <h2 class="mb-2">
+                    <sup>$</sup>39 / 4 <sup>hrs</sup>
+                  </h2>
+                  <p class="mb-6">per person</p>
+                  <p class="mb-6">Marrakech, Morocco</p>
+                  <button class="btn">Book now</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <h2 class="title">Super Night</h2>
+                <button class="btn btn-outline-danger btn-circle favorite-button">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <div>
+                  <h2 class="mb-2">
+                    <sup>$</sup>39 / 4 <sup>hrs</sup>
+                  </h2>
+                  <p class="mb-6">per person</p>
+                  <p class="mb-6">Marrakech, Morocco</p>
+                  <button class="btn">Book now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+    <!-- Best Organiser's section -->
+    <div class="shadow-border">
+      <!-- partial:index.partial.html -->
+      <h2 class="custom-heading"> Best Orgniser's this week</h2>
+      <div class="org-content">
+     
+      <div class="profile">
+        <div class="profile-image">
+            <img src="../static/imgs/user.jpeg" />
+        </div>
+        <h2 class="profile-username">Elena Zoldado</h2>
+        <small class="profile-user-handle">@elena_zoldado</small>
+        <div class="profile-actions">
+            <button class="btn btn--primary">Follow</button>
+<!--             <button class="btn btn--icon">
+                <i class="ph-export"></i>
+            </button> -->
+            <button class="btn btn--icon">
+                <i class="ph-dots-three-outline-fill"></i>
+            </button>
+        </div>
+        <div class="profile-links">
+            <a href="#" class="link link--icon">
+                <i class="ph-twitter-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-facebook-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-instagram-logo"></i>
+            </a>
+        </div>
+      </div>
+
+      <div class="profile">
+        <div class="profile-image">
+            <img src="../static/imgs/user.jpeg" />
+        </div>
+        <h2 class="profile-username">Elena Zoldado</h2>
+        <small class="profile-user-handle">@elena_zoldado</small>
+        <div class="profile-actions">
+            <button class="btn btn--primary">Follow</button>
+<!--             <button class="btn btn--icon">
+                <i class="ph-export"></i>
+            </button> -->
+            <button class="btn btn--icon">
+                <i class="ph-dots-three-outline-fill"></i>
+            </button>
+        </div>
+        <div class="profile-links">
+            <a href="#" class="link link--icon">
+                <i class="ph-twitter-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-facebook-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-instagram-logo"></i>
+            </a>
+        </div>
+      </div>
+
+      <div class="profile">
+        <div class="profile-image">
+            <img src="../static/imgs/user.jpeg" />
+        </div>
+        <h2 class="profile-username">Elena Zoldado</h2>
+        <small class="profile-user-handle">@elena_zoldado</small>
+        <div class="profile-actions">
+            <button class="btn btn--primary">Follow</button>
+<!--             <button class="btn btn--icon">
+                <i class="ph-export"></i>
+            </button> -->
+            <button class="btn btn--icon">
+                <i class="ph-dots-three-outline-fill"></i>
+            </button>
+        </div>
+        <div class="profile-links">
+            <a href="#" class="link link--icon">
+                <i class="ph-twitter-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-facebook-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-instagram-logo"></i>
+            </a>
+        </div>
+      </div>
+
+      <div class="profile">
+        <div class="profile-image">
+            <img src="../static/imgs/user.jpeg" />
+        </div>
+        <h2 class="profile-username">Elena Zoldado</h2>
+        <small class="profile-user-handle">@elena_zoldado</small>
+        <div class="profile-actions">
+            <button class="btn btn--primary">Follow</button>
+<!--             <button class="btn btn--icon">
+                <i class="ph-export"></i>
+            </button> -->
+            <button class="btn btn--icon">
+                <i class="ph-dots-three-outline-fill"></i>
+            </button>
+        </div>
+        <div class="profile-links">
+            <a href="#" class="link link--icon">
+                <i class="ph-twitter-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-facebook-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-instagram-logo"></i>
+            </a>
+        </div>
+
+    </div>
+    </div>
+      </div>
+
+
+      <!-- partial:index.partial.html -->
+      <div class="shadow-border">
+        <h1 class="custom-heading">What peopel said ...</h1>
+        <div class="container">
+          <div class="row">
+            <div id="testimonial-slider" class="owl-carousel">
+              <div class="testimonial">
+                <span class="icon fa fa-quote-left"></span>
+                <p class="description">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
+                <div class="testimonial-content">
+                  <div class="pic">
+                    <img src="https://picsum.photos/130/130?image=1027" alt="">
+                  </div>
+                  <h3 class="name">Michele Miller</h3>
+                  <span class="title">Organiser</span>
+                </div>
+              </div>
+              <div class="testimonial">
+                <span class="icon fa fa-quote-left"></span>
+                <p class="description">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
+                <div class="testimonial-content">
+                  <div class="pic">
+                    <img src="https://picsum.photos/130/130?image=839" alt="">
+                  </div>
+                  <h3 class="name">Patricia Knott</h3>
+                  <span class="title">Organiser</span>
+                </div>
+              </div>
+              <div class="testimonial">
+                <span class="icon fa fa-quote-left"></span>
+                <p class="description">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
+                <div class="testimonial-content">
+                  <div class="pic">
+                    <img src="https://picsum.photos/130/130?image=856" alt="">
+                  </div>
+                  <h3 class="name">Justin Ramos</h3>
+                  <span class="title">User</span>
+                </div>
+              </div>
+              <div class="testimonial">
+                <span class="icon fa fa-quote-left"></span>
+                <p class="description">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
+                <div class="testimonial-content">
+                  <div class="pic">
+                    <img src="https://picsum.photos/130/130?image=836" alt="">
+                  </div>
+                  <h3 class="name">Mary Huntley</h3>
+                  <span class="title">User</span>
+                </div>
+              </div>
+              <div class="testimonial">
+                <span class="icon fa fa-quote-left"></span>
+                <p class="description">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
+                <div class="testimonial-content">
+                  <div class="pic">
+                    <img src="https://picsum.photos/130/130?image=883" alt="">
+                  </div>
+                  <h3 class="name">Aaron Newell</h3>
+                  <span class="title">Organiser</span>
+                </div>
+              </div>
+                      <div class="testimonial">
+                <span class="icon fa fa-quote-left"></span>
+                <p class="description">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
+                <div class="testimonial-content">
+                  <div class="pic">
+                    <img src="https://picsum.photos/130/130?image=777" alt="">
+                  </div>
+                  <h3 class="name">Lizzie Geren</h3>
+                  <span class="title">Organiser</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- partial -->
+
+        </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5>About Us</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+                <div class="col">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@example.com</p>
+                    <p>Phone: +123 456 7890</p>
+                </div>
+                <div class="col">
+             <ul>
+                 <h5>Help & Support</h5>
+                 <li><a href="#"></a></li>
+                 <li><a href="#">FAQs</a></li>
+                 <li><a href="#">Customer Support</a></li>
+                 <li><a href="#">Return Policy</a></li>
+                 <li><a href="#">Report a scam</a></li>
+             </ul>
+                </div>
+                <div class="col">
+                  <ul>
+                    <h5>Follow Us</h5>
+                    <li><a href="#" aria-label="Link to Twitter profile">
+                      <i class="ph-twitter-logo"></i>
+                    Twitter
+                    </a></li> 
+                    <li><a href="#" aria-label="Link to Twitter profile">
+                      <i class="ph-instagram-logo"></i>
+                    Instagram
+                    </a></li> 
+                    <li><a href="#" aria-label="Link to Twitter profile">
+                      <i class="ph-facebook-logo"></i>
+                    Facebook
+                    </a></li>
+                  </u>
+                </div>
+            </div>
+        </div> 
+
+<div>
+  <section class="newsletter-section">
+      <div class="newsletter-container">
+          <h2>Subscribe to Our Newsletter</h2>
+          <p>Stay updated with our latest news and offers.<br>
+          Enter your email to subscribe to our newsletter.</p>
+          <form class="newsletter-form">
+              <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+              <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+      </div>
+  </section>
+</div>
+    </footer>
+
+    <!-- partial -->
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js'></script><script  src="../js/testimonial.js"></script>
+      <script src='https://unpkg.com/phosphor-icons'></script><script  src="./script.js"></script>
+      <script src="icons.js"></script>
+</body>
+</html>

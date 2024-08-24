@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/auth.css">
+    <title>MAX ZHOO - Login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="log-container">
+            <div class="mini-cont">
+                <div class="logo">
+                    <img src="static/imgs/logo.png" alt="">
+                </div>
+                <h2>Login to <br>your account</h2>
+                <form class="login-form" id="login-form">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                    <p>Don't have an account? <a href="./signup.html" style="text-decoration:none;">Create account</a></p>
+                </form>
+            </div>
+        </div>
+        <div class="imgcont">
+            <img class="side-img" src="../static/imgs/login-t.jpeg" alt="Login Image">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email, password: password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message); // Success message
+                    // Store the token in localStorage or cookies for further use
+                    localStorage.setItem('authToken', data.token);
+                    // Redirect to a protected page
+                    window.location.href = '/dashboard.html';
+                } else {
+                    alert(`Error: ${data.message}`);
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                alert('An unexpected error occurred. Please try again later.');
+            }
+        });
+    </script>
+</body>
+</html>

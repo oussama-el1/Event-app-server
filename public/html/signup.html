@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/auth.css">
+    <title>MAX ZHOO - Signup</title>
+  </head>
+  <body>
+    <style>
+      body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh; /* Ensure container takes full viewport height */
+}
+
+.log-container {
+    width: 44%;
+    display: flex;
+    justify-content: center;
+    text-align: center; /* Center align text and form elements */
+}
+
+.mini-cont {
+    margin-top: 15%;
+}
+
+.logo img {
+    height: 60px; /* Adjust this value to your desired size */
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #ce474d;
+    font-size: 35px;
+    margin: 0 0 20% 0; /* Space below h1 */
+}
+
+h2 {
+    font-size: 47px;
+    font-weight: bold;
+    margin: 0 0 20% 0; /* Space below h2 */
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form elements */
+    max-width: 300px; /* Adjust based on your design */
+    margin: 0 auto; /* Center form horizontally */
+}
+
+.login-form input, .login-form button {
+    width: 100%; /* Full width of the form */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login-form button {
+    background-color: #ce474d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.side-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 100vh; /* Adjusted to fit the viewport height */
+    object-fit: cover;
+}
+
+@media (max-width: 770px) {
+    .container {
+        flex-direction: column;
+    }
+    .log-container {
+        width: 100%;
+    }
+    .side-img {
+        display: none;
+    }
+}
+
+    </style>
+    <div class="container">
+      <div class="log-container">
+        <div class="mini-cont">
+          <div class="logo">
+            <img src="../static/imgs/logo.png" alt="">
+          </div>
+          <h2>Create an <br>account </h2>
+          <form class="login-form" id="registrationForm">
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+            <input type="email" id="email" name="email" placeholder="Email address" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+            <input type="date" id="birthdate" name="birthdate" placeholder="Birthdate" required>
+            <button type="submit">Create Profile</button>
+            already have an account?
+            <a style="text-decoration-line:none;" href="./login.html">Login</a>
+          </form>
+        </div>
+      </div>
+      <div class="imgcont">
+        <img class="side-img" src="../static/imgs/login-t.jpeg" alt="Login Image">
+      </div>
+    </div>
+    <script>
+      document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirm-password').value;
+        var name = document.getElementById('name').value;
+        var phone = document.getElementById('phone').value;
+        var birthdate = document.getElementById('birthdate').value;
+
+        if (password !== confirmPassword) {
+          alert('Passwords do not match. Please try again.');
+          return;
+        }
+
+        // Split full name into firstName and lastName
+        var names = name.split(" ");
+        var firstName = names[0];
+        var lastName = names.slice(1).join(" ") || "";
+
+        var data = {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          tel: phone,
+          birthDate: birthdate,
+          listOfInterest: [],
+          maritalStatus: "",
+          address: {
+            street: "",
+            city: "",
+            state: "",
+            zip: "",
+            country: ""
+          }
+        };
+
+        // Store the data in localStorage or sessionStorage to retrieve it later
+        sessionStorage.setItem('registrationData', JSON.stringify(data));
+
+        // Redirect to the next registration step
+        window.location.href = 'more_info';
+      });
+    </script>
+  </body>
+</html>
