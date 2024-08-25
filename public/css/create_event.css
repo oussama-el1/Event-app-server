@@ -69,13 +69,13 @@ main {
 }
 
 /* Container styling with dark gray background */
-.container {
+/*.containere {
     background-color: #454343bd; /* Dark gray transparent background */
     padding: 20px 40px;
     border-radius: 8px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-}
+}*/
 
 /* Header styling for form */
 h2 {
@@ -125,7 +125,7 @@ h2 {
 
 
 /* Layout for input rows */
-.row {
+/*.row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
@@ -137,9 +137,9 @@ h2 {
 }
 
 .col:last-child {
-	margin-right: 0;
+    margin-right: 0;
 }
-
+*/
 /* Layout for the vertical column */
 .column {
     display: flex;
