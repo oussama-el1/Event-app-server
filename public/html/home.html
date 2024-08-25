@@ -39,68 +39,65 @@
         
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <!-- Navbar Brand -->
-        <a class="navbar-brand img-fluid logo-small" href="#">
-          <img src="../static/imgs/logo.png" class="img-fluid w-50" alt="">
-        </a>
-        <!-- Toggle button for mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Navbar links and buttons -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">EVENTS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">FAVORITS</a>
-            </li>
-          </ul>
-          <div class="d-flex">
-            <!-- Search Form -->
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
-          </div>
-          <!-- Profile icon -->
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
-            <li class="nav-item dropdown">
-              <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="profile-icon-container">
-                  <img src="../static/imgs/user.jpeg" alt="Profile Icon" class="profile-icon">
-                </div>
-                <!-- You can also use icon as follows: -->
-                <!--  <i class="fas fa-user"></i> -->
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item" href="#">
-                   Account </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                     Settings </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Log Out </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <!-- Navbar Brand -->
+      <a class="navbar-brand img-fluid logo-small" href="home.html">
+        <img src="../static/imgs/logo.png" class="img-fluid w-50" alt="">
+      </a>
+      <!-- Toggle button for mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Navbar links and buttons -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="events.html">EVENTS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create_event.html">CREATE EVENTS</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <!-- Search Form -->
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          </form>
         </div>
+        <!-- Profile icon -->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+          <li class="nav-item dropdown">
+            <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="profile-icon-container">
+                <img src="../static/imgs/user.jpeg" alt="Profile Icon" class="profile-icon">
+              </div>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-right: 15px;padding-right: 4px;margin-left: -19px;">
+              <li>
+                <a class="dropdown-item" href="user_Aboutme.html">
+                 Account </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="user_Aboutme.html">
+                   Settings </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" href="guest_home.html">
+                  Log Out </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
     <!-- main HTML content goes here -->
         <main>
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -153,143 +150,152 @@
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
-
-            <div class="shadow-border">
-            <h2 class="custom-heading">Best Events</h2>
-          <div class="page-content">
-            <div class="card">
-              <div class="content">
-                <h2 class="title">Experience AR</h2>
-                <button class="btn btn-outline-danger btn-circle favorite-button">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div>
-                  <h2 class="mb-2">
-                    <sup>$</sup>39 / 4 <sup>hrs</sup>
-                  </h2>
-                  <p class="mb-6">per person</p>
-                  <p class="mb-6">Marrakech, Morocco</p>
-                  <button class="btn">Book now</button>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="content">
-                <h2 class="title">To The Beach</h2>
-                <button class="btn btn-outline-danger btn-circle favorite-button">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div>
-                  <h2 class="mb-2">
-                    <sup>$</sup>39 / 4 <sup>hrs</sup>
-                  </h2>
-                  <p class="mb-6">per person</p>
-                  <p class="mb-6">Marrakech, Morocco</p>
-                  <button class="btn">Book now</button>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="content">
-                <h2 class="title">Super Night</h2>
-                <button class="btn btn-outline-danger btn-circle favorite-button">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div>
-                  <h2 class="mb-2">
-                    <sup>$</sup>39 / 4 <sup>hrs</sup>
-                  </h2>
-                  <p class="mb-6">per person</p>
-                  <p class="mb-6">Marrakech, Morocco</p>
-                  <button class="btn">Book now</button>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="content">
-                <h2 class="title">Experience Yoga</h2>
-                <button class="btn btn-outline-danger btn-circle favorite-button">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div>
-                  <h2 class="mb-2">
-                    <sup>$</sup>39 / 4 <sup>hrs</sup>
-                  </h2>
-                  <p class="mb-6">per person</p>                 
-                  <p class="mb-6">Marrakech, Morocco</p>
-                  <button class="btn">Book now</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="page-content">
-            <div class="card">
-              <div class="content">
-                <h2 class="title">Experience AR</h2>
-                <button class="btn btn-outline-danger btn-circle favorite-button">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div>
-                  <h2 class="mb-2">
-                    <sup>$</sup>39 / 4 <sup>hrs</sup>
-                  </h2>
-                  <p class="mb-6">per person</p>
-                  <p class="mb-6">Marrakech, Morocco</p>
-                  <button class="btn">Book now</button>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="content">
-                <h2 class="title">To The Beach</h2>
-                <button class="btn btn-outline-danger btn-circle favorite-button">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div>
-                  <h2 class="mb-2">
-                    <sup>$</sup>39 / 4 <sup>hrs</sup>
-                  </h2>
-                  <p class="mb-6">per person</p>
-                  <p class="mb-6">Marrakech, Morocco</p>
-                  <button class="btn">Book now</button>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="content">
-                <h2 class="title">Super Night</h2>
-                <button class="btn btn-outline-danger btn-circle favorite-button">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div>
-                  <h2 class="mb-2">
-                    <sup>$</sup>39 / 4 <sup>hrs</sup>
-                  </h2>
-                  <p class="mb-6">per person</p>
-                  <p class="mb-6">Marrakech, Morocco</p>
-                  <button class="btn">Book now</button>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="content">
-                <h2 class="title">Super Night</h2>
-                <button class="btn btn-outline-danger btn-circle favorite-button">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div>
-                  <h2 class="mb-2">
-                    <sup>$</sup>39 / 4 <sup>hrs</sup>
-                  </h2>
-                  <p class="mb-6">per person</p>
-                  <p class="mb-6">Marrakech, Morocco</p>
-                  <button class="btn">Book now</button>
-                </div>
-              </div>
-            </div>
-          </div>
+<!-- Best Event Section -->
+<div class="shadow-border">
+  <h2 class="custom-heading">Best Events</h2>
+  <div class="page-content">
+    <div class="card">
+      <div class="content">
+        <h2 class="title">AR Adventure Tour</h2>
+        <button class="btn btn-outline-danger btn-circle favorite-button">
+          <i class="bi bi-heart"></i>
+        </button>
+        <div>
+          <h2 class="mb-2">
+            <sup>$</sup>45 / 3 <sup>hrs</sup>
+          </h2>
+          <p class="mb-6">per person</p>
+          <p class="mb-6">Marrakech, Morocco</p>
+          <button class="btn">Book now</button>
+        </div>
       </div>
+    </div>
+    <div class="card">
+      <img src="../static/imgs/cover2.jpg" alt="Beachside Relaxation" class="card-img-top" />
+      <div class="content">
+        <h2 class="title">Beachside Relaxation</h2>
+        <button class="btn btn-outline-danger btn-circle favorite-button">
+          <i class="bi bi-heart"></i>
+        </button>
+        <div>
+          <h2 class="mb-2">
+            <sup>$</sup>50 / 5 <sup>hrs</sup>
+          </h2>
+          <p class="mb-6">per person</p>
+          <p class="mb-6">Marrakech, Morocco</p>
+          <button class="btn">Book now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="../static/imgs/cover3.jpg" alt="Nightlife Extravaganza" class="card-img-top" />
+      <div class="content">
+        <h2 class="title">Nightlife Extravaganza</h2>
+        <button class="btn btn-outline-danger btn-circle favorite-button">
+          <i class="bi bi-heart"></i>
+        </button>
+        <div>
+          <h2 class="mb-2">
+            <sup>$</sup>60 / 6 <sup>hrs</sup>
+          </h2>
+          <p class="mb-6">per person</p>
+          <p class="mb-6">Marrakech, Morocco</p>
+          <button class="btn">Book now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="../static/imgs/cover4.jpg" alt="Yoga and Meditation Retreat" class="card-img-top" />
+      <div class="content">
+        <h2 class="title">Yoga and Meditation Retreat</h2>
+        <button class="btn btn-outline-danger btn-circle favorite-button">
+          <i class="bi bi-heart"></i>
+        </button>
+        <div>
+          <h2 class="mb-2">
+            <sup>$</sup>35 / 2 <sup>hrs</sup>
+          </h2>
+          <p class="mb-6">per person</p>
+          <p class="mb-6">Marrakech, Morocco</p>
+          <button class="btn">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--   <div class="page-content">
+    <div class="card">
+      <img src="../static/imgs/cover5.jpg" alt="Cooking Class Experience" class="card-img-top" />
+      <div class="content">
+        <h2 class="title">Cooking Class Experience</h2>
+        <button class="btn btn-outline-danger btn-circle favorite-button">
+          <i class="bi bi-heart"></i>
+        </button>
+        <div>
+          <h2 class="mb-2">
+            <sup>$</sup>55 / 3 <sup>hrs</sup>
+          </h2>
+          <p class="mb-6">per person</p>
+          <p class="mb-6">Marrakech, Morocco</p>
+          <button class="btn">Book now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="../static/imgs/cover6.jpg" alt="Desert Safari Adventure" class="card-img-top" />
+      <div class="content">
+        <h2 class="title">Desert Safari Adventure</h2>
+        <button class="btn btn-outline-danger btn-circle favorite-button">
+          <i class="bi bi-heart"></i>
+        </button>
+        <div>
+          <h2 class="mb-2">
+            <sup>$</sup>70 / 7 <sup>hrs</sup>
+          </h2>
+          <p class="mb-6">per person</p>
+          <p class="mb-6">Marrakech, Morocco</p>
+          <button class="btn">Book now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="../static/imgs/cover7.jpg" alt="Historical City Tour" class="card-img-top" />
+      <div class="content">
+        <h2 class="title">Historical City Tour</h2>
+        <button class="btn btn-outline-danger btn-circle favorite-button">
+          <i class="bi bi-heart"></i>
+        </button>
+        <div>
+          <h2 class="mb-2">
+            <sup>$</sup>40 / 4 <sup>hrs</sup>
+          </h2>
+          <p class="mb-6">per person</p>
+          <p class="mb-6">Marrakech, Morocco</p>
+          <button class="btn">Book now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="../static/imgs/cover8.jpg" alt="Traditional Moroccan Dinner" class="card-img-top" />
+      <div class="content">
+        <h2 class="title">Traditional Moroccan Dinner</h2>
+        <button class="btn btn-outline-danger btn-circle favorite-button">
+          <i class="bi bi-heart"></i>
+        </button>
+        <div>
+          <h2 class="mb-2">
+            <sup>$</sup>65 / 3 <sup>hrs</sup>
+          </h2>
+          <p class="mb-6">per person</p>
+          <p class="mb-6">Marrakech, Morocco</p>
+          <button class="btn">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+
 
     <!-- Best Organiser's section -->
     <div class="shadow-border">
@@ -299,7 +305,35 @@
      
       <div class="profile">
         <div class="profile-image">
-            <img src="../static/imgs/user.jpeg" />
+            <img src="../static/imgs/user1.jpg" />
+        </div>
+        <h2 class="profile-username">Orland kairo</h2>
+        <small class="profile-user-handle">@orland_kairo</small>
+        <div class="profile-actions">
+            <button class="btn btn--primary">Follow</button>
+<!--             <button class="btn btn--icon">
+                <i class="ph-export"></i>
+            </button> -->
+            <button class="btn btn--icon">
+                <i class="ph-dots-three-outline-fill"></i>
+            </button>
+        </div>
+        <div class="profile-links">
+            <a href="#" class="link link--icon">
+                <i class="ph-twitter-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-facebook-logo"></i>
+            </a>
+            <a href="#" class="link link--icon">
+                <i class="ph-instagram-logo"></i>
+            </a>
+        </div>
+      </div>
+
+      <div class="profile">
+        <div class="profile-image">
+            <img src="../static/imgs/user2.jpg" />
         </div>
         <h2 class="profile-username">Elena Zoldado</h2>
         <small class="profile-user-handle">@elena_zoldado</small>
@@ -327,10 +361,10 @@
 
       <div class="profile">
         <div class="profile-image">
-            <img src="../static/imgs/user.jpeg" />
+            <img src="../static/imgs/user3.jpg" />
         </div>
-        <h2 class="profile-username">Elena Zoldado</h2>
-        <small class="profile-user-handle">@elena_zoldado</small>
+        <h2 class="profile-username">Lina rodriga</h2>
+        <small class="profile-user-handle">@lina_rodiga</small>
         <div class="profile-actions">
             <button class="btn btn--primary">Follow</button>
 <!--             <button class="btn btn--icon">
@@ -355,38 +389,10 @@
 
       <div class="profile">
         <div class="profile-image">
-            <img src="../static/imgs/user.jpeg" />
+            <img src="../static/imgs/user4.jpg" />
         </div>
-        <h2 class="profile-username">Elena Zoldado</h2>
-        <small class="profile-user-handle">@elena_zoldado</small>
-        <div class="profile-actions">
-            <button class="btn btn--primary">Follow</button>
-<!--             <button class="btn btn--icon">
-                <i class="ph-export"></i>
-            </button> -->
-            <button class="btn btn--icon">
-                <i class="ph-dots-three-outline-fill"></i>
-            </button>
-        </div>
-        <div class="profile-links">
-            <a href="#" class="link link--icon">
-                <i class="ph-twitter-logo"></i>
-            </a>
-            <a href="#" class="link link--icon">
-                <i class="ph-facebook-logo"></i>
-            </a>
-            <a href="#" class="link link--icon">
-                <i class="ph-instagram-logo"></i>
-            </a>
-        </div>
-      </div>
-
-      <div class="profile">
-        <div class="profile-image">
-            <img src="../static/imgs/user.jpeg" />
-        </div>
-        <h2 class="profile-username">Elena Zoldado</h2>
-        <small class="profile-user-handle">@elena_zoldado</small>
+        <h2 class="profile-username">Locaco sandero</h2>
+        <small class="profile-user-handle">@locaco_sandero</small>
         <div class="profile-actions">
             <button class="btn btn--primary">Follow</button>
 <!--             <button class="btn btn--icon">
@@ -414,95 +420,95 @@
 
 
       <!-- partial:index.partial.html -->
-      <div class="shadow-border">
-        <h1 class="custom-heading">What peopel said ...</h1>
-        <div class="container">
-          <div class="row">
-            <div id="testimonial-slider" class="owl-carousel">
-              <div class="testimonial">
-                <span class="icon fa fa-quote-left"></span>
-                <p class="description">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-                <div class="testimonial-content">
-                  <div class="pic">
-                    <img src="https://picsum.photos/130/130?image=1027" alt="">
+        <!-- partial:index.partial.html -->
+        <div class="shadow-border">
+          <h1 class="custom-heading">What peopel said ...</h1>
+          <div class="container">
+            <div class="row">
+              <div id="testimonial-slider" class="owl-carousel">
+                <div class="testimonial">
+                  <span class="icon fa fa-quote-left"></span>
+                  <p class="description">
+                    The attention to detail in the user experience is commendable. From the smooth onboarding process to the responsive design, every aspect of the site is crafted to ensure that users can focus on what matters most: organizing their events. It's a tool that feels as good to use as it is effective."
+                  </p>
+                  <div class="testimonial-content">
+                    <div class="pic">
+                      <img src="https://picsum.photos/130/130?image=1027" alt="">
+                    </div>
+                    <h3 class="name">Michele Miller</h3>
+                    <span class="title">Organiser</span>
                   </div>
-                  <h3 class="name">Michele Miller</h3>
-                  <span class="title">Organiser</span>
                 </div>
-              </div>
-              <div class="testimonial">
-                <span class="icon fa fa-quote-left"></span>
-                <p class="description">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-                <div class="testimonial-content">
-                  <div class="pic">
-                    <img src="https://picsum.photos/130/130?image=839" alt="">
+                <div class="testimonial">
+                  <span class="icon fa fa-quote-left"></span>
+                  <p class="description">
+                    "Whether you're a seasoned event planner or just starting out, this platform caters to all. The customizable options and efficient workflow make it a go-to solution for professionals, while the minimal learning curve ensures that even beginners can get up to speed quickly."
+                  </p>
+                  <div class="testimonial-content">
+                    <div class="pic">
+                      <img src="https://picsum.photos/130/130?image=839" alt="">
+                    </div>
+                    <h3 class="name">Patricia Knott</h3>
+                    <span class="title">Organiser</span>
                   </div>
-                  <h3 class="name">Patricia Knott</h3>
-                  <span class="title">Organiser</span>
                 </div>
-              </div>
-              <div class="testimonial">
-                <span class="icon fa fa-quote-left"></span>
-                <p class="description">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-                <div class="testimonial-content">
-                  <div class="pic">
-                    <img src="https://picsum.photos/130/130?image=856" alt="">
+                <div class="testimonial">
+                  <span class="icon fa fa-quote-left"></span>
+                  <p class="description">
+                    This website stands out for its innovative features, like integrated ticketing and real-time updates, which make event management a breeze. The platform is also incredibly reliable, with fast load times and excellent uptime, ensuring that users can always depend on it when it matters most.
+                  </p>
+                  <div class="testimonial-content">
+                    <div class="pic">
+                      <img src="https://picsum.photos/130/130?image=856" alt="">
+                    </div>
+                    <h3 class="name">Justin Ramos</h3>
+                    <span class="title">User</span>
                   </div>
-                  <h3 class="name">Justin Ramos</h3>
-                  <span class="title">User</span>
                 </div>
-              </div>
-              <div class="testimonial">
-                <span class="icon fa fa-quote-left"></span>
-                <p class="description">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-                <div class="testimonial-content">
-                  <div class="pic">
-                    <img src="https://picsum.photos/130/130?image=836" alt="">
+                <div class="testimonial">
+                  <span class="icon fa fa-quote-left"></span>
+                  <p class="description">
+                    "This website offers a seamless experience for event organizers of all levels. The intuitive design and user-friendly interface make it easy to create and manage events, while the platform's robust feature set ensures that even the most complex events can be handled with ease."
+                  </p>
+                  <div class="testimonial-content">
+                    <div class="pic">
+                      <img src="https://picsum.photos/130/130?image=836" alt="">
+                    </div>
+                    <h3 class="name">Mary Huntley</h3>
+                    <span class="title">User</span>
                   </div>
-                  <h3 class="name">Mary Huntley</h3>
-                  <span class="title">User</span>
                 </div>
-              </div>
-              <div class="testimonial">
-                <span class="icon fa fa-quote-left"></span>
-                <p class="description">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-                <div class="testimonial-content">
-                  <div class="pic">
-                    <img src="https://picsum.photos/130/130?image=883" alt="">
+                <div class="testimonial">
+                  <span class="icon fa fa-quote-left"></span>
+                  <p class="description">
+                    "If you’re looking for a platform that not only supports high-quality event creation but also maintains a high level of credibility, this is it. The platform’s advanced features and consistent performance demonstrate its reliability. It’s a go-to solution for professionals who need a trustworthy tool to handle their event needs with precision and confidence."
+                  </p>
+                  <div class="testimonial-content">
+                    <div class="pic">
+                      <img src="https://picsum.photos/130/130?image=883" alt="">
+                    </div>
+                    <h3 class="name">Aaron Newell</h3>
+                    <span class="title">Organiser</span>
                   </div>
-                  <h3 class="name">Aaron Newell</h3>
-                  <span class="title">Organiser</span>
                 </div>
-              </div>
-                      <div class="testimonial">
-                <span class="icon fa fa-quote-left"></span>
-                <p class="description">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-                <div class="testimonial-content">
-                  <div class="pic">
-                    <img src="https://picsum.photos/130/130?image=777" alt="">
+                        <div class="testimonial">
+                  <span class="icon fa fa-quote-left"></span>
+                  <p class="description">
+                    "This platform has established itself as a trusted choice for event management. Its credibility is reflected in its robust event creation tools, which are both reliable and effective. Users can confidently create and manage events knowing that the platform has a strong track record and a reputation for delivering high-quality service."
+                  </p>
+                  <div class="testimonial-content">
+                    <div class="pic">
+                      <img src="https://picsum.photos/130/130?image=777" alt="">
+                    </div>
+                    <h3 class="name">Lizzie Geren</h3>
+                    <span class="title">Organiser</span>
                   </div>
-                  <h3 class="name">Lizzie Geren</h3>
-                  <span class="title">Organiser</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
       <!-- partial -->
 
         </main>
@@ -568,6 +574,6 @@
       <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js'></script><script  src="../js/testimonial.js"></script>
       <script src='https://unpkg.com/phosphor-icons'></script><script  src="./script.js"></script>
-      <script src="icons.js"></script>
+      <script src="../js/icons.js"></script>
 </body>
 </html>
