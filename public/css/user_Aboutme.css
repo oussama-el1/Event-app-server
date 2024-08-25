@@ -98,7 +98,7 @@ main {
     width: 100%;
     max-width: 600px;
 }
-
+/*
 footer {
     background-color: #36454f;
     color: #fff;
@@ -149,13 +149,13 @@ footer {
 .footer-column input {
     margin-bottom: 10px;
 }
-
-.newsletter-input {
+*/
+/*.newsletter-input {
     padding: 5px;
     width: 100%;
     max-width: 250px;
     margin-bottom: 10px;
-}
+}*/
 
 .social-icons {
     display: flex;
@@ -202,7 +202,7 @@ footer {
         text-align: center;
     }
 
-    .newsletter-input {
+  /*  .newsletter-input {
         max-width: 100%;
-    }
+    }*/
 }
