@@ -49,12 +49,33 @@ a {
     flex: 1 1 calc(25% - 2rem); /* Four columns on large screens */
   }
 }
-.profile-image img {
+/*.profile-image img {
   width: 100%;
   height: auto;
   border-radius: 50%;
   margin-bottom: 1rem;
+}*/
+
+/* Add this to your CSS file or within a <style> tag in your HTML */
+.profile-image {
+  width: 100px; /* Set the desired width */
+  height: 100px; /* Set the same height to make it a perfect circle */
+  border-radius: 50%; /* Makes the image circular */
+  overflow: hidden; /* Hides any overflow of the image */
+  display: flex; /* Enables flexbox layout */
+  justify-content: center; /* Centers the image horizontally */
+  align-items: center; /* Centers the image vertically */
+  border: 2px solid #ccc; /* Optional: add a border around the circle */
+  margin: 0 auto; /* Centers the entire .profile-image container if needed */
 }
+
+.profile-image img {
+  width: 100%; /* Ensures the image fills the entire container */
+  height: 100%; /* Ensures the image fills the entire container */
+  object-fit: cover; /* Ensures the image covers the entire circular area */
+  display: block; /* Ensures there’s no extra space around the image */
+}
+
 
 .profile-username {
   font-size: 1.2rem;
