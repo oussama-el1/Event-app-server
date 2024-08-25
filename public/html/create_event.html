@@ -10,13 +10,16 @@
     <link rel='stylesheet' href='https://unpkg.com/@yaireo/tagify/dist/tagify.css'>
     <link rel="stylesheet" href="../css/invite.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/newsletter-section.css">
+    <link rel="stylesheet" href="../css/home.css">
+
 
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <!-- Navbar Brand -->
-        <a class="navbar-brand img-fluid logo-small" href="#">
+        <a class="navbar-brand img-fluid logo-small" href="home.html">
           <img src="../static/imgs/logo.png" class="img-fluid w-50" alt="">
         </a>
         <!-- Toggle button for mobile -->
@@ -27,13 +30,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">HOME</a>
+              <a class="nav-link" href="home.html">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">EVENTS</a>
+              <a class="nav-link" href="events.html">EVENTS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">FAVORITS</a>
+              <a class="nav-link" href="create_event.html">CREATE EVENTS</a>
             </li>
           </ul>
           <div class="d-flex">
@@ -49,23 +52,21 @@
                 <div class="profile-icon-container">
                   <img src="../static/imgs/user.jpeg" alt="Profile Icon" class="profile-icon">
                 </div>
-                <!-- You can also use icon as follows: -->
-                <!--  <i class="fas fa-user"></i> -->
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-right: 15px;padding-right: 4px;margin-left: -19px;">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" href="user_Aboutme.html">
                    Account </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" href="user_Aboutme.html">
                      Settings </a>
                 </li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" href="guest_home.html">
                     Log Out </a>
                 </li>
               </ul>
@@ -140,17 +141,17 @@
                 <div class="border border-white p-3">
                 <h3 class="mx-5 text-center" >Upload pictures for your event.</h3>
 
-		    <!-- File Upload Input -->
-		    <div class="upload-section">
+            <!-- File Upload Input -->
+            <div class="upload-section">
                         <input type="file" id="uploadInput" class="form-control" style="display: none;" onchange="handleFileUpload()" multiple>
                         <label for="uploadInput" class="upload-label" id="dropZone">
                             <span class="upload-button btn btn-darki">
                                 &#128228; Upload Media
                             </span>
                         </label>
-		        <!-- Confirmation Message -->
+                <!-- Confirmation Message -->
                         <p id="uploadMessage" style="display: none;">Media uploaded successfully!</p>
-		        <!-- Image Links Container -->
+                <!-- Image Links Container -->
                         <div id="imageLinksContainer" style="display: none;"></div>
                     </div>
                 </div>
@@ -204,7 +205,7 @@
     </div>
 </div>
 
-	    <!-- Tab Content: Payment Info -->
+        <!-- Tab Content: Payment Info -->
             <div id="Payment Info" class="tabcontent ">
                 <div class="border border-white p-3">
                 <h3>Please select payment methods to be linked with this Event</h3>
@@ -255,6 +256,61 @@
         </div>
     </main>
 
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h5>About Us</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    </div>
+                    <div class="col">
+                        <h5>Contact Us</h5>
+                        <p>Email: info@example.com</p>
+                        <p>Phone: +123 456 7890</p>
+                    </div>
+                    <div class="col">
+                 <ul>
+                     <h5>Help & Support</h5>
+                     <li><a href="#">FAQs</a></li>
+                     <li><a href="#">Customer Support</a></li>
+                     <li><a href="#">Return Policy</a></li>
+                     <li><a href="#">Report a scam</a></li>
+                 </ul>
+                    </div>
+                    <div class="col">
+                      <ul>
+                        <h5>Follow Us</h5>
+                        <li><a href="#" aria-label="Link to Twitter profile">
+                          <i class="ph-twitter-logo"></i>
+                        Twitter
+                        </a></li> 
+                        <li><a href="#" aria-label="Link to Twitter profile">
+                          <i class="ph-instagram-logo"></i>
+                        Instagram
+                        </a></li> 
+                        <li><a href="#" aria-label="Link to Twitter profile">
+                          <i class="ph-facebook-logo"></i>
+                        Facebook
+                        </a></li>
+                      </u>
+                    </div>
+                </div>
+            </div> 
+
+    <div>
+      <section class="newsletter-section">
+          <div class="newsletter-container">
+              <h2>Subscribe to Our Newsletter</h2>
+              <p>Stay updated with our latest news and offers.<br>
+              Enter your email to subscribe to our newsletter.</p>
+              <form class="newsletter-form">
+                  <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                  <button type="submit" class="newsletter-btn">Subscribe</button>
+              </form>
+          </div>
+      </section>
+    </div>
+        </footer>
     <script>
 
 
@@ -290,8 +346,8 @@
                 if (tablinks[i].classList.contains("active")) {
                     activeTabIndex = i;
                     break;
-		}
-	    }
+        }
+        }
 
             // Get the next tab index
             var nextTabIndex = activeTabIndex + 1;
@@ -299,8 +355,8 @@
                 var nextTab = tablinks[nextTabIndex];
                 var nextTabName = nextTab.textContent.trim(); // Get the tab name based on the button text
                 openTab({currentTarget: nextTab}, nextTabName);
-	    }
-	}
+        }
+    }
 
         // Function to handle file upload
         function handleFileUpload() {
@@ -324,15 +380,15 @@
                             imageLinksContainer.appendChild(link);
                             imageLinksContainer.appendChild(document.createElement("br"));
                         };
-		    })(file);
+            })(file);
 
                     reader.readAsDataURL(file);
-		}
+        }
 
                 // Show the upload message and image link
                 document.getElementById("uploadMessage").style.display = "block";
                 imageLinksContainer.style.display = "block";
-	    }
+        }
         }
 
         // Function to handle file drop
@@ -383,9 +439,11 @@ function addInvite(type) {
         inputField.value = '';
     }
 }
-
     </script>
     <script src='https://unpkg.com/@yaireo/tagify'>
     </script><script  src="./invite.js"></script>
+    <script src='https://unpkg.com/phosphor-icons'></script><script  src="./script.js"></script>
+
+
 </body>
 </html>
