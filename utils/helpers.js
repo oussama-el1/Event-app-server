@@ -20,7 +20,7 @@ async function generateUniqueBookingId() {
 };
 
 const generateQRCode = async (data) => {
-  const qrCodeDir = path.join('C:\\tmp\\event-app\\tickets');
+  const qrCodeDir = path.resolve('/tmp/event-app/tickets');
   const qrCodePath = path.join(qrCodeDir, `${data.ticketId}.png`);
 
   try {
